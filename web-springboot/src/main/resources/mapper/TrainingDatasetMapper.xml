@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rs.mapper.TrainingDatasetMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.rs.entity.TrainingDataset">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="dataset_name" property="datasetName"/>
+        <result column="dataset_path" property="datasetPath"/>
+        <result column="dataset_type" property="datasetType"/>
+        <result column="total_samples" property="totalSamples"/>
+        <result column="description" property="description"/>
+        <result column="labels" property="labels"/>
+        <result column="split_ratio" property="splitRatio"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+</mapper>

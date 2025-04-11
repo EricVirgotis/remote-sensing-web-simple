@@ -1,0 +1,56 @@
+/* 主题变量 */
+
+// 主色调
+$primary-color: #1890ff;
+$primary-light: #40a9ff;
+$primary-dark: #096dd9;
+
+// 辅助色
+$success-color: #52c41a;
+$warning-color: #faad14;
+$danger-color: #f5222d;
+$info-color: #1890ff;
+
+// 中性色
+$text-primary: #262626;
+$text-secondary: #595959;
+$text-disabled: #bfbfbf;
+$border-color: #d9d9d9;
+$background-color: #f5f7fa;
+$background-light: #ffffff;
+$background-dark: #f0f2f5;
+
+// 遥感专业色彩
+$vegetation-color: #52c41a; // 植被
+$water-color: #1890ff;      // 水体
+$urban-color: #f5222d;      // 城市
+$barren-color: #faad14;     // 裸地
+$cloud-color: #d9d9d9;      // 云
+
+// 布局尺寸
+$header-height: 60px;
+$sidebar-width: 240px;
+$sidebar-collapsed-width: 64px;
+
+// 圆角
+$border-radius-sm: 2px;
+$border-radius-base: 4px;
+$border-radius-lg: 8px;
+
+// 阴影
+$box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15);
+$box-shadow-light: 0 1px 4px rgba(0, 0, 0, 0.1);
+$box-shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+// 动画
+$animation-duration-base: 0.2s;
+$animation-duration-slow: 0.3s;
+$animation-duration-fast: 0.1s;
+
+// 响应式断点
+$screen-xs: 480px;
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
+$screen-xxl: 1600px;

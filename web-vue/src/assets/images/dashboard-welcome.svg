@@ -1,0 +1,57 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="50" y="50" width="300" height="200" rx="10" fill="#ffffff" opacity="0.3"/>
+  
+  <!-- 卫星 -->
+  <g transform="translate(300, 80)">
+    <rect x="-20" y="-10" width="40" height="20" fill="#ffffff" rx="2"/>
+    <rect x="-30" y="-5" width="10" height="10" fill="#ffffff" rx="1"/>
+    <rect x="20" y="-5" width="10" height="10" fill="#ffffff" rx="1"/>
+    <rect x="-15" y="-20" width="30" height="10" fill="#64b5f6" rx="1"/>
+    <rect x="-15" y="10" width="30" height="10" fill="#64b5f6" rx="1"/>
+  </g>
+  
+  <!-- 地球 -->
+  <circle cx="150" cy="150" r="80" fill="#64b5f6" opacity="0.8"/>
+  
+  <!-- 陆地 -->
+  <path d="M100,100 Q130,120 120,150 Q110,180 150,190 Q180,170 200,180 Q220,150 190,130 Q170,100 150,110 Q130,90 100,100" fill="#81c784" opacity="0.9"/>
+  <path d="M180,100 Q200,120 210,110 Q230,130 220,150 Q210,170 230,180 Q200,190 190,170 Q170,160 180,100" fill="#81c784" opacity="0.9"/>
+  
+  <!-- 云层 -->
+  <circle cx="120" cy="110" r="15" fill="#ffffff" opacity="0.7"/>
+  <circle cx="140" cy="105" r="10" fill="#ffffff" opacity="0.7"/>
+  <circle cx="130" cy="120" r="12" fill="#ffffff" opacity="0.7"/>
+  
+  <circle cx="190" cy="170" r="12" fill="#ffffff" opacity="0.7"/>
+  <circle cx="210" cy="175" r="8" fill="#ffffff" opacity="0.7"/>
+  <circle cx="200" cy="160" r="10" fill="#ffffff" opacity="0.7"/>
+  
+  <!-- 卫星信号 -->
+  <path d="M230,150 L280,100" stroke="#ffffff" stroke-width="2" stroke-dasharray="5,5" opacity="0.8"/>
+  <path d="M230,150 L290,120" stroke="#ffffff" stroke-width="2" stroke-dasharray="5,5" opacity="0.8"/>
+  
+  <!-- 分析网格 -->
+  <rect x="70" y="130" width="20" height="20" fill="#ff5252" opacity="0.5" stroke="#ffffff" stroke-width="1"/>
+  <rect x="90" y="130" width="20" height="20" fill="#ffb74d" opacity="0.5" stroke="#ffffff" stroke-width="1"/>
+  <rect x="110" y="130" width="20" height="20" fill="#81c784" opacity="0.5" stroke="#ffffff" stroke-width="1"/>
+  <rect x="130" y="130" width="20" height="20" fill="#64b5f6" opacity="0.5" stroke="#ffffff" stroke-width="1"/>
+  
+  <rect x="70" y="150" width="20" height="20" fill="#81c784" opacity="0.5" stroke="#ffffff" stroke-width="1"/>
+  <rect x="90" y="150" width="20" height="20" fill="#64b5f6" opacity="0.5" stroke="#ffffff" stroke-width="1"/>
+  <rect x="110" y="150" width="20" height="20" fill="#ff5252" opacity="0.5" stroke="#ffffff" stroke-width="1"/>
+  <rect x="130" y="150" width="20" height="20" fill="#ffb74d" opacity="0.5" stroke="#ffffff" stroke-width="1"/>
+  
+  <!-- 图例 -->
+  <rect x="70" y="200" width="15" height="15" fill="#ff5252" opacity="0.7"/>
+  <text x="90" y="212" font-family="Arial" font-size="12" fill="#ffffff">城市</text>
+  
+  <rect x="130" y="200" width="15" height="15" fill="#ffb74d" opacity="0.7"/>
+  <text x="150" y="212" font-family="Arial" font-size="12" fill="#ffffff">裸地</text>
+  
+  <rect x="190" y="200" width="15" height="15" fill="#81c784" opacity="0.7"/>
+  <text x="210" y="212" font-family="Arial" font-size="12" fill="#ffffff">植被</text>
+  
+  <rect x="250" y="200" width="15" height="15" fill="#64b5f6" opacity="0.7"/>
+  <text x="270" y="212" font-family="Arial" font-size="12" fill="#ffffff">水体</text>
+</svg>

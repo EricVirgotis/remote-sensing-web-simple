@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rs.mapper.TrainingTaskMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.rs.entity.TrainingTask">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="dataset_id" property="datasetId"/>
+        <result column="task_name" property="taskName"/>
+        <result column="model_type" property="modelType"/>
+        <result column="parameters" property="parameters"/>
+        <result column="task_status" property="taskStatus"/>
+        <result column="progress" property="progress"/>
+        <result column="model_path" property="modelPath"/>
+        <result column="accuracy" property="accuracy"/>
+        <result column="error_message" property="errorMessage"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+</mapper>

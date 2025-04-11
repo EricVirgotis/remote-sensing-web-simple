@@ -1,0 +1,277 @@
+/* 全局样式定义 */
+
+// 颜色变量
+:root {
+  // 主题色
+  --primary-color: #3b82f6;
+  --primary-light: #93c5fd;
+  --primary-dark: #1d4ed8;
+  
+  // 辅助色
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --info-color: #6366f1;
+  
+  // 中性色
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-disabled: #9ca3af;
+  --border-color: #e5e7eb;
+  --background-color: #f9fafb;
+  --background-light: #ffffff;
+  --background-dark: #f3f4f6;
+}
+
+// 全局重置
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 16px;
+  color: var(--text-primary);
+  background-color: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+// 通用布局类
+.app-container {
+  padding: 20px;
+  background-color: var(--background-color);
+  min-height: calc(100vh - 60px);
+}
+
+.card-container {
+  background-color: var(--background-light);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// 动画
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// Element Plus 样式覆盖
+.el-button--primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  
+  &:hover, &:focus {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+  }
+  
+  &:active {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+  }
+}
+
+.el-card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  margin-bottom: 20px;
+  
+  .el-card__header {
+    padding: 15px 20px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+.el-table {
+  border-radius: 8px;
+  overflow: hidden;
+  
+  th.el-table__cell {
+    background-color: #f3f4f6;
+    font-weight: 600;
+  }
+}
+
+// 响应式布局
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+// 图片样式
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-thumbnail {
+  padding: 4px;
+  background-color: var(--background-light);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+// 遥感影像特定样式
+.remote-sensing-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .image-container {
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  .card-content {
+    padding: 15px;
+    background-color: var(--background-light);
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+  
+  .card-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+  
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+// 分析结果展示样式
+.result-visualization {
+  background-color: var(--background-light);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+  .result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    .result-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  }
+  
+  .result-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    
+    .result-image {
+      flex: 1;
+      min-width: 300px;
+      
+      img {
+        width: 100%;
+        border-radius: 4px;
+      }
+    }
+    
+    .result-data {
+      flex: 1;
+      min-width: 300px;
+    }
+  }
+  
+  .metrics-card {
+    background-color: #f8fafc;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    
+    .metrics-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    
+    .metrics-value {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      
+      .metric-item {
+        background-color: var(--background-light);
+        border-radius: 4px;
+        padding: 8px 12px;
+        font-size: 14px;
+        color: var(--text-secondary);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}
