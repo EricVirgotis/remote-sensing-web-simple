@@ -1,0 +1,36 @@
+# IDE
+.idea/
+.vscode/
+__pycache__/
+*.iml
+*.iws
+*.ipr
+
+# Compiled files
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Build directories
+target/
+build/
+dist/
+out/
+
+# Logs
+*.log
+logs/
+
+# System files
+.DS_Store
+Thumbs.db 
+
+# File store
+file_store/
+
+# Vite cache
+web-vue/.vite/
