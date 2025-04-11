@@ -34,3 +34,5 @@ file_store/
 
 # Vite cache
 web-vue/.vite/
+
+web-flask/models/*.h5
