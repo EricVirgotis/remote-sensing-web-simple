@@ -7,6 +7,7 @@ import com.rs.dto.UserLoginDTO;
 import com.rs.dto.UserRegisterDTO;
 import com.rs.entity.User;
 import com.rs.service.UserService;
+import com.rs.utils.TokenUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,6 +24,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private TokenUtils tokenUtils;
 
     @Operation(summary = "用户注册")
     @PostMapping("/register")
@@ -60,6 +64,19 @@ public class UserController {
             @Parameter(description = "真实姓名") @RequestParam(required = false) String realName) {
         Page<User> page = new Page<>(current, size);
         return Result.success(userService.page(page, null)); // 这里需要完善查询条件
+    }
+
+    @Operation(summary = "获取当前用户信息")
+    @GetMapping("/current")
+    public Result<UserInfoDTO> getCurrentUserInfo() {
+        // 获取当前用户ID
+        Long userId = tokenUtils.getCurrentUserId();
+        if (userId == null) {
+            return Result.error(401, "未登录或登录已过期");
+        }
+        
+        // 获取用户信息
+        return Result.success(userService.getUserInfo(userId));
     }
 
     @Operation(summary = "用户登出")

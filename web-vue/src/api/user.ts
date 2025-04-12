@@ -43,6 +43,11 @@ export const getUserInfo = (id: number) => {
   return request.get<UserInfo>(`/user/${id}`)
 }
 
+// 获取当前登录用户信息
+export const getCurrentUserInfo = () => {
+  return request.get<UserInfo>('/user/current')
+}
+
 // 新增用户
 export const addUser = (data: UserForm) => {
   return request.post<void>('/user', data)

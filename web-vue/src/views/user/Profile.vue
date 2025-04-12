@@ -299,9 +299,21 @@ const handleSaveEdit = async () => {
   if (!editFormRef.value) return
 
   // 确保用户ID存在
+  console.log('当前用户信息:', JSON.stringify(userInfo.value, null, 2))
   if (!userInfo.value?.id) {
-    ElMessage.error('用户信息不完整，请重新登录后重试')
-    return
+    // 尝试重新初始化用户信息
+    try {
+      await userStore.initUserInfo()
+      console.log('重新初始化后的用户信息:', JSON.stringify(userInfo.value, null, 2))
+      if (!userInfo.value?.id) {
+        ElMessage.error('用户信息不完整，请重新登录后重试')
+        return
+      }
+    } catch (error) {
+      console.error('初始化用户信息失败:', error)
+      ElMessage.error('用户信息不完整，请重新登录后重试')
+      return
+    }
   }
 
   try {

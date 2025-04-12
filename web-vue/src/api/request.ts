@@ -63,25 +63,62 @@ instance.interceptors.response.use(
       // 统一处理登录响应数据
       const { code, msg, data } = response.data
       
-      // 如果响应成功且包含data
+      // 如果响应成功且包含data（token）
       if ((code === 200 || code === 0) && data) {
-        // 构造标准的LoginResponse格式
-        const loginResponse = {
-          token: data,
-          userInfo: {
-            id: response.data.data?.id || 0,
-            username: JSON.parse(response.config.data).username,
-            realName: '',
-            phone: null,
-            email: null,
-            role: 0,
-            status: 1
-          }
-        }
+        // 获取登录用户名
+        const username = JSON.parse(response.config.data).username
+        const token = data
         
-        console.log('处理后的登录响应数据:', loginResponse)
-        console.groupEnd()
-        return loginResponse
+        // 创建一个新的axios实例用于获取用户信息，避免循环依赖
+        const userInfoInstance = axios.create({
+          baseURL: import.meta.env.VITE_API_URL,
+          timeout: 10000,
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        
+        // 使用token获取用户信息
+        return userInfoInstance.get('/user/current')
+          .then(userResponse => {
+            // 获取用户信息成功
+            console.log('获取用户信息成功:', userResponse.data)
+            
+            // 构造标准的LoginResponse格式
+            const userInfo = userResponse.data.data || userResponse.data
+            const loginResponse = {
+              token: token,
+              userInfo: userInfo
+            }
+            
+            console.log('处理后的登录响应数据:', loginResponse)
+            console.groupEnd()
+            return loginResponse
+          })
+          .catch(error => {
+            console.error('获取用户信息失败:', error)
+            // 检查错误响应
+            const errorResponse = error.response?.data;
+            
+            // 如果获取用户信息失败，构造基本的用户信息
+            // 但保留错误信息以便前端显示
+            const loginResponse = {
+              token: token,
+              userInfo: errorResponse || {
+                id: 0,
+                username: username,
+                realName: '',
+                phone: null,
+                email: null,
+                role: 0,
+                status: 1,
+                error: '获取用户信息失败'
+              }
+            }
+            console.log('使用基本用户信息:', loginResponse)
+            console.groupEnd()
+            return loginResponse
+          })
       }
       
       // 处理错误情况
