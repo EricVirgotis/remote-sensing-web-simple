@@ -21,6 +21,8 @@ import org.springframework.web.context.request.RequestAttributes;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -68,7 +70,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public String login(UserLoginDTO loginDTO) {
+    public Map<String, Object> login(UserLoginDTO loginDTO) {
         // 根据用户名查询用户
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getUsername, loginDTO.getUsername());
@@ -94,7 +96,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             Duration.ofDays(7)
         );
         
-        return token;
+        // 转换为UserInfoDTO，移除敏感信息
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        BeanUtils.copyProperties(user, userInfoDTO);
+        userInfoDTO.setAvatar(user.getAvatarUrl()); // 字段名不同，需要单独设置
+        
+        // 返回token和用户信息
+        Map<String, Object> result = new HashMap<>();
+        result.put("token", token);
+        result.put("userInfo", userInfoDTO);
+        return result;
     }
 
     @Override

@@ -14,6 +14,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * 用户控制器
  */
@@ -36,7 +38,7 @@ public class UserController {
 
     @Operation(summary = "用户登录")
     @PostMapping("/login")
-    public Result<String> login(@RequestBody UserLoginDTO loginDTO) {
+    public Result<Map<String, Object>> login(@RequestBody UserLoginDTO loginDTO) {
         return Result.success(userService.login(loginDTO));
     }
 

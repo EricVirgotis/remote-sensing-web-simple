@@ -6,6 +6,7 @@ import com.rs.dto.UserInfoDTO;
 import com.rs.dto.UserLoginDTO;
 import com.rs.dto.UserRegisterDTO;
 import com.rs.entity.User;
+import java.util.Map;
 
 /**
  * 用户服务接口
@@ -24,9 +25,9 @@ public interface UserService extends IService<User> {
      * 用户登录
      *
      * @param loginDTO 登录信息
-     * @return 登录token
+     * @return 包含token和用户信息的Map
      */
-    String login(UserLoginDTO loginDTO);
+    Map<String, Object> login(UserLoginDTO loginDTO);
     
     /**
      * 获取用户信息
