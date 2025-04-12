@@ -86,4 +86,14 @@ public class UserController {
     public Result<Boolean> logout() {
         return Result.success(userService.logout());
     }
+    
+    @Operation(summary = "修改密码")
+    @PostMapping("/password")
+    public Result<Boolean> updatePassword(@RequestBody Map<String, String> passwordMap) {
+        Long userId = tokenUtils.getCurrentUserId();
+        if (userId == null) {
+            return Result.error(401, "未登录或登录已过期");
+        }
+        return Result.success(userService.resetPassword(userId, passwordMap.get("oldPassword"), passwordMap.get("newPassword")));
+    }
 }

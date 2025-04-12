@@ -55,7 +55,22 @@ public class TokenUtils {
         // 从Redis中获取用户ID
         Object userId = redisTemplate.opsForValue().get(Constants.REDIS_TOKEN_PREFIX + token);
         
-        return userId != null ? (Long) userId : null;
+        // 安全地将Object转换为Long，处理Integer和Long的兼容性
+        if (userId != null) {
+            if (userId instanceof Integer) {
+                return ((Integer) userId).longValue();
+            } else if (userId instanceof Long) {
+                return (Long) userId;
+            } else {
+                // 尝试转换其他可能的类型
+                try {
+                    return Long.valueOf(userId.toString());
+                } catch (NumberFormatException e) {
+                    return null;
+                }
+            }
+        }
+        return null;
     }
 
     /**

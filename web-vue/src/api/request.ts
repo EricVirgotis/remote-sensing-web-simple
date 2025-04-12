@@ -20,12 +20,18 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // 从 localStorage 获取 token
-    const userInfo = localStorage.getItem('userInfo')
-    if (userInfo) {
-      const { token } = JSON.parse(userInfo)
-      if (token && config.headers) {
-        // 添加 token 到请求头
-        config.headers.Authorization = `Bearer ${token}`
+    const userInfoStr = localStorage.getItem('userInfo')
+    if (userInfoStr) {
+      try {
+        const parsedInfo = JSON.parse(userInfoStr)
+        // 兼容两种可能的数据结构：直接包含token或嵌套在data中
+        const token = parsedInfo.token || (parsedInfo.data && parsedInfo.data.token)
+        if (token && config.headers) {
+          // 添加 token 到请求头
+          config.headers.Authorization = `Bearer ${token}`
+        }
+      } catch (error) {
+        console.error('解析用户信息失败:', error)
       }
     }
     return config
@@ -61,13 +67,14 @@ instance.interceptors.response.use(
       console.log('登录响应原始数据:', JSON.stringify(response.data))
       
       // 统一处理登录响应数据
-      const { code, msg, data } = response.data
+      const { code, message, data } = response.data
       
-      // 如果响应成功且包含data（token）
+      // 如果响应成功且包含data（包含token和userInfo）
       if ((code === 200 || code === 0) && data) {
         // 获取登录用户名
         const username = JSON.parse(response.config.data).username
-        const token = data
+        // 检查data中是否直接包含token，或者是否嵌套在data.data中
+        const token = data.token || (data.data && data.data.token) || data
         
         // 创建一个新的axios实例用于获取用户信息，避免循环依赖
         const userInfoInstance = axios.create({
@@ -85,7 +92,25 @@ instance.interceptors.response.use(
             console.log('获取用户信息成功:', userResponse.data)
             
             // 构造标准的LoginResponse格式
-            const userInfo = userResponse.data.data || userResponse.data
+            // 从响应中提取用户信息，兼容不同的数据结构
+            const responseData = userResponse.data;
+            const userInfo = responseData.data || 
+                            (responseData.userInfo) || 
+                            (responseData.data && responseData.data.userInfo) || 
+                            responseData;
+            
+            // 确保userInfo是一个有效的对象
+            if (!userInfo || typeof userInfo !== 'object') {
+              console.error('无法从响应中提取有效的用户信息:', responseData);
+              throw new Error('获取用户信息失败，响应格式不正确');
+            }
+            
+            // 保留原始登录响应中的avatar字段
+            const originalLoginData = response.data.data;
+            if (originalLoginData && originalLoginData.userInfo && originalLoginData.userInfo.avatar) {
+              userInfo.avatar = originalLoginData.userInfo.avatar;
+            }
+            
             const loginResponse = {
               token: token,
               userInfo: userInfo
@@ -122,7 +147,7 @@ instance.interceptors.response.use(
       }
       
       // 处理错误情况
-      const errorMsg = msg || '登录失败，请稍后重试'
+      const errorMsg = message || '登录失败，请稍后重试'
       console.error('登录失败:', errorMsg)
       console.groupEnd()
       return Promise.reject(new Error(errorMsg))

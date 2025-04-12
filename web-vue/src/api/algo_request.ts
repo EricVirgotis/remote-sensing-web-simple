@@ -11,10 +11,19 @@ const service: AxiosInstance = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
-    // 从localStorage获取token
-    const token = localStorage.getItem('token')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+    // 从localStorage获取userInfo中的token
+    const userInfoStr = localStorage.getItem('userInfo')
+    if (userInfoStr) {
+      try {
+        const parsedInfo = JSON.parse(userInfoStr)
+        // 兼容两种可能的数据结构：直接包含token或嵌套在data中
+        const token = parsedInfo.token || (parsedInfo.data && parsedInfo.data.token)
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`
+        }
+      } catch (error) {
+        console.error('解析用户信息失败:', error)
+      }
     }
     return config
   },

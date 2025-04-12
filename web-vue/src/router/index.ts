@@ -206,6 +206,15 @@ const routes: RouteRecordRaw[] = [
           title: '图片上传',
           requiresAuth: true
         }
+      },
+      {
+        path: 'list',
+        name: 'ImageList',
+        component: () => import('@/views/image/ImageList.vue'),
+        meta: {
+          title: '图片列表',
+          requiresAuth: true
+        }
       }
     ]
   }

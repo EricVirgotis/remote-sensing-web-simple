@@ -24,7 +24,7 @@ export function pageQuery(params: {
         total: number
         size: number
         current: number
-    }>('/classification/page', { params })
+    }>('/images/page', { params })
 }
 
 /**
@@ -39,4 +39,4 @@ export function getTaskDetail(taskId: number) {
  */
 export function deleteTask(taskId: number) {
     return request.delete(`/classification/${taskId}`)
-} 
+}

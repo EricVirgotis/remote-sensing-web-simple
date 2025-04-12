@@ -177,11 +177,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean resetPassword(Long userId, String newPassword) {
+    public boolean resetPassword(Long userId, String oldPassword, String newPassword) {
         // 查询用户
         User user = this.getById(userId);
         if (user == null) {
             throw new BusinessException("用户不存在");
+        }
+        
+        // 验证原密码
+        if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
+            throw new BusinessException("请输入正确的原密码");
         }
         
         // 更新密码

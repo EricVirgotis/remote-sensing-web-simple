@@ -17,6 +17,10 @@ export const useUserStore = defineStore('user', () => {
     if (storedUserInfo) {
       try {
         const data = JSON.parse(storedUserInfo)
+        // 确保头像URL正确加载
+        if (data.userInfo && !data.userInfo.avatar) {
+          data.userInfo.avatar = `${import.meta.env.VITE_FILE_URL}/file/avatars/default_avatar.svg`
+        }
         userInfo.value = data.userInfo
         token.value = data.token
       } catch (error) {

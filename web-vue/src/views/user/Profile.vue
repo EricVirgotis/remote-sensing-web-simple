@@ -250,8 +250,12 @@ const handleChangePassword = async () => {
       newPassword: '',
       confirmPassword: ''
     }
-  } catch (error) {
-    console.error('修改密码失败:', error)
+  } catch (error: any) {
+    if (error.response?.data?.message) {
+      ElMessage.error(error.response.data.message)
+    } else {
+      ElMessage.error('修改密码失败')
+    }
   } finally {
     passwordLoading.value = false
   }
@@ -386,6 +390,19 @@ const handleAvatarChange: UploadProps['onChange'] = async (uploadFile) => {
   if (!uploadFile.raw) return
   
   try {
+    // 检查并删除旧头像(非默认头像)
+    if (userInfo.value?.avatar && !userInfo.value.avatar.includes('default_avatar')) {
+      try {
+        const url = new URL(userInfo.value.avatar);
+        const pathParts = url.pathname.split('/');
+        const bucket = pathParts[2];
+        const objectKey = pathParts.slice(3).join('/');
+        await fileRequest.delete(bucket, objectKey);
+      } catch (deleteError) {
+        console.warn('删除旧头像失败:', deleteError);
+      }
+    }
+    
     // 上传文件到文件服务
     let retryCount = 0;
     const maxRetries = 3;
@@ -401,6 +418,25 @@ const handleAvatarChange: UploadProps['onChange'] = async (uploadFile) => {
         // 确保URL格式正确
         if (!url || typeof url !== 'string') {
           throw new Error('文件服务返回的URL格式不正确')
+        }
+
+        // 立即更新用户头像
+        const updateParams: UpdateUserParams = {
+          id: userInfo.value?.id as number,
+          avatar: url
+        }
+        
+        await updateUser(updateParams)
+        
+        // 更新本地用户信息
+        const storedUserInfo = localStorage.getItem('userInfo')
+        if (storedUserInfo) {
+          const data = JSON.parse(storedUserInfo)
+          if (data && data.userInfo) {
+            data.userInfo.avatar = url
+            localStorage.setItem('userInfo', JSON.stringify(data))
+            userStore.initUserInfo()
+          }
         }
 
         // 上传成功，跳出重试循环

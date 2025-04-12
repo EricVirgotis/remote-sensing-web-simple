@@ -11,10 +11,19 @@ const service: AxiosInstance = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
-    // 从localStorage获取token
-    const token = localStorage.getItem('token')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+    // 从localStorage获取userInfo中的token
+    const userInfoStr = localStorage.getItem('userInfo')
+    if (userInfoStr) {
+      try {
+        const parsedInfo = JSON.parse(userInfoStr)
+        // 兼容两种可能的数据结构：直接包含token或嵌套在data中
+        const token = parsedInfo.token || (parsedInfo.data && parsedInfo.data.token)
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`
+        }
+      } catch (error) {
+        console.error('解析用户信息失败:', error)
+      }
     }
     return config
   },
@@ -115,14 +124,13 @@ const fileRequest = {
     
     // 特殊处理头像上传
     if (bucket === 'avatars') {
-      // 使用用户ID作为头像存储目录
+      // 不再将用户ID添加到bucket中，而是通过请求头传递
+      // 获取用户信息用于后续处理
       const storedUserInfo = localStorage.getItem('userInfo')
       if (storedUserInfo) {
         const userData = JSON.parse(storedUserInfo)
         const userInfo = userData.userInfo || userData
-        if (userInfo && userInfo.id) {
-          bucket = `avatars/${userInfo.id}`
-        } else {
+        if (!userInfo || !userInfo.id) {
           console.error('用户信息中缺少有效的id字段:', userInfo)
           throw new Error('用户信息中缺少有效的id字段')
         }

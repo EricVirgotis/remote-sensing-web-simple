@@ -22,7 +22,7 @@ export function pageDatasets(params: {
         total: number
         size: number
         current: number
-    }>('/dataset/page', { params })
+    }>('/list_datasets', { params })
 }
 
 /**
@@ -57,4 +57,4 @@ export function updateDataset(id: number, data: {
     status: number
 }) {
     return request.put(`/dataset/${id}`, data)
-} 
+}
