@@ -2,15 +2,18 @@ package com.example.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaType;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.rs.common.Result;
+import com.example.entity.Dataset;
+import com.example.service.DatasetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Collections;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -18,71 +21,97 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/dataset")
 public class DatasetController {
     
-    @PostMapping
-    public Integer createDataset(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload")
+    public Result<Long> createDataset(
+        @RequestParam("file") MultipartFile file,
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false) String description
+    ) {
         try {
-            // 保存文件到临时目录
-            String tempDir = System.getProperty("java.io.tmpdir");
-            File dest = new File(tempDir + File.separator + file.getOriginalFilename());
-            file.transferTo(dest);
-            
-            // 这里应该调用服务层处理数据集创建逻辑
-            // 返回数据集ID
-            return 1;
-        } catch (IOException e) {
-            throw new RuntimeException("文件上传失败", e);
+            // 从TokenUtils获取当前用户ID
+            Long userId = tokenUtils.getCurrentUserId();
+            if (userId == null) {
+                return Result.error(401, "用户未认证");
+            }
+            // 调用服务层处理数据集创建逻辑
+            Long datasetId = datasetService.uploadDataset(userId, file, name, description);
+            return Result.success(datasetId);
+        } catch (Exception e) {
+            return Result.error(500, "上传数据集失败: " + e.getMessage());
+        }
+    }
+    
+    @Autowired
+    private DatasetService datasetService;
+    
+    @Autowired
+    private com.rs.utils.TokenUtils tokenUtils;
+    
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Result<Dataset> createDataset(
+            @RequestPart("dataset") Dataset dataset,
+            @RequestPart(value = "file", required = false) MultipartFile file
+    ) {
+        try {
+            // 从TokenUtils获取当前用户ID
+            Long userId = tokenUtils.getCurrentUserId();
+            if (userId == null) {
+                return Result.error(401, "用户未认证");
+            }
+            dataset.setUserId(userId);
+            Dataset createdDataset = datasetService.createDataset(dataset, file);
+            return Result.success(createdDataset);
+        } catch (Exception e) {
+            return Result.error(500, "创建数据集失败: " + e.getMessage());
         }
     }
     
     @GetMapping("/list_datasets")
-    public Object pageDatasets(
+    public Result<Page<Dataset>> pageDatasets(
         @RequestParam Integer current,
         @RequestParam Integer size,
         @RequestParam(required = false) String name,
         @RequestParam(required = false) Integer status
     ) {
-        Page<Object> page = new Page<>(current, size);
-        // 这里应该调用Mapper或Service层进行分页查询
-        // 示例: return datasetService.pageDatasets(page, name, status);
-        return new HashMap<String, Object>() {{
-            put("records", Collections.emptyList());
-            put("total", 0);
-            put("size", size);
-            put("current", current);
-        }};
+        try {
+            Page<Dataset> page = new Page<>(current, size);
+            // 调用Service层进行分页查询
+            Page<Dataset> result = datasetService.pageDatasets(page, name, status);
+            return Result.success(result);
+        } catch (Exception e) {
+            return Result.error(500, "查询数据集列表失败: " + e.getMessage());
+        }
     }
     
     @GetMapping("/{id}")
-    public Object getDatasetDetail(@PathVariable Integer id) {
-        // 这里应该调用Mapper或Service层查询数据集详情
-        // 示例: return datasetService.getDatasetDetail(id);
-        return new HashMap<String, Object>() {{
-            put("id", id);
-            put("name", "示例数据集");
-            put("status", 1);
-            put("createTime", "2023-01-01");
-        }};
+    public Result<Dataset> getDatasetDetail(@PathVariable Long id) {
+        try {
+            // 调用Service层查询数据集详情
+            Dataset dataset = datasetService.getDatasetDetail(id);
+            return Result.success(dataset);
+        } catch (Exception e) {
+            return Result.error(500, "获取数据集详情失败: " + e.getMessage());
+        }
     }
     
     @DeleteMapping("/{id}")
-    public Result<Boolean> deleteDataset(@PathVariable Integer id) {
+    public Result<Boolean> deleteDataset(@PathVariable Long id) {
         try {
-            // 这里应该调用Service层删除数据集
-            // 示例: return Result.success(datasetService.deleteDataset(id));
-            return Result.success(true);
+            // 调用Service层删除数据集
+            boolean result = datasetService.deleteDataset(id);
+            return Result.success(result);
         } catch (Exception e) {
             return Result.error(500, "删除数据集失败: " + e.getMessage());
         }
     }
     
-    private String getDatasetFilePath(Integer id) {
-        // 这里应该实现根据ID获取数据集文件路径的逻辑
-        // 示例: return datasetService.getDatasetPath(id);
-        return System.getProperty("java.io.tmpdir") + File.separator + "dataset_" + id + ".zip";
+    private String getDatasetFilePath(Long id) {
+        // 调用Service层获取数据集文件路径
+        return datasetService.getDatasetPath(id);
     }
     
     @GetMapping("/{id}/download")
-    public void downloadDataset(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+    public void downloadDataset(@PathVariable Long id, HttpServletResponse response) throws IOException {
         try {
             // 获取数据集文件路径
             String filePath = getDatasetFilePath(id);
@@ -114,7 +143,7 @@ public class DatasetController {
     
     @PutMapping("/{id}")
     public Result<Boolean> updateDataset(
-        @PathVariable Integer id,
+        @PathVariable Long id,
         @RequestParam(value = "file", required = false) MultipartFile file,
         @RequestParam String name,
         @RequestParam String description,
@@ -129,18 +158,9 @@ public class DatasetController {
                 return Result.error(400, "状态值不合法");
             }
             
-            // 处理文件更新
-            if (file != null && !file.isEmpty()) {
-                String tempDir = System.getProperty("java.io.tmpdir");
-                File dest = new File(tempDir + File.separator + "dataset_" + id + ".zip");
-                file.transferTo(dest);
-            }
-            
-            // 这里应该调用Service层更新数据集元数据和文件
-            // 示例: return Result.success(datasetService.updateDataset(id, name, description, status, file));
-            return Result.success(true);
-        } catch (IOException e) {
-            return Result.error(500, "文件上传失败: " + e.getMessage());
+            // 调用Service层更新数据集元数据和文件
+            boolean result = datasetService.updateDataset(id, name, description, status, file);
+            return Result.success(result);
         } catch (Exception e) {
             return Result.error(500, "更新数据集失败: " + e.getMessage());
         }

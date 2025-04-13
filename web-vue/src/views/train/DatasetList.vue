@@ -306,14 +306,19 @@ const handleSubmit = async () => {
         if (dialog.value.type === 'add') {
           // 创建数据集
           const formData = new FormData()
-          formData.append('name', form.value.name)
-          if (form.value.description) {
-            formData.append('description', form.value.description)
+          const datasetInfo = {
+            name: form.value.name,
+            description: form.value.description
           }
+          formData.append('dataset', new Blob([JSON.stringify(datasetInfo)], { type: 'application/json' }))
           if (form.value.file) {
             formData.append('file', form.value.file)
           }
-          await createDataset(formData)
+          await createDataset(formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
           ElMessage.success('创建成功')
         } else {
           // 更新数据集

@@ -4,8 +4,8 @@ import type { Dataset } from '@/types/dataset'
 /**
  * 创建数据集
  */
-export function createDataset(data: FormData) {
-    return request.post<number>('/dataset', data)
+export function createDataset(data: FormData, config?: any) {
+    return request.post<number>('/dataset', data, config)
 }
 
 /**
@@ -22,7 +22,7 @@ export function pageDatasets(params: {
         total: number
         size: number
         current: number
-    }>('/list_datasets', { params })
+    }>('/dataset/list_datasets', { params })
 }
 
 /**

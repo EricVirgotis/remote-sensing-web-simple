@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.DatasetMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.entity.Dataset">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="dataset_name" property="name"/>
+        <result column="dataset_path" property="filePath"/>
+        <result column="dataset_size" property="fileSize"/>
+        <result column="sample_count" property="sampleCount"/>
+        <result column="description" property="description"/>
+        <result column="metadata" property="metadata"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <select id="selectCount" resultType="java.lang.Long">
+        SELECT COUNT(*) AS total FROM training_dataset WHERE deleted = 0 AND (dataset_name LIKE #{dataset_name})
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        SELECT * FROM training_dataset WHERE deleted = 0 AND (dataset_name LIKE #{dataset_name}) LIMIT #{offset}, #{size}
+    </select>
+</mapper>

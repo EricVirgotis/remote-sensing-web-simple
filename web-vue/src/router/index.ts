@@ -199,9 +199,18 @@ const routes: RouteRecordRaw[] = [
     component: Layout,
     children: [
       {
+        path: '',
+        name: 'Image',
+        component: () => import('@/views/image/index.vue'),
+        meta: {
+          title: '遥感影像',
+          requiresAuth: true
+        }
+      },
+      {
         path: 'upload',
         name: 'ImageUpload',
-        component: () => import('@/views/image/ImageUpload.vue'),
+        component: () => import('@/views/image/index.vue'),
         meta: {
           title: '图片上传',
           requiresAuth: true
@@ -210,7 +219,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'list',
         name: 'ImageList',
-        component: () => import('@/views/image/ImageList.vue'),
+        component: () => import('@/views/image/index.vue'),
         meta: {
           title: '图片列表',
           requiresAuth: true

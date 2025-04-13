@@ -169,17 +169,7 @@ const menuItems = computed<MenuItem[]>(() => {
     {
       index: '/image',
       title: '遥感影像',
-      icon: 'Picture',
-      children: [
-        {
-          title: '影像列表',
-          index: '/image/list'
-        },
-        {
-          title: '上传影像',
-          index: '/image/upload'
-        }
-      ]
+      icon: 'Picture'
     },
     {
       index: '/classification',
