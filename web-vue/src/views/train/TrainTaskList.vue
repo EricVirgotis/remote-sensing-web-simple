@@ -13,6 +13,15 @@
             <el-option label="训练失败" :value="2" />
           </el-select>
         </el-form-item>
+        <el-form-item label="模型选择">
+          <el-select v-model="queryForm.model_name" placeholder="请选择模型" clearable style="width: 220px">
+            <el-option label="LeNet-5" value="LeNet-5" />
+            <el-option label="AlexNet" value="AlexNet" />
+            <el-option label="VGGNet-16" value="VGGNet-16" />
+            <el-option label="GoogleNet" value="GoogleNet" />
+            <el-option label="ResNet50" value="ResNet50" />
+          </el-select>
+        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleQuery">查询</el-button>
           <el-button type="success" @click="handleAdd">新建</el-button>
@@ -82,6 +91,19 @@
         <el-form-item label="任务名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入任务名称" />
         </el-form-item>
+        <el-form-item label="模型选择" prop="modelName">
+          <el-select v-model="form.modelName" placeholder="请选择模型" style="width: 100%">
+            <el-option label="LeNet-5" value="LeNet-5" />
+            <el-option label="AlexNet" value="AlexNet" />
+            <el-option label="VGGNet-16" value="VGGNet-16" />
+            <el-option label="GoogleNet" value="GoogleNet" />
+            <el-option label="ResNet50" value="ResNet50" />
+          </el-select>
+          <div style="margin-top: 10px;">
+            <el-checkbox v-model="form.usePretrained">使用预训练权重</el-checkbox>
+          </div>
+        </el-form-item>
+        
         <el-form-item label="数据集" prop="datasetId">
           <el-select v-model="form.datasetId" placeholder="请选择数据集" style="width: 100%">
             <el-option
@@ -127,7 +149,8 @@ const queryForm = reactive({
   current: 1,
   size: 10,
   name: '',
-  status: undefined as number | undefined
+  status: undefined as number | undefined,
+  model_name: ''
 })
 
 // 表格数据
@@ -141,6 +164,8 @@ const formRef = ref<FormInstance>()
 const form = reactive({
   name: '',
   datasetId: undefined as number | undefined,
+  modelName: 'ResNet50',
+  usePretrained: true,
   epochs: 10,
   batchSize: 32,
   learningRate: 0.001
@@ -153,6 +178,7 @@ const datasetOptions = ref<Dataset[]>([])
 const rules: FormRules = {
   name: [{ required: true, message: '请输入任务名称', trigger: 'blur' }],
   datasetId: [{ required: true, message: '请选择数据集', trigger: 'change' }],
+  modelName: [{ required: true, message: '请选择模型', trigger: 'change' }],
   epochs: [{ required: true, message: '请输入训练轮数', trigger: 'blur' }],
   batchSize: [{ required: true, message: '请输入批次大小', trigger: 'blur' }],
   learningRate: [{ required: true, message: '请输入学习率', trigger: 'blur' }]
@@ -207,6 +233,8 @@ const handleSubmit = async () => {
         await createTrainTask({
           name: form.name,
           datasetId: form.datasetId,
+          modelName: form.modelName,
+          usePretrained: form.usePretrained,
           epochs: form.epochs,
           batchSize: form.batchSize,
           learningRate: form.learningRate
@@ -286,4 +314,4 @@ onMounted(() => {
   justify-content: flex-end;
   gap: 10px;
 }
-</style> 
+</style>

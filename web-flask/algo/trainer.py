@@ -107,13 +107,37 @@ class ModelTrainer:
             torch.nn.Module: 创建的模型
         """
         try:
-            # 使用预训练的ResNet50模型
             import torchvision.models as models
-            model = models.resnet50(pretrained=True)
             
-            # 修改最后一层以适应类别数量
-            in_features = model.fc.in_features
-            model.fc = nn.Linear(in_features, self.num_classes)
+            if self.model_name == 'LeNet-5':
+                model = nn.Sequential(
+                    nn.Conv2d(3, 6, kernel_size=5),
+                    nn.ReLU(),
+                    nn.MaxPool2d(kernel_size=2, stride=2),
+                    nn.Conv2d(6, 16, kernel_size=5),
+                    nn.ReLU(),
+                    nn.MaxPool2d(kernel_size=2, stride=2),
+                    nn.Flatten(),
+                    nn.Linear(16*53*53, 120),
+                    nn.ReLU(),
+                    nn.Linear(120, 84),
+                    nn.ReLU(),
+                    nn.Linear(84, self.num_classes)
+                )
+            elif self.model_name == 'AlexNet':
+                model = models.alexnet(pretrained=True)
+                model.classifier[6] = nn.Linear(4096, self.num_classes)
+            elif self.model_name == 'VGGNet-16':
+                model = models.vgg16(pretrained=True)
+                model.classifier[6] = nn.Linear(4096, self.num_classes)
+            elif self.model_name == 'GoogleNet':
+                model = models.googlenet(pretrained=True)
+                model.fc = nn.Linear(1024, self.num_classes)
+            elif self.model_name == 'ResNet50':
+                model = models.resnet50(pretrained=True)
+                model.fc = nn.Linear(2048, self.num_classes)
+            else:
+                raise ValueError(f"不支持的模型名称: {self.model_name}")
             
             return model
         except Exception as e:

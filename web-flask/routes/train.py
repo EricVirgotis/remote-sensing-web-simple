@@ -30,6 +30,46 @@ os.makedirs(DATASET_DIR, exist_ok=True)
 TRAIN_RESULT_DIR = Path(os.path.dirname(os.path.abspath(__file__))) / '../train_results'
 os.makedirs(TRAIN_RESULT_DIR, exist_ok=True)
 
+@train_bp.route('/train-task', methods=['POST'])
+def create_train_task():
+    """
+    创建训练任务
+    
+    Returns:
+        JSON: 训练任务ID
+    """
+    try:
+        data = request.get_json()
+        
+        # 验证必填参数
+        required_fields = ['task_name', 'dataset_name', 'epochs', 'batch_size', 'learning_rate', 'model_name']
+        for field in required_fields:
+            if field not in data:
+                return jsonify({
+                    'status': 'error',
+                    'message': f'缺少必填参数: {field}'
+                }), 400
+                
+        # 检查模型名称是否有效
+        valid_models = ['LeNet-5', 'AlexNet', 'VGGNet', 'GoogleNet', 'ResNet']
+        if data['model_name'] not in valid_models:
+            return jsonify({
+                'status': 'error',
+                'message': f'无效的模型名称，支持的模型: {", ".join(valid_models)}'
+            }), 400
+            
+        # 这里需要添加实际的训练任务创建逻辑
+        return jsonify({
+            'status': 'success',
+            'data': 1  # 示例返回的训练任务ID
+        })
+    except Exception as e:
+        logger.error(f'创建训练任务失败: {str(e)}')
+        return jsonify({
+            'status': 'error',
+            'message': '创建训练任务失败'
+        }), 500
+
 @train_bp.route('/upload_dataset', methods=['POST'])
 def upload_dataset():
     """
