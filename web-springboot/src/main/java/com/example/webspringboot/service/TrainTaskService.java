@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TrainTaskService extends ServiceImpl<TrainTaskMapper, TrainTask> {
-    public Page<TrainTask> pageTrainTasks(Page<TrainTask> page, String name, Integer status) {
+    public Page<TrainTask> pageTrainTasks(Page<TrainTask> page, String name, Integer status, String model_name) {
         // 构建查询条件
         QueryWrapper<TrainTask> queryWrapper = new QueryWrapper<>();
         if (name != null && !name.trim().isEmpty()) {
@@ -17,6 +17,9 @@ public class TrainTaskService extends ServiceImpl<TrainTaskMapper, TrainTask> {
         }
         if (status != null) {
             queryWrapper.eq("task_status", status);
+        }
+        if (model_name != null && !model_name.trim().isEmpty()) {
+            queryWrapper.eq("model_name", model_name);
         }
         
         // 执行分页查询

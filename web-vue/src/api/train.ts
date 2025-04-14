@@ -43,6 +43,7 @@ export function pageTrainTasks(params: {
   size: number
   name?: string
   status?: number
+  model_name?: string
 }) {
   return request.get<TrainTaskPage>('/train-task/page', { params })
 }

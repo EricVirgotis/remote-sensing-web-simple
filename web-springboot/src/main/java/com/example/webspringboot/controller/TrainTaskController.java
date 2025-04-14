@@ -127,14 +127,15 @@ public class TrainTaskController {
 
     @GetMapping("/page")
     public Result<Page<TrainTask>> pageTrainTasks(
-        @RequestParam Integer current,
-        @RequestParam Integer size,
+        @RequestParam(defaultValue = "1") Integer current,
+        @RequestParam(defaultValue = "10") Integer size,
         @RequestParam(required = false) String name,
-        @RequestParam(required = false) Integer status
+        @RequestParam(required = false) Integer status,
+        @RequestParam(required = false) String model_name
     ) {
         try {
             Page<TrainTask> page = new Page<>(current, size);
-            Page<TrainTask> result = trainTaskService.pageTrainTasks(page, name, status);
+            Page<TrainTask> result = trainTaskService.pageTrainTasks(page, name, status, model_name);
             return Result.success(result != null ? result : page);
         } catch (Exception e) {
             return Result.error(500, "查询训练任务列表失败: " + e.getMessage());
