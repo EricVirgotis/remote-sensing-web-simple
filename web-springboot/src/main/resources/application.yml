@@ -1,8 +1,20 @@
+# 日志配置
+logging:
+  charset:
+    console: UTF-8
+    file: UTF-8
+
 # 服务器配置
 server:
   port: 8080
   servlet:
     context-path: /api
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+  tomcat:
+    uri-encoding: UTF-8
 
 # Spring配置
 spring:
@@ -19,10 +31,29 @@ spring:
     multipart:
       max-file-size: 1GB
       max-request-size: 1GB
+  # 编码配置
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+  # 数据库初始化配置
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/init.sql
+      continue-on-error: true
+  # JPA配置
+  jpa:
+    open-in-view: false
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password: ''
 
 # MyBatis Plus配置
 mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath*:mapper/**/*.xml
   type-aliases-package: com.rs.entity
   configuration:
     map-underscore-to-camel-case: true
@@ -50,6 +81,7 @@ rs:
   file-storage:
     base-path: D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple/file_store
     remote-image-path: ${rs.file-storage.base-path}/remote-image
+    result-path: ${rs.file-storage.base-path}/result
   # 算法服务配置
   algorithm:
     url: http://localhost:5000

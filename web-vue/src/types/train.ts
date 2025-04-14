@@ -101,6 +101,11 @@ export interface TrainTask {
    * 更新时间
    */
   updateTime: string
+
+  /**
+   * 训练参数(JSON字符串)
+   */
+  parameters?: string
 }
 
 /**
@@ -126,4 +131,4 @@ export interface TrainTaskPage {
    * 当前页码
    */
   current: number
-} 
+}

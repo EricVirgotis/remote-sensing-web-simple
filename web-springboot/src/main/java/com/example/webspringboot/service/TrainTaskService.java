@@ -13,10 +13,10 @@ public class TrainTaskService extends ServiceImpl<TrainTaskMapper, TrainTask> {
         // 构建查询条件
         QueryWrapper<TrainTask> queryWrapper = new QueryWrapper<>();
         if (name != null && !name.trim().isEmpty()) {
-            queryWrapper.like("name", name);
+            queryWrapper.like("task_name", name);
         }
         if (status != null) {
-            queryWrapper.eq("status", status);
+            queryWrapper.eq("task_status", status);
         }
         
         // 执行分页查询

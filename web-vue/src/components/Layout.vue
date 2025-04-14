@@ -85,7 +85,7 @@
                 :size="32"
                 :src="userStore.userInfo?.avatar || defaultAvatar"
               />
-              <span class="username">{{ userStore.userInfo?.realName || userStore.userInfo?.username }}</span>
+              <span class="username">{{ userStore.userInfo?.username }}</span>
               <el-icon class="el-icon-arrow-down"><ArrowDown /></el-icon>
             </div>
 

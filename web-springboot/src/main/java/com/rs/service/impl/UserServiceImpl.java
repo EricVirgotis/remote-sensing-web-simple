@@ -199,7 +199,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public boolean logout() {
         // 从请求上下文中获取当前用户token
-        String token = (String) RequestContextHolder.getRequestAttributes()
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if (requestAttributes == null) {
+            return true;
+        }
+        
+        String token = (String) requestAttributes
                 .getAttribute(Constants.TOKEN_HEADER, RequestAttributes.SCOPE_REQUEST);
                 
         if (token != null) {
@@ -207,7 +212,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             redisTemplate.delete(Constants.REDIS_TOKEN_PREFIX + token);
             
             // 清除请求上下文中的token
-            RequestContextHolder.getRequestAttributes()
+            requestAttributes
                 .removeAttribute(Constants.TOKEN_HEADER, RequestAttributes.SCOPE_REQUEST);
         }
         

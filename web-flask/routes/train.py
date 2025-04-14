@@ -51,7 +51,7 @@ def create_train_task():
                 }), 400
                 
         # 检查模型名称是否有效
-        valid_models = ['LeNet-5', 'AlexNet', 'VGGNet', 'GoogleNet', 'ResNet']
+        valid_models = ['LeNet-5', 'AlexNet', 'VGGNet-16', 'GoogleNet', 'ResNet50']
         if data['model_name'] not in valid_models:
             return jsonify({
                 'status': 'error',
@@ -371,9 +371,13 @@ def start_training():
         })
     except Exception as e:
         logger.error(f"训练失败: {str(e)}")
+        # 更新任务状态为失败(2)
+        from web_flask.utils.db_utils import update_task_status
+        update_task_status(task_id=data.get('task_id'), status=2, error_message=str(e))
         return jsonify({
             'status': 'error',
-            'message': f"训练失败: {str(e)}"
+            'message': f"训练失败: {str(e)}",
+            'task_status': 2  # 2表示训练失败
         }), 500
 
 @train_bp.route('/results/<model_name>', methods=['GET'])

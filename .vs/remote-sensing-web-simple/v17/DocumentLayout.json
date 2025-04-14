@@ -1,0 +1,1316 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\AnalysisTaskMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\mapper\\AnalysisTaskMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\ClassificationModelMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\mapper\\ClassificationModelMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\DatasetMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\mapper\\DatasetMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\OperationLogMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\mapper\\OperationLogMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\RemoteImageMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\mapper\\RemoteImageMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\TrainingDatasetMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\mapper\\TrainingDatasetMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\TrainingTaskMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\mapper\\TrainingTaskMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\UserMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\mapper\\UserMapper.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\application.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\application.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\logback-spring.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\resources\\logback-spring.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\RemoteSensingApplication.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\RemoteSensingApplication.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\utils\\TokenUtils.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\utils\\TokenUtils.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\AnalysisTaskServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\AnalysisTaskServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\ClassificationModelServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\ClassificationModelServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\RemoteImageServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\RemoteImageServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\UserServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\UserServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\AnalysisTaskService.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\service\\AnalysisTaskService.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\ClassificationModelService.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\service\\ClassificationModelService.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\UserService.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\service\\UserService.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\RemoteImageService.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\service\\RemoteImageService.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\UserMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\mapper\\UserMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainTaskMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainTaskMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingTaskMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingTaskMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingDatasetMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingDatasetMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\OperationLogMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\mapper\\OperationLogMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\ClassificationModelMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\mapper\\ClassificationModelMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\basemapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\mapper\\basemapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\exception\\GlobalExceptionHandler.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\exception\\GlobalExceptionHandler.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\exception\\BusinessException.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\exception\\BusinessException.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\User.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\entity\\User.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainTask.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainTask.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainingTask.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainingTask.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\RemoteImage.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\entity\\RemoteImage.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\OperationLog.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\entity\\OperationLog.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\ClassificationModel.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\entity\\ClassificationModel.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\AnalysisTask.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\entity\\AnalysisTask.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\UserRegisterDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\dto\\UserRegisterDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\UserLoginDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\dto\\UserLoginDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\UserInfoDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\dto\\UserInfoDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\TrainingDatasetUploadDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\dto\\TrainingDatasetUploadDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\RemoteImageUploadDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\dto\\RemoteImageUploadDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\AnalysisTaskSubmitDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\dto\\AnalysisTaskSubmitDTO.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\UserController.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\controller\\UserController.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\RemoteImageController.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\controller\\RemoteImageController.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\ClassificationModelController.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\controller\\ClassificationModelController.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\AnalysisTaskController.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\controller\\AnalysisTaskController.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\WebConfig.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\config\\WebConfig.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\RedisConfig.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\config\\RedisConfig.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\MyMetaObjectHandler.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\config\\MyMetaObjectHandler.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\MybatisPlusConfig.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\config\\MybatisPlusConfig.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\EmbeddedDatabaseConfig.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\config\\EmbeddedDatabaseConfig.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\DatabaseInitializer.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\config\\DatabaseInitializer.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\common\\Result.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\common\\Result.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\common\\Constants.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\rs\\common\\Constants.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\webspringboot\\service\\TrainTaskService.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\example\\webspringboot\\service\\TrainTaskService.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\webspringboot\\controller\\TrainTaskController.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\example\\webspringboot\\controller\\TrainTaskController.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\service\\DatasetService.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\example\\service\\DatasetService.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\service\\impl\\DatasetServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\example\\service\\impl\\DatasetServiceImpl.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\mapper\\DatasetMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\example\\mapper\\DatasetMapper.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\entity\\Dataset.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\example\\entity\\Dataset.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\controller\\DatasetController.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-springboot\\src\\main\\java\\com\\example\\controller\\DatasetController.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\utils\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\utils\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\utils\\image_utils.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\utils\\image_utils.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\utils\\file_utils.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\utils\\file_utils.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\routes\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\train.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\routes\\train.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\model.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\routes\\model.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\classify.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\routes\\classify.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\models\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\models\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-file\\config.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-file\\config.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-file\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-file\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\algo\\cnn_trainer.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\algo\\cnn_trainer.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\algo\\cnn_models.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\algo\\cnn_models.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\algo\\trainer.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:web-flask\\algo\\trainer.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AnalysisTaskMapper.xml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\AnalysisTaskMapper.xml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\mapper\\AnalysisTaskMapper.xml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\AnalysisTaskMapper.xml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\mapper\\AnalysisTaskMapper.xml",
+              "ViewState": "AgIAAA8AAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-04-13T17:11:29.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClassificationModelMapper.xml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\ClassificationModelMapper.xml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\mapper\\ClassificationModelMapper.xml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\ClassificationModelMapper.xml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\mapper\\ClassificationModelMapper.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-04-13T17:11:29.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DatasetMapper.xml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\DatasetMapper.xml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\mapper\\DatasetMapper.xml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\DatasetMapper.xml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\mapper\\DatasetMapper.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-04-13T17:11:28.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OperationLogMapper.xml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\OperationLogMapper.xml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\mapper\\OperationLogMapper.xml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\OperationLogMapper.xml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\mapper\\OperationLogMapper.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-04-13T17:11:28.234Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RemoteImageMapper.xml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\RemoteImageMapper.xml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\mapper\\RemoteImageMapper.xml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\RemoteImageMapper.xml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\mapper\\RemoteImageMapper.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-04-13T17:11:27.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "README.md",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAF0AAAAAAAAAAADwv3EAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-04-13T16:59:41.259Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TrainingDatasetMapper.xml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\TrainingDatasetMapper.xml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\mapper\\TrainingDatasetMapper.xml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\TrainingDatasetMapper.xml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\mapper\\TrainingDatasetMapper.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-04-13T17:11:27.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TrainingTaskMapper.xml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\TrainingTaskMapper.xml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\mapper\\TrainingTaskMapper.xml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\TrainingTaskMapper.xml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\mapper\\TrainingTaskMapper.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-04-13T17:11:26.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserMapper.xml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\UserMapper.xml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\mapper\\UserMapper.xml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\mapper\\UserMapper.xml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\mapper\\UserMapper.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-04-13T17:11:26.156Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "application.yml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\application.yml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\application.yml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\application.yml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\application.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-04-13T17:11:25.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "logback-spring.xml",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\logback-spring.xml",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\resources\\logback-spring.xml",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\resources\\logback-spring.xml",
+              "RelativeToolTip": "web-springboot\\src\\main\\resources\\logback-spring.xml",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-04-13T17:11:24.547Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RemoteSensingApplication.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\RemoteSensingApplication.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\RemoteSensingApplication.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\RemoteSensingApplication.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\RemoteSensingApplication.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:19.567Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "TokenUtils.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\utils\\TokenUtils.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\utils\\TokenUtils.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\utils\\TokenUtils.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\utils\\TokenUtils.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:19.037Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AnalysisTaskServiceImpl.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\AnalysisTaskServiceImpl.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\AnalysisTaskServiceImpl.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\AnalysisTaskServiceImpl.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\AnalysisTaskServiceImpl.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:16.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ClassificationModelServiceImpl.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\ClassificationModelServiceImpl.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\ClassificationModelServiceImpl.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\ClassificationModelServiceImpl.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\ClassificationModelServiceImpl.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:16.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "RemoteImageServiceImpl.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\RemoteImageServiceImpl.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\RemoteImageServiceImpl.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\RemoteImageServiceImpl.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\RemoteImageServiceImpl.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:15.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "UserServiceImpl.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\UserServiceImpl.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\UserServiceImpl.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\UserServiceImpl.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\service\\impl\\UserServiceImpl.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:14.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AnalysisTaskService.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\AnalysisTaskService.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\service\\AnalysisTaskService.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\AnalysisTaskService.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\service\\AnalysisTaskService.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:14.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ClassificationModelService.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\ClassificationModelService.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\service\\ClassificationModelService.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\ClassificationModelService.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\service\\ClassificationModelService.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:13.523Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "UserService.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\UserService.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\service\\UserService.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\UserService.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\service\\UserService.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:12.996Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "RemoteImageService.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\RemoteImageService.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\service\\RemoteImageService.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\service\\RemoteImageService.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\service\\RemoteImageService.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:12.488Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "UserMapper.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\UserMapper.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\UserMapper.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\UserMapper.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\UserMapper.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:09.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "TrainTaskMapper.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainTaskMapper.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainTaskMapper.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainTaskMapper.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainTaskMapper.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:08.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "TrainingTaskMapper.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingTaskMapper.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingTaskMapper.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingTaskMapper.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingTaskMapper.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:08.23Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "TrainingDatasetMapper.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingDatasetMapper.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingDatasetMapper.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingDatasetMapper.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\TrainingDatasetMapper.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:07.722Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "OperationLogMapper.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\OperationLogMapper.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\OperationLogMapper.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\OperationLogMapper.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\OperationLogMapper.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:06.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ClassificationModelMapper.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\ClassificationModelMapper.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\ClassificationModelMapper.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\ClassificationModelMapper.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\ClassificationModelMapper.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:06.067Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "basemapper.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\basemapper.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\basemapper.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\mapper\\basemapper.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\mapper\\basemapper.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:05.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "GlobalExceptionHandler.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\exception\\GlobalExceptionHandler.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\exception\\GlobalExceptionHandler.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\exception\\GlobalExceptionHandler.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\exception\\GlobalExceptionHandler.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:04.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "BusinessException.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\exception\\BusinessException.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\exception\\BusinessException.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\exception\\BusinessException.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\exception\\BusinessException.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:03.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "User.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\User.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\entity\\User.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\User.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\entity\\User.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:01.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "TrainTask.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainTask.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainTask.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainTask.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainTask.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:01.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "TrainingTask.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainingTask.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainingTask.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainingTask.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\entity\\TrainingTask.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:11:00.583Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "RemoteImage.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\RemoteImage.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\entity\\RemoteImage.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\RemoteImage.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\entity\\RemoteImage.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:59.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "OperationLog.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\OperationLog.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\entity\\OperationLog.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\OperationLog.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\entity\\OperationLog.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:59.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ClassificationModel.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\ClassificationModel.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\entity\\ClassificationModel.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\ClassificationModel.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\entity\\ClassificationModel.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:58.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "AnalysisTask.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\AnalysisTask.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\entity\\AnalysisTask.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\entity\\AnalysisTask.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\entity\\AnalysisTask.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:58.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "UserRegisterDTO.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\UserRegisterDTO.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\dto\\UserRegisterDTO.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\UserRegisterDTO.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\dto\\UserRegisterDTO.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:56.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "UserLoginDTO.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\UserLoginDTO.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\dto\\UserLoginDTO.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\UserLoginDTO.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\dto\\UserLoginDTO.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:55.733Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "UserInfoDTO.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\UserInfoDTO.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\dto\\UserInfoDTO.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\UserInfoDTO.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\dto\\UserInfoDTO.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:55.234Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "TrainingDatasetUploadDTO.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\TrainingDatasetUploadDTO.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\dto\\TrainingDatasetUploadDTO.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\TrainingDatasetUploadDTO.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\dto\\TrainingDatasetUploadDTO.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:54.744Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "RemoteImageUploadDTO.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\RemoteImageUploadDTO.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\dto\\RemoteImageUploadDTO.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\RemoteImageUploadDTO.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\dto\\RemoteImageUploadDTO.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:54.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "AnalysisTaskSubmitDTO.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\AnalysisTaskSubmitDTO.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\dto\\AnalysisTaskSubmitDTO.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\dto\\AnalysisTaskSubmitDTO.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\dto\\AnalysisTaskSubmitDTO.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:53.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "UserController.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\UserController.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\controller\\UserController.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\UserController.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\controller\\UserController.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:52.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "RemoteImageController.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\RemoteImageController.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\controller\\RemoteImageController.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\RemoteImageController.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\controller\\RemoteImageController.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:52.034Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "ClassificationModelController.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\ClassificationModelController.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\controller\\ClassificationModelController.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\ClassificationModelController.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\controller\\ClassificationModelController.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:51.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "AnalysisTaskController.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\AnalysisTaskController.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\controller\\AnalysisTaskController.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\controller\\AnalysisTaskController.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\controller\\AnalysisTaskController.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:50.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "WebConfig.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\WebConfig.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\config\\WebConfig.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\WebConfig.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\config\\WebConfig.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:49.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "RedisConfig.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\RedisConfig.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\config\\RedisConfig.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\RedisConfig.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\config\\RedisConfig.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:48.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "MyMetaObjectHandler.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\MyMetaObjectHandler.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\config\\MyMetaObjectHandler.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\MyMetaObjectHandler.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\config\\MyMetaObjectHandler.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:47.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "MybatisPlusConfig.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\MybatisPlusConfig.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\config\\MybatisPlusConfig.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\MybatisPlusConfig.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\config\\MybatisPlusConfig.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:47.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "EmbeddedDatabaseConfig.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\EmbeddedDatabaseConfig.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\config\\EmbeddedDatabaseConfig.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\EmbeddedDatabaseConfig.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\config\\EmbeddedDatabaseConfig.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:46.575Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "DatabaseInitializer.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\DatabaseInitializer.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\config\\DatabaseInitializer.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\config\\DatabaseInitializer.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\config\\DatabaseInitializer.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:45.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Result.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\common\\Result.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\common\\Result.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\common\\Result.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\common\\Result.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:41.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Constants.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\common\\Constants.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\rs\\common\\Constants.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\rs\\common\\Constants.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\rs\\common\\Constants.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:40.234Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "TrainTaskService.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\webspringboot\\service\\TrainTaskService.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\example\\webspringboot\\service\\TrainTaskService.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\webspringboot\\service\\TrainTaskService.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\example\\webspringboot\\service\\TrainTaskService.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:17.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "TrainTaskController.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\webspringboot\\controller\\TrainTaskController.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\example\\webspringboot\\controller\\TrainTaskController.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\webspringboot\\controller\\TrainTaskController.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\example\\webspringboot\\controller\\TrainTaskController.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:15.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "DatasetService.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\service\\DatasetService.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\example\\service\\DatasetService.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\service\\DatasetService.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\example\\service\\DatasetService.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:14.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "DatasetServiceImpl.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\service\\impl\\DatasetServiceImpl.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\example\\service\\impl\\DatasetServiceImpl.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\service\\impl\\DatasetServiceImpl.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\example\\service\\impl\\DatasetServiceImpl.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:13.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "DatasetMapper.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\mapper\\DatasetMapper.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\example\\mapper\\DatasetMapper.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\mapper\\DatasetMapper.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\example\\mapper\\DatasetMapper.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:11.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "Dataset.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\entity\\Dataset.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\example\\entity\\Dataset.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\entity\\Dataset.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\example\\entity\\Dataset.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:09.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "DatasetController.java",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\controller\\DatasetController.java",
+              "RelativeDocumentMoniker": "web-springboot\\src\\main\\java\\com\\example\\controller\\DatasetController.java",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-springboot\\src\\main\\java\\com\\example\\controller\\DatasetController.java",
+              "RelativeToolTip": "web-springboot\\src\\main\\java\\com\\example\\controller\\DatasetController.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-04-13T17:10:07.965Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "app.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\app.py",
+              "RelativeDocumentMoniker": "web-flask\\app.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\app.py",
+              "RelativeToolTip": "web-flask\\app.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:56.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "__init__.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\utils\\__init__.py",
+              "RelativeDocumentMoniker": "web-flask\\utils\\__init__.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\utils\\__init__.py",
+              "RelativeToolTip": "web-flask\\utils\\__init__.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:55.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "image_utils.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\utils\\image_utils.py",
+              "RelativeDocumentMoniker": "web-flask\\utils\\image_utils.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\utils\\image_utils.py",
+              "RelativeToolTip": "web-flask\\utils\\image_utils.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:54.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "file_utils.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\utils\\file_utils.py",
+              "RelativeDocumentMoniker": "web-flask\\utils\\file_utils.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\utils\\file_utils.py",
+              "RelativeToolTip": "web-flask\\utils\\file_utils.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:54.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "__init__.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\__init__.py",
+              "RelativeDocumentMoniker": "web-flask\\routes\\__init__.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\__init__.py",
+              "RelativeToolTip": "web-flask\\routes\\__init__.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:50.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "train.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\train.py",
+              "RelativeDocumentMoniker": "web-flask\\routes\\train.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\train.py",
+              "RelativeToolTip": "web-flask\\routes\\train.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:49.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "model.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\model.py",
+              "RelativeDocumentMoniker": "web-flask\\routes\\model.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\model.py",
+              "RelativeToolTip": "web-flask\\routes\\model.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:48.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "classify.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\classify.py",
+              "RelativeDocumentMoniker": "web-flask\\routes\\classify.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\routes\\classify.py",
+              "RelativeToolTip": "web-flask\\routes\\classify.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:48.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "README.md",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\models\\README.md",
+              "RelativeDocumentMoniker": "web-flask\\models\\README.md",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\models\\README.md",
+              "RelativeToolTip": "web-flask\\models\\README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-04-13T17:09:42.879Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "config.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-file\\config.py",
+              "RelativeDocumentMoniker": "web-file\\config.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-file\\config.py",
+              "RelativeToolTip": "web-file\\config.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:37.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "app.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-file\\app.py",
+              "RelativeDocumentMoniker": "web-file\\app.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-file\\app.py",
+              "RelativeToolTip": "web-file\\app.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T17:09:37.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "cnn_trainer.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\algo\\cnn_trainer.py",
+              "RelativeDocumentMoniker": "web-flask\\algo\\cnn_trainer.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\algo\\cnn_trainer.py",
+              "RelativeToolTip": "web-flask\\algo\\cnn_trainer.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAALAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T16:57:05.453Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "cnn_models.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\algo\\cnn_models.py",
+              "RelativeDocumentMoniker": "web-flask\\algo\\cnn_models.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\algo\\cnn_models.py",
+              "RelativeToolTip": "web-flask\\algo\\cnn_models.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T16:57:02.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "trainer.py",
+              "DocumentMoniker": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\algo\\trainer.py",
+              "RelativeDocumentMoniker": "web-flask\\algo\\trainer.py",
+              "ToolTip": "D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple\\web-flask\\algo\\trainer.py",
+              "RelativeToolTip": "web-flask\\algo\\trainer.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMuSURBVDhPrVTPTxNREP627e7SQm0F2mKLUEVICP5IMBqUhB6NJ4/GGGPwoIf\u002BCR7VxBBPhnAxAeVC4kEuJB6Qi0Y8oCGKpoKQUpEWAhX6c7vb3X1Ol5UauzEc/JLJm31v3pdv5u0M/isYY5zpGohEIs8GBgZu8Dxv7tQik8mwbDb7YGpq6lEqlcqa2/twmOs\u002BBgcHEQgEzK9azMzMsHg8fsdut7Pp6enHKysrafPIQA1hBRRkelUQAcLhMEi9jTLxdnZ23pZl2elwOIYWFxe3zTBrwmAwaHpVcFy1OoIg8P39/c1Efo3KJquq\u002BpBEFCpnNiPiL9CFGvtd14rSyclJDA8P22dnZ1tcLlevKIp\u002B45BgqXBpacn0qqDUQGniXN9F9J6/AIeNg1TIyaOjo9/NEAOWhN3d3aZXRV5W8Sq2jY2sBElSwFNuR9x2x5HWtkabrZrogRXKDUEsb\u002BSxmSlg7tsG1LICX4PAX\u002Blpbff7/Q1mmHUNK6/5t2WKKt4uphBbS0NXy2QasvkiV1RtTrfb7TKvWhNWoGkaNHD4ulXGxNwmPibSOH3Ui95wI5rqeahESq8Ln7dwavLpjXe69HlB1/U2y5RXV1eNdb3E48VCDuvpHF1WoJWJhEyjdHWNVNKvJHBbgDQPlOZ74Ls7ZKmwq6vLsCKrw\u002BZu3lCjl1UquA6P0wGPi4eX7EzYhdNB6j5NoiL/AJS1S5YKY7GYsa6tS5BlUkOptTU6EI1IcNp3aQboNAh0eIUdhJybgFrcI9V2Pf9U2B4KQKCIisLbEQFnWz6gx7eMk/4VnGyOobU\u002BDk79SQF5IqNG4YM7loSKohjWfljE8WYn3KIdvkM6OKYBukIEMq2kkj7BiIJRF9Wd0iCEnlimnEwmjVUkuxU5jgzdD3jooUpEppWosT1kTlJE/S127UA89gV1J76Nj48PWRJ2dHSY3h4qg0HUkwz5AmcQajRc6vtIGRHam9aev1y/9/r1xNuRkZFiDeHY2Nj\u002BIPgTN69fThwVQ2Eon4iQHiD3HqzhPNOcvek3b\u002B7HK2Rm6MFAY\u002BoQ08uPWCmRYvl5ncnJBO29JLsajUbDe1HAL6CnYE1YMsFsAAAAAElFTkSuQmCC",
+              "WhenOpened": "2025-04-13T16:57:01.908Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

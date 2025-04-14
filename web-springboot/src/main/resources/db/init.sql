@@ -107,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `training_task` (
   `model_name` varchar(100) NOT NULL COMMENT '模型名称',
   `model_type` varchar(50) NOT NULL COMMENT '模型类型',
   `task_status` varchar(20) NOT NULL COMMENT '任务状态：PENDING-等待中，RUNNING-运行中，COMPLETED-已完成，FAILED-失败',
+  `progress` int DEFAULT 0 COMMENT '训练进度(0-100)',
   `model_path` varchar(255) DEFAULT NULL COMMENT '生成模型存储路径',
   `start_time` datetime DEFAULT NULL COMMENT '开始时间',
   `end_time` datetime DEFAULT NULL COMMENT '结束时间',

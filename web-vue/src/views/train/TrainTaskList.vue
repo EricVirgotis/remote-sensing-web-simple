@@ -8,6 +8,7 @@
         </el-form-item>
         <el-form-item label="任务状态">
           <el-select v-model="queryForm.status" placeholder="请选择任务状态" clearable style="width: 220px">
+            <el-option label="全部" :value="''" />
             <el-option label="训练中" :value="0" />
             <el-option label="训练成功" :value="1" />
             <el-option label="训练失败" :value="2" />
@@ -32,7 +33,8 @@
 
     <!-- 训练任务表格 -->
     <el-table v-loading="loading" :data="tableData" border style="width: 100%">
-      <el-table-column prop="name" label="任务名称" min-width="120" show-overflow-tooltip />
+      <el-table-column prop="taskName" label="任务名称" min-width="120" show-overflow-tooltip />
+      <el-table-column prop="modelName" label="模型名称" min-width="120" show-overflow-tooltip />
       <el-table-column prop="epochs" label="训练轮数" width="100" />
       <el-table-column prop="batchSize" label="批次大小" width="100" />
       <el-table-column prop="learningRate" label="学习率" width="100" />
@@ -92,7 +94,7 @@
           <el-input v-model="form.name" placeholder="请输入任务名称" />
         </el-form-item>
         <el-form-item label="模型选择" prop="modelName">
-          <el-select v-model="form.modelName" placeholder="请选择模型" style="width: 100%">
+          <el-select v-model="form.modelName" placeholder="请选择模型" style="width: 100%" @change="handleModelChange">
             <el-option label="LeNet-5" value="LeNet-5" />
             <el-option label="AlexNet" value="AlexNet" />
             <el-option label="VGGNet-16" value="VGGNet-16" />
@@ -100,7 +102,10 @@
             <el-option label="ResNet50" value="ResNet50" />
           </el-select>
           <div style="margin-top: 10px;">
-            <el-checkbox v-model="form.usePretrained">使用预训练权重</el-checkbox>
+            <el-checkbox v-model="form.usePretrained" :disabled="form.modelName === 'LeNet-5' || form.modelName === 'AlexNet'">使用预训练权重</el-checkbox>
+            <el-tooltip v-if="form.modelName === 'LeNet-5' || form.modelName === 'AlexNet'" content="该模型没有官方预训练权重可用" placement="top">
+              <el-icon style="margin-left: 5px;"><QuestionFilled /></el-icon>
+            </el-tooltip>
           </div>
         </el-form-item>
         
@@ -174,6 +179,13 @@ const form = reactive({
 // 数据集选项
 const datasetOptions = ref<Dataset[]>([])
 
+// 处理模型选择变化
+const handleModelChange = (value: string) => {
+  if (value === 'LeNet-5' || value === 'AlexNet') {
+    form.usePretrained = false
+  }
+}
+
 // 表单校验规则
 const rules: FormRules = {
   name: [{ required: true, message: '请输入任务名称', trigger: 'blur' }],
@@ -189,7 +201,23 @@ const handleQuery = async () => {
   loading.value = true
   try {
     const res = await pageTrainTasks(queryForm)
-    tableData.value = res.records
+    // 解析parameters字段中的训练参数
+    tableData.value = res.records.map(item => {
+      if (item.parameters) {
+        try {
+          const params = JSON.parse(item.parameters)
+          return {
+            ...item,
+            epochs: params.epochs,
+            batchSize: params.batchSize,
+            learningRate: params.learningRate
+          }
+        } catch (e) {
+          console.error('解析训练参数失败:', e)
+        }
+      }
+      return item
+    })
     total.value = res.total
   } catch (error) {
     console.error('查询训练任务列表失败:', error)
@@ -257,8 +285,23 @@ const handleDialogClose = () => {
 }
 
 // 刷新
-const handleRefresh = () => {
-  handleQuery()
+const handleRefresh = async () => {
+  loading.value = true
+  try {
+    const res = await pageTrainTasks({
+      current: queryForm.current,
+      size: queryForm.size,
+      name: queryForm.name,
+      status: queryForm.status
+    })
+    tableData.value = res.records
+    total.value = res.total
+    ElMessage.success('刷新成功')
+  } catch (error: any) {
+    ElMessage.error('刷新失败: ' + error.message)
+  } finally {
+    loading.value = false
+  }
 }
 
 // 分页
