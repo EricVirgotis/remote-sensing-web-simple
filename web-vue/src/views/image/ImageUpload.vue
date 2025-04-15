@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import type { UploadProps, UploadInstance } from 'element-plus'
+import type { UploadProps, UploadInstance, UploadRequestOptions, UploadFile, UploadFiles } from 'element-plus'
 import { uploadImageFile, uploadImage } from '@/api/image'
 import type { ImageUploadParams } from '@/types/image'
 
@@ -20,7 +20,14 @@ const uploadParams = ref<ImageUploadParams>({
 })
 
 // 上传组件实例
-const upload = ref<UploadInstance>()
+const upload = ref<UploadInstance | null>(null)
+
+// 获取已上传的文件列表
+const getUploadFiles = () => {
+    const uploadRef = upload.value
+    if (!uploadRef) return []
+    return uploadRef.getFiles()
+}
 
 // 获取图片尺寸
 const getImageDimensions = (file: File): Promise<{ width: number; height: number }> => {
@@ -85,7 +92,7 @@ const beforeUpload: UploadProps['beforeUpload'] = async (file) => {
 }
 
 // 自定义上传
-const customUpload: UploadProps['httpRequest'] = async (options) => {
+const customUpload = async (options: UploadRequestOptions) => {
     try {
         // 检查必填字段
         if (!uploadParams.value.name) {
@@ -137,6 +144,62 @@ const customUpload: UploadProps['httpRequest'] = async (options) => {
     } catch (error: any) {
         ElMessage.error(error.message || '上传失败')
     }
+}
+
+// 重置表单
+const resetForm = () => {
+    uploadParams.value = {
+        name: '',
+        description: '',
+        bucketName: 'images',
+        objectKey: '',
+        size: 0,
+        format: '',
+        width: 0,
+        height: 0,
+        bands: 0
+    }
+    upload.value?.clearFiles()
+}
+
+// 自定义上传按钮点击事件
+const handleUploadClick = async () => {
+    const files = getUploadFiles()
+    if (!files.length) {
+        ElMessage.error('请先选择要上传的文件')
+        return
+    }
+
+    const uploadFile = files[0].raw
+    if (!uploadFile) {
+        ElMessage.error('文件获取失败')
+        return
+    }
+
+    const options: UploadRequestOptions = {
+        action: '',
+        method: 'post',
+        data: {
+            name: uploadParams.value.name,
+            description: uploadParams.value.description,
+            bucketName: uploadParams.value.bucketName,
+            objectKey: uploadParams.value.objectKey,
+            size: String(uploadParams.value.size),
+            format: uploadParams.value.format,
+            width: String(uploadParams.value.width),
+            height: String(uploadParams.value.height),
+            bands: String(uploadParams.value.bands)
+        },
+        file: uploadFile,
+        filename: uploadParams.value.name,
+        headers: {},
+        withCredentials: false,
+        onProgress: () => {},
+        onSuccess: () => {},
+        onError: () => {}
+    }
+
+    await customUpload(options)
 }
 </script>
 
@@ -198,7 +261,7 @@ const customUpload: UploadProps['httpRequest'] = async (options) => {
                 </el-form-item>
                 
                 <el-form-item>
-                    <el-button type="primary" size="large" @click="customUpload({file: uploadParams.file})">
+                    <el-button type="primary" size="large" @click="handleUploadClick">
                         <el-icon><Upload /></el-icon> 提交上传
                     </el-button>
                     <el-button size="large" @click="resetForm">

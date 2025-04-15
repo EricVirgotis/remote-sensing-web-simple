@@ -22,6 +22,10 @@ logger = logging.getLogger(__name__)
 # 创建蓝图
 train_bp = Blueprint('train', __name__)
 
+@train_bp.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "healthy", "service": "training"})
+
 # 数据集目录
 DATASET_DIR = Path(os.path.dirname(os.path.abspath(__file__))) / '../datasets'
 os.makedirs(DATASET_DIR, exist_ok=True)
@@ -269,6 +273,9 @@ def start_training():
         model_name = data.get('model_name')
         epochs = data.get('epochs', 30)
         batch_size = data.get('batch_size', 32)
+        learning_rate = data.get('learning_rate', 0.001)
+        task_name = data.get('task_name')
+
         
         if not dataset_name:
             return jsonify({
@@ -280,6 +287,12 @@ def start_training():
             return jsonify({
                 'status': 'error',
                 'message': '缺少模型名称'
+            }), 400
+            
+        if not task_name:
+            return jsonify({
+                'status': 'error',
+                'message': '缺少任务名称'
             }), 400
         
         # 检查数据集是否存在

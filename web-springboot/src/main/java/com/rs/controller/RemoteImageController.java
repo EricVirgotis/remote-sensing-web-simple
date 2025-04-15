@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Tag(name = "遥感影像管理", description = "遥感影像相关接口")
 @RestController
-@RequestMapping("/api/images")
+@RequestMapping("/images")
 public class RemoteImageController {
 
     @Autowired

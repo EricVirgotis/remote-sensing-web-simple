@@ -10,6 +10,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Web配置类
@@ -23,7 +25,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(@NonNull ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
-                .addResourceLocations("classpath:/static/");
+                .addResourceLocations("classpath:/static/")
+                .resourceChain(true);
     }
 
     /**
@@ -31,7 +34,11 @@ public class WebConfig implements WebMvcConfigurer {
      */
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getMessageConverters().stream()
+            .filter(converter -> converter instanceof StringHttpMessageConverter)
+            .forEach(converter -> ((StringHttpMessageConverter) converter).setDefaultCharset(StandardCharsets.UTF_8));
+        return restTemplate;
     }
 
     /**

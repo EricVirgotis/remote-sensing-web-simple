@@ -32,7 +32,7 @@ export function createTrainTask(data: {
     epochs: data.epochs,
     learningRate: data.learningRate
   }
-  return request.post<number>('/train-task', requestData)
+  return request.post<number>('/train-task/create', requestData)
 }
 
 /**

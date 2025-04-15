@@ -16,6 +16,7 @@
         </el-form-item>
         <el-form-item label="模型选择">
           <el-select v-model="queryForm.model_name" placeholder="请选择模型" clearable style="width: 220px">
+            <el-option label="全部" :value="''" />
             <el-option label="LeNet-5" value="LeNet-5" />
             <el-option label="AlexNet" value="AlexNet" />
             <el-option label="VGGNet-16" value="VGGNet-16" />

@@ -4,6 +4,7 @@ package com.rs.common;
  * 系统常量类
  */
 public class Constants {
+    
 
     /**
      * Token请求头名称
@@ -73,6 +74,46 @@ public class Constants {
          * 已取消
          */
         public static final String CANCELED = "CANCELED";
+    }
+    
+    /**
+     * 训练任务状态码
+     */
+    public static class TrainTaskStatus {
+        /**
+         * 进行中
+         */
+        public static final int IN_PROGRESS = 0;
+        
+        /**
+         * 成功
+         */
+        public static final int SUCCESS = 1;
+        
+        /**
+         * 失败
+         */
+        public static final int FAILED = 2;
+        
+        /**
+         * 提交失败
+         */
+        public static final int SUBMIT_FAILED = 3;
+        
+        /**
+         * 服务端点不存在
+         */
+        public static final int ENDPOINT_NOT_FOUND = 4;
+        
+        /**
+         * 网络连接问题
+         */
+        public static final int NETWORK_ERROR = 5;
+        
+        /**
+         * 其他错误
+         */
+        public static final int OTHER_ERROR = 6;
     }
     
     /**

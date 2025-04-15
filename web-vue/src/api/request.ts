@@ -53,7 +53,7 @@ instance.interceptors.response.use(
     }
     
     // 对于登录接口，特殊处理
-    if (response.config.url === '/user/login') {
+    if (response.config.url === '/api/auth/login') {
       console.groupCollapsed('登录接口响应处理')
       console.log('完整响应对象:', response)
       

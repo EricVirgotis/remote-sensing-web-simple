@@ -277,7 +277,7 @@ const initClassAccuracyChart = () => {
   const chart = echarts.init(classAccuracyChartRef.value)
   
   const classNames = Object.keys(result.value.metrics.classAccuracy)
-  const accuracyValues = classNames.map(name => result.value.metrics.classAccuracy[name] * 100)
+  const accuracyValues = classNames.map(name => (result.value.metrics.classAccuracy as Record<string, number>)[name] * 100)
   
   const option = {
     tooltip: {
