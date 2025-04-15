@@ -26,18 +26,47 @@ class RemoteSensingDataset(Dataset):
     """
     遥感影像数据集
     """
-    def __init__(self, image_paths, labels, transform=None):
+    def __init__(self, data_dir=None, image_paths=None, labels=None, transform=None):
         """
         初始化数据集
         
         Args:
-            image_paths (list): 图像路径列表
-            labels (list): 标签列表
+            data_dir (str, optional): 数据集根目录，如果提供则自动从目录结构构建数据集
+            image_paths (list, optional): 图像路径列表
+            labels (list, optional): 标签列表
             transform (callable, optional): 数据变换
         """
-        self.image_paths = image_paths
-        self.labels = labels
         self.transform = transform
+        
+        if data_dir is not None:
+            # 从目录结构构建数据集
+            self.image_paths = []
+            self.labels = []
+            self.class_names = []
+            
+            # 获取所有类别（子文件夹）
+            class_dirs = [d for d in Path(data_dir).iterdir() if d.is_dir()]
+            
+            # 为每个类别分配数字标签
+            for label_idx, class_dir in enumerate(sorted(class_dirs)):
+                self.class_names.append(class_dir.name)
+                
+                # 获取该类别下的所有图像
+                image_files = [str(f) for f in class_dir.glob('*') 
+                              if f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.tif', '.tiff']]
+                
+                self.image_paths.extend(image_files)
+                self.labels.extend([label_idx] * len(image_files))
+                
+            logger.info(f"从目录 {data_dir} 加载数据集")
+            logger.info(f"找到 {len(self.class_names)} 个类别: {self.class_names}")
+            logger.info(f"总共 {len(self.image_paths)} 张图像")
+        else:
+            # 使用提供的图像路径和标签
+            if image_paths is None or labels is None:
+                raise ValueError("必须提供 data_dir 或同时提供 image_paths 和 labels")
+            self.image_paths = image_paths
+            self.labels = labels
     
     def __len__(self):
         return len(self.image_paths)
@@ -48,21 +77,26 @@ class RemoteSensingDataset(Dataset):
         try:
             import cv2
             image = cv2.imread(image_path)
+            if image is None:
+                raise ValueError(f"无法读取图像文件: {image_path}")
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             
             # 应用变换
             if self.transform:
-                image = self.transform(image)
+                image = self.transform(image=image)["image"]
             
-            return image, self.labels[idx]
+            # 确保标签是tensor
+            label = torch.tensor(self.labels[idx], dtype=torch.long)
+            
+            return image, label
         except Exception as e:
             logger.error(f"读取图像失败 {image_path}: {str(e)}")
             # 返回一个空图像和标签
             if self.transform:
-                dummy_image = torch.zeros(3, 256, 256)
+                dummy_image = torch.zeros((3, 256, 256), dtype=torch.float32)
             else:
                 dummy_image = np.zeros((256, 256, 3), dtype=np.uint8)
-            return dummy_image, self.labels[idx]
+            return dummy_image, torch.tensor(self.labels[idx], dtype=torch.long)
 
 class ModelTrainer:
     """
@@ -163,19 +197,37 @@ class ModelTrainer:
             train_transform = get_train_transforms()
             val_transform = get_val_transforms()
             
-            train_dataset = RemoteSensingDataset(
-                train_data['images'],
-                train_data['labels'],
-                transform=train_transform
-            )
+            # 支持两种数据加载方式
+            if isinstance(train_data, str):
+                # 从目录加载数据集
+                train_dataset = RemoteSensingDataset(
+                    data_dir=train_data,
+                    transform=train_transform
+                )
+                # 更新类别数量
+                self.num_classes = len(train_dataset.class_names)
+            else:
+                # 使用传统方式加载数据集
+                train_dataset = RemoteSensingDataset(
+                    image_paths=train_data['images'],
+                    labels=train_data['labels'],
+                    transform=train_transform
+                )
+            
             train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
             
             if val_data:
-                val_dataset = RemoteSensingDataset(
-                    val_data['images'],
-                    val_data['labels'],
-                    transform=val_transform
-                )
+                if isinstance(val_data, str):
+                    val_dataset = RemoteSensingDataset(
+                        data_dir=val_data,
+                        transform=val_transform
+                    )
+                else:
+                    val_dataset = RemoteSensingDataset(
+                        image_paths=val_data['images'],
+                        labels=val_data['labels'],
+                        transform=val_transform
+                    )
                 val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
             else:
                 val_loader = None

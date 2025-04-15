@@ -58,12 +58,21 @@ def load_model(model_name):
         return model_cache[model_name]
     
     # 构建模型文件路径并尝试不同格式
+    model_found = False
     for ext in ['.pt', '.pth', '.h5']:
         model_path = MODEL_DIR / f"{model_name}{ext}"
         if model_path.exists():
+            # 检查文件大小
+            if model_path.stat().st_size == 0:
+                logger.error(f"模型文件 {model_path} 是空文件")
+                continue
+            model_found = True
             break
-    else:
-        raise ModelNotFoundError(f"模型 {model_name} 不存在")
+    
+    if not model_found:
+        error_msg = f"模型 {model_name} 不存在或文件损坏"
+        logger.error(error_msg)
+        raise ModelNotFoundError(error_msg)
     
     try:
         # 加载模型

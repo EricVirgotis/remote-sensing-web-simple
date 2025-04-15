@@ -23,7 +23,7 @@ public class TrainingTask {
     private Integer batchSize;
     private Double learningRate;
     private String parameters;
-    private Integer taskStatus;
+    private String taskStatus;
     private Integer progress;
     private String modelPath;
     private Double accuracy;

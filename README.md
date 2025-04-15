@@ -111,7 +111,7 @@
 ```bash
 # 1. 安装MySQL 8
 # 2. 创建数据库
-mysql -u root -p
+mysql -uroot -pcxz20030620
 CREATE DATABASE rs_analysis DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 # 3. 导入初始化SQL
 mysql -u root -p rs_analysis < web-springboot/src/main/resources/db/init.sql

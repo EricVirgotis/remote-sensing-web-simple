@@ -124,6 +124,13 @@ public class DatasetServiceImpl extends ServiceImpl<DatasetMapper, Dataset> impl
             throw new BusinessException("数据集不存在");
         }
         
+        // 检查数据集文件是否存在
+        File datasetFile = new File(dataset.getFilePath());
+        if (!datasetFile.exists()) {
+            // 文件不存在则直接删除数据库记录
+            return this.removeById(id);
+        }
+        
         // 逻辑删除数据集记录
         dataset.setStatus(0); // 无效状态
         dataset.setUpdateTime(LocalDateTime.now());

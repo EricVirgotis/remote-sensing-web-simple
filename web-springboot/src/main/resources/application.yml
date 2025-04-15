@@ -79,7 +79,7 @@ springdoc:
 rs:
   # 文件存储路径
   file-storage:
-    base-path: D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple/file_store
+    base-path: D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple2/remote-sensing-web-simple/file_store
     remote-image-path: ${rs.file-storage.base-path}/remote-image
     result-path: ${rs.file-storage.base-path}/result
   # 算法服务配置

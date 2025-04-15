@@ -194,12 +194,38 @@ def get_train_transforms(image_size=(256, 256)):
         image_size (tuple): 图像大小 (高度, 宽度)
         
     Returns:
-        torchvision.transforms: 数据增强变换
+        albumentations.Compose: 数据增强变换
     """
-    return transforms.Compose([
-        transforms.ToPILImage(),
-        transforms.RandomHorizontalFlip(),
-        transforms.RandomVerticalFlip(),
+    import albumentations as A
+    from albumentations.pytorch import ToTensorV2
+    
+    return A.Compose([
+        A.Resize(height=image_size[0], width=image_size[1]),
+        A.HorizontalFlip(p=0.5),
+        A.VerticalFlip(p=0.5),
+        A.RandomRotate90(p=0.5),
+        A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ToTensorV2()
+    ])
+
+def get_val_transforms(image_size=(256, 256)):
+    """
+    获取验证数据变换
+    
+    Args:
+        image_size (tuple): 图像大小 (高度, 宽度)
+        
+    Returns:
+        albumentations.Compose: 数据变换
+    """
+    import albumentations as A
+    from albumentations.pytorch import ToTensorV2
+    
+    return A.Compose([
+        A.Resize(height=image_size[0], width=image_size[1]),
+        A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ToTensorV2()
+    ])
         transforms.RandomRotation(15),
         transforms.ColorJitter(brightness=0.1, contrast=0.1, saturation=0.1),
         transforms.Resize(image_size),

@@ -354,7 +354,15 @@ const handleDelete = async (row: Dataset) => {
   } catch (error: any) {
     if (error !== 'cancel') {
       console.error('删除数据集失败：', error)
-      ElMessage.error('删除数据集失败')
+      
+      // 检查是否为数据集不存在的错误
+      if (error.response?.data?.msg?.includes('数据集不存在')) {
+        // 从列表中移除该数据集
+        datasetList.value = datasetList.value.filter(item => item.id !== row.id)
+        ElMessage.warning('该数据集已被删除')
+      } else {
+        ElMessage.error('删除数据集失败')
+      }
     }
   }
 }
@@ -362,6 +370,12 @@ const handleDelete = async (row: Dataset) => {
 // 下载按钮
 const handleDownload = async (row: Dataset) => {
   try {
+    if (!row?.objectKey) {
+      // 当objectKey无效时，直接跳转到固定格式的下载链接
+      window.location.href = `/api/dataset/${row.id}/download`
+      return
+    }
+    
     const response = await downloadDataset(row.id)
     
     // 检查响应是否为错误信息
