@@ -29,6 +29,13 @@ CORS(app)  # 启用CORS支持跨域请求
 # 注册蓝图
 app.register_blueprint(classify_bp, url_prefix='/api/classify')
 app.register_blueprint(train_bp, url_prefix='/api/train')
+
+def legacy_train_health_check():
+    return jsonify({
+        'status': 'ok',
+        'service': 'algorithm-service',
+        'version': '1.0.0'
+    })
 app.register_blueprint(model_bp, url_prefix='/api/model')
 
 # 健康检查路由

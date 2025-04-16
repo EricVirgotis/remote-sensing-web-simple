@@ -64,7 +64,7 @@
               <div class="stat-label">影像总数</div>
             </div>
             <div class="stat-chart">
-              <div class="stat-progress" :style="{width: `${Math.min(stats.imageCount / 50 * 100, 100)}%`}"></div>
+              <div class="stat-progress" :style="{width: `${Math.min(Number(stats.imageCount) / 50 * 100, 100)}%`}"></div>
             </div>
           </el-card>
         </el-col>
@@ -79,7 +79,7 @@
               <div class="stat-label">任务总数</div>
             </div>
             <div class="stat-chart">
-              <div class="stat-progress" :style="{width: `${Math.min(stats.taskCount / 30 * 100, 100)}%`}"></div>
+              <div class="stat-progress" :style="{width: `${Math.min(Number(stats.taskCount) / 30 * 100, 100)}%`}"></div>
             </div>
           </el-card>
         </el-col>
@@ -94,7 +94,7 @@
               <div class="stat-label">模型总数</div>
             </div>
             <div class="stat-chart">
-              <div class="stat-progress" :style="{width: `${Math.min(stats.modelCount / 10 * 100, 100)}%`}"></div>
+              <div class="stat-progress" :style="{width: `${Math.min(Number(stats.modelCount) / 10 * 100, 100)}%`}"></div>
             </div>
           </el-card>
         </el-col>
@@ -109,7 +109,7 @@
               <div class="stat-label">结果总数</div>
             </div>
             <div class="stat-chart">
-              <div class="stat-progress" :style="{width: `${Math.min(stats.resultCount / 40 * 100, 100)}%`}"></div>
+              <div class="stat-progress" :style="{width: `${Math.min(Number(stats.resultCount) / 40 * 100, 100)}%`}"></div>
             </div>
           </el-card>
         </el-col>

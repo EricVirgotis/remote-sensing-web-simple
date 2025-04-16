@@ -88,3 +88,13 @@ rs:
   # 文件服务配置
   file-service:
     url: http://localhost:5001
+  # 训练服务配置
+  train:
+    service:
+      url: http://localhost:5000
+      retry:
+        max-attempts: 3
+        interval-ms: 1000
+      health-check:
+        max-attempts: 3
+        interval-ms: 1000

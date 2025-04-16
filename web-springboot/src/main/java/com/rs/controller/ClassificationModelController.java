@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "分类模型管理", description = "分类模型相关接口")
 @RestController
-@RequestMapping("/api/models")
+@RequestMapping("/models")
 public class ClassificationModelController {
 
     @Autowired

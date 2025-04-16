@@ -23,6 +23,10 @@ logger = logging.getLogger(__name__)
 # 创建蓝图
 train_bp = Blueprint('train', __name__)
 
+@train_bp.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "healthy", "service": "training"})
+
 # 数据集目录
 DATASET_DIR = Path('D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple2/remote-sensing-web-simple/file_store/dataset')
 os.makedirs(DATASET_DIR, exist_ok=True)
@@ -274,7 +278,6 @@ def start_training():
                 'status': 'error',
                 'message': '缺少必填参数: datasetId'
             }), 400
-
         if not dataset_name:
             if task_id:
                 update_task_status(task_id=task_id, status=2, error_message='缺少数据集名称')
@@ -439,11 +442,11 @@ def start_training():
         # 准备训练数据和参数
         from algo.trainer import ModelTrainer
         
-        # 更新任务状态为训练中
-        if task_id:
-            update_task_status(task_id=task_id, status=1)  # 1表示训练中
-        
         try:
+            # 更新任务状态为训练中
+            if task_id:
+                update_task_status(task_id=task_id, status=1)  # 1表示训练中
+
             # 准备训练数据
             train_data = {
                 'images': [str(f) for f in train_dir.rglob('*') if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png']],
@@ -481,9 +484,7 @@ def start_training():
             if task_id:
                 update_task_status(
                     task_id=task_id,
-                    status=3,  # 3表示训练完成
-                    model_path=str(training_result.get('model_path')),
-                    accuracy=training_result.get('accuracy')
+                    status=3  # 3表示训练完成
                 )
             
             # 清理临时目录
@@ -551,6 +552,95 @@ def get_dataset_info(dataset_id):
             return None
     finally:
         conn.close()
+
+@train_bp.route('/train-task/<int:task_id>', methods=['DELETE'])
+def delete_train_task(task_id):
+    """
+    删除训练任务
+    
+    Args:
+        task_id (int): 任务ID
+        
+    Returns:
+        JSON: 删除结果
+    """
+    try:
+        # 删除数据库记录
+        if delete_train_task(task_id):
+            return jsonify({
+                'status': 'success',
+                'message': '训练任务删除成功'
+            })
+        else:
+            return jsonify({
+                'status': 'error',
+                'message': '未找到该训练任务'
+            }), 404
+    except Exception as e:
+        logger.error(f'删除训练任务失败: {str(e)}')
+        return jsonify({
+            'status': 'error',
+            'message': '删除训练任务失败'
+        }), 500
+
+@train_bp.route('/retry/<int:task_id>', methods=['POST'])
+def retry_training(task_id):
+    """
+    重试失败的训练任务
+    
+    Args:
+        task_id (int): 训练任务ID
+        
+    Returns:
+        JSON: 重试结果
+    """
+    try:
+        # 获取任务信息
+        conn = get_db()
+        try:
+            with conn.cursor() as cursor:
+                cursor.execute(
+                    'SELECT * FROM training_task WHERE id = %s',
+                    (task_id,)
+                )
+                task = cursor.fetchone()
+                
+                if not task:
+                    return jsonify({
+                        'status': 'error',
+                        'message': f'训练任务 {task_id} 不存在'
+                    }), 404
+                
+                # 只有失败的任务才能重试
+                if task['status'] != 2:  # 2表示失败状态
+                    return jsonify({
+                        'status': 'error',
+                        'message': '只能重试失败的训练任务'
+                    }), 400
+                
+                # 重置任务状态
+                update_task_status(task_id=task_id, status=0)  # 0表示待训练状态
+                
+                # 准备重试参数
+                retry_data = {
+                    'taskId': task_id,
+                    'datasetId': task['dataset_id'],
+                    'dataset_name': task['dataset_name'],
+                    'model_name': task['model_name'],
+                    'epochs': task['epochs'],
+                    'batch_size': task['batch_size']
+                }
+                
+                # 开始重新训练
+                return start_training(retry_data)
+        finally:
+            conn.close()
+    except Exception as e:
+        logger.error(f"重试训练任务失败: {str(e)}")
+        return jsonify({
+            'status': 'error',
+            'message': f"重试训练任务失败: {str(e)}"
+        }), 500
 
 @train_bp.route('/results/<model_name>', methods=['GET'])
 def get_training_result(model_name):

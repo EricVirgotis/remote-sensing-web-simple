@@ -221,11 +221,7 @@ def get_val_transforms(image_size=(256, 256)):
     import albumentations as A
     from albumentations.pytorch import ToTensorV2
     
-    return A.Compose([
-        A.Resize(height=image_size[0], width=image_size[1]),
-        A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-        ToTensorV2()
-    ])
+    return transforms.Compose([
         transforms.RandomRotation(15),
         transforms.ColorJitter(brightness=0.1, contrast=0.1, saturation=0.1),
         transforms.Resize(image_size),

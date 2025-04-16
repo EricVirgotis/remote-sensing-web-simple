@@ -15,7 +15,12 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 from pathlib import Path
+import albumentations as A
+from tqdm import tqdm
 from .preprocessing import get_train_transforms, get_val_transforms
+
+# 设置环境变量以屏蔽albumentations更新提示
+os.environ['NO_ALBUMENTATIONS_UPDATE'] = '1'
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +42,8 @@ class RemoteSensingDataset(Dataset):
             transform (callable, optional): 数据变换
         """
         self.transform = transform
+        self.label_to_idx = {}
+        self.idx_to_label = {}
         
         if data_dir is not None:
             # 从目录结构构建数据集
@@ -49,7 +56,10 @@ class RemoteSensingDataset(Dataset):
             
             # 为每个类别分配数字标签
             for label_idx, class_dir in enumerate(sorted(class_dirs)):
-                self.class_names.append(class_dir.name)
+                class_name = class_dir.name
+                self.class_names.append(class_name)
+                self.label_to_idx[class_name] = label_idx
+                self.idx_to_label[label_idx] = class_name
                 
                 # 获取该类别下的所有图像
                 image_files = [str(f) for f in class_dir.glob('*') 
@@ -66,7 +76,15 @@ class RemoteSensingDataset(Dataset):
             if image_paths is None or labels is None:
                 raise ValueError("必须提供 data_dir 或同时提供 image_paths 和 labels")
             self.image_paths = image_paths
-            self.labels = labels
+            
+            # 处理标签
+            unique_labels = sorted(set(labels))
+            self.class_names = unique_labels
+            self.label_to_idx = {label: idx for idx, label in enumerate(unique_labels)}
+            self.idx_to_label = {idx: label for idx, label in enumerate(unique_labels)}
+            
+            # 将字符串标签转换为数值索引
+            self.labels = [self.label_to_idx[label] if isinstance(label, str) else label for label in labels]
     
     def __len__(self):
         return len(self.image_paths)
@@ -83,7 +101,13 @@ class RemoteSensingDataset(Dataset):
             
             # 应用变换
             if self.transform:
-                image = self.transform(image=image)["image"]
+                if isinstance(self.transform, A.Compose):
+                    # 对于albumentations变换
+                    transformed = self.transform(image=image)
+                    image = transformed["image"]
+                else:
+                    # 对于torchvision变换
+                    image = self.transform(image)
             
             # 确保标签是tensor
             label = torch.tensor(self.labels[idx], dtype=torch.long)
@@ -251,7 +275,9 @@ class ModelTrainer:
                 train_correct = 0
                 train_total = 0
                 
-                for images, labels in train_loader:
+                # 添加进度条
+                train_pbar = tqdm(train_loader, desc=f'Epoch {epoch+1}/{epochs} [Train]')
+                for images, labels in train_pbar:
                     images, labels = images.to(self.device), labels.to(self.device)
                     
                     # 前向传播
@@ -268,6 +294,11 @@ class ModelTrainer:
                     _, predicted = torch.max(outputs, 1)
                     train_total += labels.size(0)
                     train_correct += (predicted == labels).sum().item()
+                    
+                    # 更新进度条
+                    current_loss = loss.item()
+                    current_acc = (predicted == labels).sum().item() / labels.size(0)
+                    train_pbar.set_postfix({'loss': f'{current_loss:.4f}', 'acc': f'{current_acc:.4f}'})
                 
                 # 计算训练指标
                 epoch_train_loss = train_loss / train_total
@@ -283,7 +314,9 @@ class ModelTrainer:
                     val_total = 0
                     
                     with torch.no_grad():
-                        for images, labels in val_loader:
+                        # 添加验证进度条
+                        val_pbar = tqdm(val_loader, desc=f'Epoch {epoch+1}/{epochs} [Val]')
+                        for images, labels in val_pbar:
                             images, labels = images.to(self.device), labels.to(self.device)
                             
                             # 前向传播
@@ -308,7 +341,7 @@ class ModelTrainer:
                     # 保存最佳模型
                     if epoch_val_acc > best_val_acc:
                         best_val_acc = epoch_val_acc
-                        self.save_model(f"{self.model_name}_best")
+                        self.save_model(f"{self.model_name}_best", user_id=task_id)
                         logger.info(f"保存最佳模型，验证准确率: {epoch_val_acc:.4f}")
                 
                 # 打印进度
@@ -325,14 +358,25 @@ class ModelTrainer:
                 
                 # 定期保存模型
                 if (epoch + 1) % save_interval == 0:
-                    self.save_model(f"{self.model_name}_epoch{epoch+1}")
+                    self.save_model(f"{self.model_name}_epoch{epoch+1}", user_id=task_id)
             
             # 保存最终模型
-            self.save_model(self.model_name)
+            self.save_model(self.model_name, user_id=task_id)
             
             # 计算总训练时间
             total_time = time.time() - start_time
             logger.info(f"训练完成，总耗时: {total_time:.2f}秒")
+            
+            # 清理临时数据集目录
+            if user_id:
+                import shutil
+                temp_dir = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) / 'temp_datasets' / str(user_id)
+                if temp_dir.exists():
+                    try:
+                        shutil.rmtree(temp_dir)
+                        logger.info(f"已清理临时数据集目录: {temp_dir}")
+                    except Exception as e:
+                        logger.warning(f"清理临时数据集目录失败: {str(e)}")
             
             return history
             
@@ -340,17 +384,27 @@ class ModelTrainer:
             logger.error(f"训练失败: {str(e)}")
             raise
     
-    def save_model(self, model_name=None):
+    def save_model(self, model_name=None, user_id=None):
         """
         保存模型
         
         Args:
             model_name (str, optional): 模型名称，如果为None则使用初始化时的名称
+            user_id (str, optional): 用户ID，用于指定保存路径
         """
         if model_name is None:
             model_name = self.model_name
         
-        model_path = MODEL_DIR / f"{model_name}.pt"
+        # 设置模型保存路径
+        if user_id:
+            # 使用用户指定的路径
+            model_dir = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) / 'file_store/model' / str(user_id)
+            os.makedirs(model_dir, exist_ok=True)
+            model_path = model_dir / f"{model_name}.pt"
+        else:
+            # 使用默认路径
+            model_path = MODEL_DIR / f"{model_name}.pt"
+        
         torch.save(self.model, model_path)
         logger.info(f"模型已保存: {model_path}")
     

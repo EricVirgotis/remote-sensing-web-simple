@@ -32,7 +32,7 @@ export function createTrainTask(data: {
     epochs: data.epochs,
     learningRate: data.learningRate
   }
-  return request.post<number>('/train-task', requestData)
+  return request.post<number>('/train-task/create', requestData)
 }
 
 /**
@@ -60,4 +60,11 @@ export function getTrainTaskDetail(id: number) {
  */
 export function deleteTrainTask(id: number) {
   return request.delete<void>(`/train-task/${id}`)
+}
+
+/**
+ * 重试训练任务
+ */
+export function retryTrainTask(id: number) {
+  return request.post<void>(`/train-task/${id}/retry`)
 }

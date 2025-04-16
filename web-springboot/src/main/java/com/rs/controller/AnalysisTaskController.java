@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Tag(name = "分析任务管理", description = "分析任务相关接口")
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("/tasks")
 public class AnalysisTaskController {
 
     @Autowired

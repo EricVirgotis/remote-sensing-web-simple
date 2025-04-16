@@ -130,7 +130,7 @@ cd web-springboot
 mvn clean package
 
 # 4. 使用mvn运行服务
-mvn spring-boot:run
+mvn spring-boot:run（mvn clean install: Maven命令重新加载项目依赖）
 
 # 5. 运行服务（可以跳过）
 java -jar target/web-springboot-1.0.0.jar

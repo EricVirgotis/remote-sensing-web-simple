@@ -155,26 +155,37 @@ const pagination = reactive({
 const loading = ref(false)
 
 // 表格数据
-const tableData = ref([])
+const tableData = ref<IFile[]>([])
 
 // 预览对话框
 const previewDialogVisible = ref(false)
-const currentFile = ref(null)
+interface IFile {
+  id: number
+  fileName: string
+  fileType: 'classification' | 'model' | 'dataset' | 'image' | 'other'
+  fileSize: number
+  createTime: string
+  creator: string
+  downloadCount: number
+  url?: string
+}
+
+const currentFile = ref<IFile | null>(null)
 
 // 获取文件类型标签样式
-const getFileTypeTag = (type) => {
-  const map = {
+const getFileTypeTag = (type: 'classification' | 'model' | 'dataset' | 'image' | 'other') => {
+  const map: Record<string, 'success' | 'warning' | 'info' | 'primary' | 'danger'> = {
     classification: 'success',
     model: 'primary',
     dataset: 'warning',
     image: 'info',
-    other: ''
+    other: 'danger'
   }
-  return map[type] || ''
+  return map[type] || 'danger'
 }
 
 // 获取文件类型名称
-const getFileTypeName = (type) => {
+const getFileTypeName = (type: 'classification' | 'model' | 'dataset' | 'image' | 'other') => {
   const map = {
     classification: '分类结果',
     model: '训练模型',
@@ -186,7 +197,7 @@ const getFileTypeName = (type) => {
 }
 
 // 格式化文件大小
-const formatFileSize = (size) => {
+const formatFileSize = (size: number) => {
   if (size < 1024) {
     return size + ' B'
   } else if (size < 1024 * 1024) {
@@ -199,7 +210,7 @@ const formatFileSize = (size) => {
 }
 
 // 判断是否为图像文件
-const isImageFile = (type) => {
+const isImageFile = (type: 'classification' | 'model' | 'dataset' | 'image' | 'other') => {
   return type === 'image' || type === 'classification'
 }
 
@@ -211,8 +222,8 @@ const refreshFileList = async () => {
     await new Promise(resolve => setTimeout(resolve, 500))
     
     // 模拟数据
-    const mockData = Array.from({ length: 20 }, (_, index) => {
-      const types = ['classification', 'model', 'dataset', 'image', 'other']
+    const mockData: IFile[] = Array.from({ length: 20 }, (_, index) => {
+      const types: ('classification' | 'model' | 'dataset' | 'image' | 'other')[] = ['classification', 'model', 'dataset', 'image', 'other']
       const type = types[Math.floor(Math.random() * types.length)]
       const size = Math.floor(Math.random() * 1024 * 1024 * 10) // 0-10MB
       
@@ -224,12 +235,14 @@ const refreshFileList = async () => {
         createTime: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000).toLocaleString(),
         creator: `用户${Math.floor(Math.random() * 10) + 1}`,
         downloadCount: Math.floor(Math.random() * 100),
-        url: type === 'image' ? 'https://example.com/image.jpg' : ''
+        url: type === 'image' ? 'https://example.com/image.jpg' : '',
+        description: '',
+        updateTime: ''
       }
     })
     
     tableData.value = mockData
-    pagination.value.total = 100 // 模拟总数
+    pagination.total = 100 // 模拟总数
     
     ElMessage.success('刷新成功')
   } catch (error) {
@@ -242,7 +255,7 @@ const refreshFileList = async () => {
 
 // 搜索
 const handleSearch = () => {
-  pagination.value.current = 1
+  pagination.current = 1
   refreshFileList()
 }
 
@@ -255,18 +268,91 @@ const handleReset = () => {
 }
 
 // 预览文件
-const handlePreview = (row) => {
+const handlePreview = (row: IFile) => {
   currentFile.value = row
   previewDialogVisible.value = true
 }
 
 // 下载文件
-const handleDownload = (row) => {
+const handleDownload = (row: IFile) => {
   ElMessage.success(`开始下载文件：${row.fileName}`)
   // 实际项目中这里应该调用下载API
 }
 
 // 删除文件
-const handleDelete = (row) => {
+const handleDelete = (row: IFile) => {
   ElMessageBox.confirm(
-    `确定要删除文件
+    `确定要删除文件 ${row.fileName}？`,
+    '警告',
+    {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    }
+  ).then(() => {
+    ElMessage.success(`删除文件成功：${row.fileName}`)
+    refreshFileList()
+  }).catch(() => {
+    ElMessage.info('已取消删除')
+  })
+}
+
+// 处理分页大小变化
+const handleSizeChange = (size: number) => {
+  pagination.size = size
+  refreshFileList()
+}
+
+// 处理页码变化
+const handleCurrentChange = (current: number) => {
+  pagination.current = current
+  refreshFileList()
+}
+</script>
+
+<style scoped>
+.file-management {
+  padding: 20px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-form {
+  margin-bottom: 20px;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.preview-container {
+  padding: 20px;
+}
+
+.file-info {
+  margin-bottom: 20px;
+}
+
+.image-preview {
+  text-align: center;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 600px;
+}
+
+.other-preview {
+  text-align: center;
+}
+
+.preview-actions {
+  margin-top: 20px;
+}
+</style>

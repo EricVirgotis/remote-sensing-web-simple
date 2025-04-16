@@ -97,3 +97,26 @@ def update_task_status(task_id, status, error_message=None):
             conn.commit()
     finally:
         conn.close()
+
+def delete_train_task(task_id):
+    """
+    删除训练任务
+    
+    Args:
+        task_id (int): 任务ID
+        
+    Returns:
+        bool: 删除是否成功
+    """
+    conn = get_db()
+    try:
+        with conn.cursor() as cursor:
+            # 软删除训练任务
+            cursor.execute(
+                'UPDATE training_task SET deleted = 1 WHERE id = %s',
+                (task_id,)
+            )
+            conn.commit()
+            return cursor.rowcount > 0
+    finally:
+        conn.close()

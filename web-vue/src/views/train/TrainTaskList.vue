@@ -16,6 +16,7 @@
         </el-form-item>
         <el-form-item label="模型选择">
           <el-select v-model="queryForm.model_name" placeholder="请选择模型" clearable style="width: 220px">
+            <el-option label="全部" :value="''" />
             <el-option label="LeNet-5" value="LeNet-5" />
             <el-option label="AlexNet" value="AlexNet" />
             <el-option label="VGGNet-16" value="VGGNet-16" />
@@ -33,6 +34,7 @@
 
     <!-- 训练任务表格 -->
     <el-table v-loading="loading" :data="tableData" border style="width: 100%">
+      <el-table-column prop="id" label="任务ID" width="80" />
       <el-table-column prop="taskName" label="任务名称" min-width="120" show-overflow-tooltip />
       <el-table-column prop="modelName" label="模型名称" min-width="120" show-overflow-tooltip />
       <el-table-column prop="epochs" label="训练轮数" width="100" />
@@ -62,6 +64,14 @@
       </el-table-column>
       <el-table-column label="操作" width="120" fixed="right">
         <template #default="{ row }">
+          <el-button
+            v-if="row.status === 2"
+            type="primary"
+            link
+            @click="handleRetry(row)"
+          >
+            重试
+          </el-button>
           <el-button
             v-if="row.status !== 0"
             type="danger"
@@ -147,7 +157,7 @@ import { formatDateTime } from '@/utils/format'
 import type { Dataset } from '@/types/dataset'
 import type { TrainTask } from '@/types/train'
 import { pageDatasets } from '@/api/dataset'
-import { createTrainTask, pageTrainTasks, deleteTrainTask } from '@/api/train'
+import { createTrainTask, pageTrainTasks, deleteTrainTask, retryTrainTask } from '@/api/train'
 
 // 查询表单
 const queryForm = reactive({
@@ -312,6 +322,22 @@ const handleSizeChange = () => {
 
 const handleCurrentChange = () => {
   handleQuery()
+}
+
+// 重试训练任务
+const handleRetry = async (row: TrainTask) => {
+  try {
+    await ElMessageBox.confirm('确认要重试该训练任务吗？', '提示', {
+      type: 'warning'
+    })
+    await retryTrainTask(row.id)
+    ElMessage.success('训练任务重试已提交')
+    await handleQuery()
+  } catch (error: any) {
+    if (error !== 'cancel') {
+      ElMessage.error(error.message || '重试失败')
+    }
+  }
 }
 
 // 删除训练任务

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -49,7 +48,7 @@ public class TrainTaskController {
         this.trainTaskService = trainTaskService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Result<String> createTrainTask(@RequestBody TrainTask trainTask) {
         try {
             // 设置必要的字段值
@@ -192,6 +191,82 @@ public class TrainTaskController {
             return Result.success(result != null ? result : page);
         } catch (Exception e) {
             return Result.error(500, "查询训练任务列表失败: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/{id}/retry")
+    public Result<String> retryTrainTask(@PathVariable Long id) {
+        try {
+            TrainTask trainTask = trainTaskService.getById(id);
+            if (trainTask == null) {
+                return Result.error(404, "未找到该训练任务");
+            }
+            
+            // 只允许重试失败的任务
+            if (!"FAILED".equals(trainTask.getTaskStatus())) {
+                return Result.error(400, "只能重试失败的训练任务");
+            }
+            
+            // 重置任务状态
+            trainTask.setTaskStatus("PENDING");
+            trainTask.setErrorMessage(null);
+            trainTaskService.updateById(trainTask);
+            
+            // 重新提交到训练服务
+            try {
+                // 查询数据集名称
+                TrainingDataset dataset = trainingDatasetMapper.selectById(trainTask.getDatasetId());
+                if (dataset == null) {
+                    log.error("无法找到 ID 为 {} 的数据集，无法重试训练任务 {}", trainTask.getDatasetId(), trainTask.getId());
+                    return Result.error(404, "未找到对应的数据集");
+                }
+                String datasetName = dataset.getDatasetName();
+
+                // 调用算法服务进行训练
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                
+                Map<String, Object> requestMap = new HashMap<>();
+                requestMap.put("taskId", trainTask.getId());
+                requestMap.put("datasetId", trainTask.getDatasetId());
+                requestMap.put("dataset_name", datasetName);
+                requestMap.put("model_name", trainTask.getModelName());
+                requestMap.put("epochs", trainTask.getEpochs());
+                requestMap.put("batch_size", trainTask.getBatchSize());
+                
+                HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestMap, headers);
+                
+                // 异步调用
+                new Thread(() -> {
+                    try {
+                        String trainEndpoint = algorithmServiceUrl + "/api/train/start";
+                        restTemplate.postForEntity(trainEndpoint, requestEntity, String.class);
+                        log.info("训练任务 {} 重试已成功提交到训练服务。", trainTask.getId());
+                        trainTask.setTaskStatus("RUNNING");
+                        trainTask.setErrorMessage(null);
+                        trainTaskService.updateById(trainTask);
+                    } catch (HttpClientErrorException | HttpServerErrorException httpClientOrServerException) {
+                        String errorBody = httpClientOrServerException.getResponseBodyAsString();
+                        log.error("重试训练任务 {} 提交失败: {} - Response Body: {}", trainTask.getId(), httpClientOrServerException.getMessage(), errorBody, httpClientOrServerException);
+                        trainTask.setTaskStatus("FAILED");
+                        trainTask.setErrorMessage(errorBody != null && !errorBody.isEmpty() ? errorBody : httpClientOrServerException.getMessage());
+                        trainTaskService.updateById(trainTask);
+                    } catch (Exception e) {
+                        log.error("重试训练任务 {} 提交时发生非HTTP错误: {}", trainTask.getId(), e.getMessage(), e);
+                        trainTask.setTaskStatus("FAILED");
+                        trainTask.setErrorMessage(e.getMessage());
+                        trainTaskService.updateById(trainTask);
+                    }
+                }).start();
+                
+                return Result.success("训练任务重试已提交");
+            } catch (Exception e) {
+                log.error("训练任务重试准备阶段异常: {}", e.getMessage(), e);
+                return Result.error(500, "训练任务重试失败: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            log.error("重试训练任务失败: {}", e.getMessage(), e);
+            return Result.error(500, "重试训练任务失败: " + e.getMessage());
         }
     }
 
