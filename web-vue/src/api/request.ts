@@ -19,19 +19,29 @@ const instance: AxiosInstance = axios.create({
 // 请求拦截器
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // 从 localStorage 获取 token
+    // 从 localStorage 获取 token 和 userId
     const userInfoStr = localStorage.getItem('userInfo')
     if (userInfoStr) {
       try {
         const parsedInfo = JSON.parse(userInfoStr)
-        // 兼容两种可能的数据结构：直接包含token或嵌套在data中
+        // 兼容两种可能的数据结构：直接包含token/userInfo或嵌套在data中
         const token = parsedInfo.token || (parsedInfo.data && parsedInfo.data.token)
+        const userInfo = parsedInfo.userInfo || (parsedInfo.data && parsedInfo.data.userInfo) || parsedInfo
+        
         if (token && config.headers) {
           // 添加 token 到请求头
           config.headers.Authorization = `Bearer ${token}`
         }
+        
+        // 添加 X-User-ID 请求头
+        if (userInfo && userInfo.id && config.headers) {
+          config.headers['X-User-ID'] = userInfo.id
+        } else {
+          // 如果需要 userId 但不存在，可以考虑取消请求或记录警告
+          console.warn('缺少 X-User-ID，请求可能失败:', config.url);
+        }
       } catch (error) {
-        console.error('解析用户信息失败:', error)
+        console.error('解析用户信息或添加请求头失败:', error)
       }
     }
     return config

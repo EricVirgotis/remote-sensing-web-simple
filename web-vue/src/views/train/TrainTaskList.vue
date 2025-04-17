@@ -1,5 +1,6 @@
 <template>
   <div class="train-task-list">
+    <TrainingStatusHandler />
     <!-- 操作栏 -->
     <div class="operation-bar">
       <el-form :inline="true" :model="queryForm">
@@ -9,9 +10,10 @@
         <el-form-item label="任务状态">
           <el-select v-model="queryForm.status" placeholder="请选择任务状态" clearable style="width: 220px">
             <el-option label="全部" :value="''" />
-            <el-option label="训练中" :value="0" />
-            <el-option label="训练成功" :value="1" />
-            <el-option label="训练失败" :value="2" />
+            <el-option label="等待中" :value="TrainTaskStatus.PENDING" />
+            <el-option label="训练中" :value="TrainTaskStatus.RUNNING" />
+            <el-option label="训练失败" :value="TrainTaskStatus.FAILED" />
+            <el-option label="训练成功" :value="TrainTaskStatus.COMPLETED" />
           </el-select>
         </el-form-item>
         <el-form-item label="模型选择">
@@ -52,8 +54,8 @@
       </el-table-column>
       <el-table-column prop="status" label="状态" width="100">
         <template #default="{ row }">
-          <el-tag :type="row.status === 0 ? 'warning' : row.status === 1 ? 'success' : 'danger'">
-            {{ row.status === 0 ? '训练中' : row.status === 1 ? '训练成功' : '训练失败' }}
+          <el-tag :type="row.status === TrainTaskStatus.PENDING ? 'info' : row.status === TrainTaskStatus.RUNNING ? 'warning' : row.status === TrainTaskStatus.FAILED ? 'danger' : 'success'">
+            {{ row.status === TrainTaskStatus.PENDING ? '等待中' : row.status === TrainTaskStatus.RUNNING ? '训练中' : row.status === TrainTaskStatus.FAILED ? '训练失败' : '训练成功' }}
           </el-tag>
         </template>
       </el-table-column>
@@ -65,7 +67,7 @@
       <el-table-column label="操作" width="120" fixed="right">
         <template #default="{ row }">
           <el-button
-            v-if="row.status === 2"
+            v-if="row.status === TrainTaskStatus.FAILED"
             type="primary"
             link
             @click="handleRetry(row)"
@@ -73,7 +75,7 @@
             重试
           </el-button>
           <el-button
-            v-if="row.status !== 0"
+            v-if="row.status !== TrainTaskStatus.RUNNING"
             type="danger"
             link
             @click="handleDelete(row)"
@@ -150,14 +152,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { formatDateTime } from '@/utils/format'
 import type { Dataset } from '@/types/dataset'
 import type { TrainTask } from '@/types/train'
+import { TrainTaskStatus } from '@/types/train'
 import { pageDatasets } from '@/api/dataset'
 import { createTrainTask, pageTrainTasks, deleteTrainTask, retryTrainTask } from '@/api/train'
+import TrainingStatusHandler from '@/components/TrainingStatusHandler.vue'
 
 // 查询表单
 const queryForm = reactive({
@@ -207,31 +211,45 @@ const rules: FormRules = {
 }
 
 // 查询训练任务列表
+const mapTaskStatus = (status: string | number): TrainTaskStatus => {
+  if (typeof status === 'number') {
+    return status as TrainTaskStatus
+  }
+  switch (status) {
+    case 'PENDING': return TrainTaskStatus.PENDING
+    case 'RUNNING': return TrainTaskStatus.RUNNING
+    case 'FAILED': return TrainTaskStatus.FAILED
+    case 'COMPLETED': return TrainTaskStatus.COMPLETED
+    default: return TrainTaskStatus.PENDING
+  }
+}
 const handleQuery = async () => {
   loading.value = true
   try {
     const res = await pageTrainTasks(queryForm)
-    // 解析parameters字段中的训练参数
-    tableData.value = res.records.map(item => {
+    tableData.value = res.records.map((item: any) => {
+      const status = mapTaskStatus(item.taskStatus || item.status || 0)
+      let parsed = { 
+        ...item,
+        status,
+        epochs: item.epochs,
+        batchSize: item.batchSize,
+        learningRate: item.learningRate
+      }
+      
       if (item.parameters) {
         try {
           const params = JSON.parse(item.parameters)
-          return {
-            ...item,
-            epochs: params.epochs,
-            batchSize: params.batchSize,
-            learningRate: params.learningRate
-          }
+          if (!parsed.epochs) parsed.epochs = params.epochs
+          if (!parsed.batchSize) parsed.batchSize = params.batchSize
+          if (!parsed.learningRate) parsed.learningRate = params.learningRate
         } catch (e) {
           console.error('解析训练参数失败:', e)
         }
       }
-      return item
+      return parsed
     })
     total.value = res.total
-  } catch (error) {
-    console.error('查询训练任务列表失败:', error)
-    ElMessage.error('查询训练任务列表失败')
   } finally {
     loading.value = false
   }
@@ -302,9 +320,31 @@ const handleRefresh = async () => {
       current: queryForm.current,
       size: queryForm.size,
       name: queryForm.name,
-      status: queryForm.status
+      status: queryForm.status,
+      model_name: queryForm.model_name
     })
-    tableData.value = res.records
+    tableData.value = res.records.map(item => {
+      const status = mapTaskStatus(item.taskStatus || item.status || 0)
+      let parsed = {
+        ...item,
+        status,
+        epochs: item.epochs,
+        batchSize: item.batchSize,
+        learningRate: item.learningRate
+      }
+      
+      if (item.parameters) {
+        try {
+          const params = JSON.parse(item.parameters)
+          if (!parsed.epochs) parsed.epochs = params.epochs
+          if (!parsed.batchSize) parsed.batchSize = params.batchSize
+          if (!parsed.learningRate) parsed.learningRate = params.learningRate
+        } catch (e) {
+          console.error('解析训练参数失败:', e)
+        }
+      }
+      return parsed
+    })
     total.value = res.total
     ElMessage.success('刷新成功')
   } catch (error: any) {
@@ -326,16 +366,42 @@ const handleCurrentChange = () => {
 
 // 重试训练任务
 const handleRetry = async (row: TrainTask) => {
+  const task = tableData.value.find(task => task.id === row.id)
   try {
     await ElMessageBox.confirm('确认要重试该训练任务吗？', '提示', {
       type: 'warning'
     })
-    await retryTrainTask(row.id)
+    // 优化 UI 更新：在 API 调用之前将状态设置为 PENDING
+    if (task) {
+      task.status = TrainTaskStatus.PENDING
+    }
+    await retryTrainTask(row.id) // API call
     ElMessage.success('训练任务重试已提交')
-    await handleQuery()
+    // 如果 API 调用成功，PENDING 状态是正确的
+    await handleQuery() // Refresh list
   } catch (error: any) {
     if (error !== 'cancel') {
-      ElMessage.error(error.message || '重试失败')
+      // 如果 API 调用失败，将状态设置为 FAILED
+      if (task) {
+        task.status = TrainTaskStatus.FAILED
+      }
+      // Error handling logic
+      let errorMessage = '重试失败'
+      if (error.response?.data?.message) {
+        const message = error.response.data.message
+        if (message.includes('dataset') || message.includes('数据集')) {
+          errorMessage = '训练任务重试失败：数据集信息不完整，请检查数据集是否存在'
+        } else if (message.includes('model') || message.includes('模型')) {
+          errorMessage = '训练任务重试失败：模型配置信息不完整，请检查模型配置'
+        } else {
+          errorMessage = `训练任务重试失败：${message}`
+        }
+      } else if (error.message) {
+        errorMessage = `训练任务重试失败：${error.message}`
+      }
+      ElMessage.error(errorMessage)
+      // 在错误发生后刷新列表以确保 UI 一致性
+      await handleQuery()
     }
   }
 }
@@ -357,9 +423,32 @@ const handleDelete = async (row: TrainTask) => {
   }
 }
 
+// 处理训练状态更新
+const handleTrainingStatusUpdate = (event: CustomEvent) => {
+  const { taskId, status, accuracy, loss } = event.detail
+  // 更新对应任务的状态
+  const task = tableData.value.find(task => task.id === taskId)
+  if (task) {
+    task.status = status
+    if (accuracy !== undefined) task.accuracy = accuracy
+    if (loss !== undefined) task.loss = loss
+    // 如果状态是失败，立即显示错误消息
+    if (status === TrainTaskStatus.FAILED) {
+      ElMessage.error(`训练任务${task.name}执行失败`)
+    }
+  }
+}
+
 // 初始化
 onMounted(() => {
   handleQuery()
+  // 添加训练状态更新事件监听
+  window.addEventListener('training-status-update', handleTrainingStatusUpdate as EventListener)
+})
+
+// 组件卸载时清理
+onUnmounted(() => {
+  window.removeEventListener('training-status-update', handleTrainingStatusUpdate as EventListener)
 })
 </script>
 

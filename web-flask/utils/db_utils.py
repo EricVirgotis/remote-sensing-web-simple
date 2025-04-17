@@ -69,7 +69,7 @@ def get_dataset_info(dataset_id):
     finally:
         conn.close()
 
-def update_task_status(task_id, status, error_message=None):
+def update_task_status(task_id, status, error_message=None, start_time=None, end_time=None, accuracy=None, loss=None):
     """
     更新训练任务状态
     
@@ -77,6 +77,10 @@ def update_task_status(task_id, status, error_message=None):
         task_id (int): 任务ID
         status (int): 任务状态（0：等待中，1：进行中，2：失败，3：成功）
         error_message (str, optional): 错误信息
+        start_time (datetime, optional): 开始时间
+        end_time (datetime, optional): 结束时间
+        accuracy (float, optional): 模型精度
+        loss (float, optional): 损失值
     """
     conn = get_db()
     try:
@@ -90,11 +94,65 @@ def update_task_status(task_id, status, error_message=None):
             }
             task_status = status_map.get(status, 'PENDING')
             
-            cursor.execute(
-                'UPDATE training_task SET task_status = %s, error_message = %s WHERE id = %s',
-                (task_status, error_message, task_id)
-            )
+            # 构建更新字段和参数
+            update_fields = ['task_status = %s']
+            params = [task_status]
+            
+            if error_message is not None:
+                update_fields.append('error_message = %s')
+                params.append(error_message)
+            
+            if start_time is not None:
+                update_fields.append('start_time = %s')
+                params.append(start_time)
+            
+            if end_time is not None:
+                update_fields.append('end_time = %s')
+                params.append(end_time)
+            
+            if accuracy is not None:
+                update_fields.append('accuracy = %s')
+                params.append(accuracy)
+            
+            if loss is not None:
+                update_fields.append('loss = %s')
+                params.append(loss)
+            
+            # 添加task_id作为WHERE条件
+            params.append(task_id)
+            
+            # 构建并执行SQL语句
+            sql = f"UPDATE training_task SET {', '.join(update_fields)} WHERE id = %s"
+            cursor.execute(sql, tuple(params))
             conn.commit()
+    finally:
+        conn.close()
+
+def get_task_parameters(task_id):
+    """
+    获取指定训练任务的参数
+
+    Args:
+        task_id (int): 任务ID
+
+    Returns:
+        dict: 解析后的参数字典，如果找不到或解析失败则返回 None
+    """
+    conn = get_db()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                'SELECT parameters FROM training_task WHERE id = %s',
+                (task_id,)
+            )
+            row = cursor.fetchone()
+            if row and row.get('parameters'):
+                try:
+                    return json.loads(row['parameters'])
+                except json.JSONDecodeError:
+                    # 处理JSON解析错误
+                    return None
+            return None
     finally:
         conn.close()
 

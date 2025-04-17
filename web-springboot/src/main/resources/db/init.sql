@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `training_task` (
   `start_time` datetime DEFAULT NULL COMMENT '开始时间',
   `end_time` datetime DEFAULT NULL COMMENT '结束时间',
   `accuracy` decimal(5,2) DEFAULT NULL COMMENT '模型精度',
+  `loss` decimal(10,4) DEFAULT NULL COMMENT '损失值',
   `parameters` text DEFAULT NULL COMMENT '训练参数JSON',
   `error_message` varchar(500) DEFAULT NULL COMMENT '错误信息',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

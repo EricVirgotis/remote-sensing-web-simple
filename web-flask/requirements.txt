@@ -30,3 +30,4 @@ tqdm==4.61.2
 pyyaml==5.4.1
 requests==2.26.0
 pymysql==1.1.1
+redis==5.2.1

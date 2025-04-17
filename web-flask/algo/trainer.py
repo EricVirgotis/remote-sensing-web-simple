@@ -25,7 +25,7 @@ os.environ['NO_ALBUMENTATIONS_UPDATE'] = '1'
 logger = logging.getLogger(__name__)
 
 # 模型存储路径
-MODEL_DIR = Path(os.path.dirname(os.path.abspath(__file__))) / '../models'
+MODEL_DIR = Path(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))) / 'file_store/model'
 
 class RemoteSensingDataset(Dataset):
     """
@@ -126,7 +126,7 @@ class ModelTrainer:
     """
     遥感影像分类模型训练器
     """
-    def __init__(self, model_name, num_classes=7, device=None):
+    def __init__(self, model_name, num_classes=7, use_pretrained=True, device=None): # 添加 use_pretrained 参数
         """
         初始化训练器
         
@@ -146,6 +146,7 @@ class ModelTrainer:
         # 创建模型
         self.model_name = model_name
         self.num_classes = num_classes
+        self.use_pretrained = use_pretrained # 保存 use_pretrained
         self.model = self._create_model()
         self.model.to(self.device)
         
@@ -166,6 +167,7 @@ class ModelTrainer:
         """
         try:
             import torchvision.models as models
+            import torch.hub as hub
             
             if self.model_name == 'LeNet-5':
                 model = nn.Sequential(
@@ -183,26 +185,61 @@ class ModelTrainer:
                     nn.Linear(84, self.num_classes)
                 )
             elif self.model_name == 'AlexNet':
-                model = models.alexnet(pretrained=True)
-                model.classifier[6] = nn.Linear(4096, self.num_classes)
+                # AlexNet 没有官方预训练权重
+                if self.use_pretrained:
+                    logger.warning("AlexNet不支持官方预训练权重，将使用随机初始化权重")
+                model = models.alexnet(weights=None)
+                model.classifier[6] = nn.Linear(model.classifier[6].in_features, self.num_classes)
             elif self.model_name == 'VGGNet-16':
-                model = models.vgg16(pretrained=True)
-                model.classifier[6] = nn.Linear(4096, self.num_classes)
+                model = models.vgg16(weights=None)
+                if self.use_pretrained:
+                    try:
+                        logger.info("正在下载VGG16预训练权重...")
+                        state_dict = hub.load_state_dict_from_url(models.VGG16_Weights.IMAGENET1K_V1.url, progress=True)
+                        model.load_state_dict(state_dict)
+                        logger.info("成功加载VGG16预训练权重")
+                    except Exception as e:
+                        logger.error(f"加载VGG16预训练权重失败: {str(e)}")
+                        raise ValueError("下载预训练权重失败，请检查网络连接或稍后重试")
+                else:
+                    logger.info("使用随机初始化权重")
+                model.classifier[6] = nn.Linear(model.classifier[6].in_features, self.num_classes)
             elif self.model_name == 'GoogleNet':
-                model = models.googlenet(pretrained=True)
-                model.fc = nn.Linear(1024, self.num_classes)
+                model = models.googlenet(weights=None)
+                if self.use_pretrained:
+                    try:
+                        logger.info("正在下载GoogleNet预训练权重...")
+                        state_dict = hub.load_state_dict_from_url(models.GoogLeNet_Weights.IMAGENET1K_V1.url, progress=True)
+                        model.load_state_dict(state_dict)
+                        logger.info("成功加载GoogleNet预训练权重")
+                    except Exception as e:
+                        logger.error(f"加载GoogleNet预训练权重失败: {str(e)}")
+                        raise ValueError("下载预训练权重失败，请检查网络连接或稍后重试")
+                else:
+                    logger.info("使用随机初始化权重")
+                model.fc = nn.Linear(model.fc.in_features, self.num_classes)
             elif self.model_name == 'ResNet50':
-                model = models.resnet50(pretrained=True)
-                model.fc = nn.Linear(2048, self.num_classes)
+                model = models.resnet50(weights=None)
+                if self.use_pretrained:
+                    try:
+                        logger.info("正在下载ResNet50预训练权重...")
+                        state_dict = hub.load_state_dict_from_url(models.ResNet50_Weights.IMAGENET1K_V2.url, progress=True)
+                        model.load_state_dict(state_dict)
+                        logger.info("成功加载ResNet50预训练权重")
+                    except Exception as e:
+                        logger.error(f"加载ResNet50预训练权重失败: {str(e)}")
+                        raise ValueError("下载预训练权重失败，请检查网络连接或稍后重试")
+                else:
+                    logger.info("使用随机初始化权重")
+                model.fc = nn.Linear(model.fc.in_features, self.num_classes)
             else:
                 raise ValueError(f"不支持的模型名称: {self.model_name}")
             
             return model
         except Exception as e:
             logger.error(f"创建模型失败: {str(e)}")
-            raise
-    
-    def train(self, train_data, val_data=None, epochs=30, batch_size=32, save_interval=5):
+            raise    
+    def train(self, train_data, val_data=None, epochs=30, batch_size=32, save_interval=5, task_id=None, user_id=None):
         """
         训练模型
         
@@ -212,6 +249,8 @@ class ModelTrainer:
             epochs (int): 训练轮数
             batch_size (int): 批次大小
             save_interval (int): 保存模型的间隔轮数
+            task_id (int, optional): 训练任务ID，用于保存模型和清理临时文件
+            user_id (int, optional): 用户ID，用于指定保存路径
             
         Returns:
             dict: 训练历史记录
@@ -267,6 +306,23 @@ class ModelTrainer:
             # 训练循环
             best_val_acc = 0.0
             start_time = time.time()
+            # 更新训练开始时间
+            from datetime import datetime
+            from utils.db_utils import update_task_status
+            import redis
+            
+            # 连接Redis
+            redis_client = redis.Redis(host='localhost', port=6379, db=0)
+            
+            # 更新任务状态并发布消息
+            update_task_status(task_id, 1, start_time=datetime.now())
+            status_message = {
+                'taskId': task_id,
+                'status': 1,
+                'startTime': datetime.now().isoformat(),
+                'message': '训练开始'
+            }
+            redis_client.publish(f'training_status:{task_id}', json.dumps(status_message))
             
             for epoch in range(epochs):
                 # 训练阶段
@@ -341,7 +397,7 @@ class ModelTrainer:
                     # 保存最佳模型
                     if epoch_val_acc > best_val_acc:
                         best_val_acc = epoch_val_acc
-                        self.save_model(f"{self.model_name}_best", user_id=task_id)
+                        self.save_model(f"{self.model_name}_best", user_id=user_id, task_id=task_id)
                         logger.info(f"保存最佳模型，验证准确率: {epoch_val_acc:.4f}")
                 
                 # 打印进度
@@ -358,19 +414,36 @@ class ModelTrainer:
                 
                 # 定期保存模型
                 if (epoch + 1) % save_interval == 0:
-                    self.save_model(f"{self.model_name}_epoch{epoch+1}", user_id=task_id)
+                    self.save_model(f"{self.model_name}_epoch{epoch+1}", user_id=user_id, task_id=task_id)
             
             # 保存最终模型
-            self.save_model(self.model_name, user_id=task_id)
+            self.save_model(self.model_name, user_id=user_id, task_id=task_id)
             
             # 计算总训练时间
             total_time = time.time() - start_time
             logger.info(f"训练完成，总耗时: {total_time:.2f}秒")
             
+            # 更新训练结束时间、精度和损失值
+            from datetime import datetime
+            final_accuracy = history['val_acc'][-1] if history['val_acc'] else history['train_acc'][-1]
+            final_loss = history['val_loss'][-1] if history['val_loss'] else history['train_loss'][-1]
+            
+            # 更新任务状态并发布消息
+            update_task_status(task_id, 3, end_time=datetime.now(), accuracy=final_accuracy, loss=final_loss)
+            status_message = {
+                'taskId': task_id,
+                'status': 3,
+                'endTime': datetime.now().isoformat(),
+                'accuracy': final_accuracy,
+                'loss': final_loss,
+                'message': '训练完成'
+            }
+            redis_client.publish(f'training_status:{task_id}', json.dumps(status_message))
+            
             # 清理临时数据集目录
             if user_id:
                 import shutil
-                temp_dir = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) / 'temp_datasets' / str(user_id)
+                temp_dir = Path(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))) / 'temp_datasets' / str(user_id) / str(task_id)
                 if temp_dir.exists():
                     try:
                         shutil.rmtree(temp_dir)
@@ -384,29 +457,59 @@ class ModelTrainer:
             logger.error(f"训练失败: {str(e)}")
             raise
     
-    def save_model(self, model_name=None, user_id=None):
+    def save_model(self, model_name=None, user_id=None, task_id=None):
         """
         保存模型
         
         Args:
             model_name (str, optional): 模型名称，如果为None则使用初始化时的名称
             user_id (str, optional): 用户ID，用于指定保存路径
+            task_id (str, optional): 任务ID，用于指定保存路径,用于更新数据库中的model_path字段
         """
         if model_name is None:
             model_name = self.model_name
         
         # 设置模型保存路径
         if user_id:
-            # 使用用户指定的路径
-            model_dir = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) / 'file_store/model' / str(user_id)
-            os.makedirs(model_dir, exist_ok=True)
-            model_path = model_dir / f"{model_name}.pt"
+            # 使用用户ID和任务ID构建保存路径
+            save_dir = MODEL_DIR / str(user_id)
+            if task_id:
+                save_dir = save_dir / str(task_id)
+            os.makedirs(save_dir, exist_ok=True)
+            save_path = save_dir / f"{model_name}.pt"
         else:
-            # 使用默认路径
-            model_path = MODEL_DIR / f"{model_name}.pt"
+            save_path = MODEL_DIR / f"{model_name}.pt"
         
-        torch.save(self.model, model_path)
-        logger.info(f"模型已保存: {model_path}")
+        # 保存模型
+        try:
+            torch.save({
+                'model_state_dict': self.model.state_dict(),
+                'optimizer_state_dict': self.optimizer.state_dict(),
+                'scheduler_state_dict': self.scheduler.state_dict(),
+                'num_classes': self.num_classes
+            }, save_path)
+            logger.info(f"模型已保存到: {save_path}")
+            
+            # 如果有任务ID，更新数据库中的model_path
+            if task_id:
+                from utils.db_utils import get_db
+                conn = get_db()
+                try:
+                    with conn.cursor() as cursor:
+                        # 更新training_task表中的model_path字段、progress字段
+                        cursor.execute(
+                            'UPDATE training_task SET model_path = %s, progress = 100 WHERE id = %s',
+                            (str(save_path), task_id)
+                        )
+                        conn.commit()
+                        logger.info(f"已更新任务 {task_id} 的模型路径")
+                finally:
+                    conn.close()
+            
+            return str(save_path)
+        except Exception as e:
+            logger.error(f"保存模型失败: {str(e)}")
+            raise
     
     def evaluate(self, test_data, batch_size=32):
         """
@@ -511,4 +614,3 @@ class ModelTrainer:
             
         except Exception as e:
             logger.error(f"评估失败: {str(e)}")
-            raise

@@ -16,7 +16,7 @@ from pathlib import Path
 from flask import Blueprint, request, jsonify, current_app
 from werkzeug.utils import secure_filename
 from algo.trainer import ModelTrainer
-from utils.db_utils import get_db, update_task_status, get_dataset_info
+from utils.db_utils import get_db, update_task_status, get_dataset_info, get_task_parameters # 导入 get_task_parameters
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ def health_check():
     return jsonify({"status": "healthy", "service": "training"})
 
 # 数据集目录
-DATASET_DIR = Path('D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple2/remote-sensing-web-simple/file_store/dataset')
+DATASET_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) / '/temp_datasets'
 os.makedirs(DATASET_DIR, exist_ok=True)
 
 # 训练结果目录
@@ -106,6 +106,16 @@ def upload_dataset():
                 'status': 'error',
                 'message': '只支持ZIP格式的数据集文件'
             }), 400
+
+        # 获取用户ID
+        user_id = request.form.get('user_id', None)
+        if not user_id:
+            return jsonify({
+              'status': 'error',
+              'message': '缺少用户ID'
+            }), 400
+        else:
+            user_id = int(user_id)  # 确保 user_id 是整数
         
         # 获取数据集名称
         dataset_name = request.form.get('dataset_name', None)
@@ -117,7 +127,7 @@ def upload_dataset():
             dataset_name = secure_filename(dataset_name)
         
         # 创建数据集目录
-        dataset_dir = DATASET_DIR / dataset_name
+        dataset_dir = DATASET_DIR / str(user_id) / dataset_name
         if os.path.exists(dataset_dir):
             # 如果目录已存在，先删除
             shutil.rmtree(dataset_dir)
@@ -266,10 +276,68 @@ def start_training():
         # 获取参数
         dataset_name = data.get('dataset_name')
         model_name = data.get('model_name')
-        epochs = data.get('epochs', 30)
-        batch_size = data.get('batch_size', 32)
+        epochs = data.get('epochs') # 先获取原始值
+        batch_size = data.get('batch_size') # 先获取原始值
+        use_pretrained = data.get('usePretrained', True) # 获取 use_pretrained 参数，默认为 True
         task_id = data.get('taskId')
         dataset_id = data.get('datasetId')
+
+        # --- 参数验证和回退逻辑 ---
+        db_params = None
+        if task_id:
+            db_params = get_task_parameters(task_id)
+
+        # 验证 epochs
+        valid_epochs = False
+        if epochs is not None:
+            try:
+                epochs = int(epochs)
+                if epochs > 0:
+                    valid_epochs = True
+            except (ValueError, TypeError):
+                pass # 转换失败，尝试从数据库获取
+
+        if not valid_epochs and db_params:
+            epochs_from_db = db_params.get('epochs')
+            if epochs_from_db is not None:
+                try:
+                    epochs = int(epochs_from_db)
+                    if epochs > 0:
+                        valid_epochs = True
+                except (ValueError, TypeError):
+                    pass # 数据库中的值也无效
+
+        if not valid_epochs:
+            epochs = 30 # 使用默认值
+            logger.warning(f"任务 {task_id}: epochs 无效或缺失，使用默认值 30")
+
+        # 验证 batch_size
+        valid_batch_size = False
+        if batch_size is not None:
+            try:
+                batch_size = int(batch_size)
+                if batch_size > 0:
+                    valid_batch_size = True
+            except (ValueError, TypeError):
+                pass # 转换失败，尝试从数据库获取
+
+        if not valid_batch_size and db_params:
+            batch_size_from_db = db_params.get('batchSize') # 注意数据库中可能是驼峰命名
+            if batch_size_from_db is None:
+                 batch_size_from_db = db_params.get('batch_size') # 尝试下划线命名
+
+            if batch_size_from_db is not None:
+                try:
+                    batch_size = int(batch_size_from_db)
+                    if batch_size > 0:
+                        valid_batch_size = True
+                except (ValueError, TypeError):
+                    pass # 数据库中的值也无效
+
+        if not valid_batch_size:
+            batch_size = 32 # 使用默认值
+            logger.warning(f"任务 {task_id}: batch_size 无效或缺失，使用默认值 32")
+        # --- 参数验证结束 ---
 
         if dataset_id is None:
             if task_id:
@@ -464,19 +532,24 @@ def start_training():
             # 创建训练器实例
             trainer = ModelTrainer(
                 model_name=model_name,
-                num_classes=num_classes
+                num_classes=num_classes,
+                use_pretrained=use_pretrained # 传递 use_pretrained 参数
             )
             
             # 开始训练
             training_result = trainer.train(
                 train_data=train_data,
                 val_data=val_data,
-                epochs=epochs,
-                batch_size=batch_size
+                epochs=epochs, # 确保传递的是整数 epochs
+                batch_size=batch_size, # 确保传递的是整数 batch_size
+                task_id=task_id,
+                user_id=user_id,
             )
             
             # 保存训练结果
-            result_file = TRAIN_RESULT_DIR / f"{model_name}_result.json"
+            result_dir = TRAIN_RESULT_DIR / str(user_id) / str(task_id)
+            os.makedirs(result_dir, exist_ok=True)
+            result_file = result_dir / f"{model_name}_result.json"
             with open(result_file, 'w', encoding='utf-8') as f:
                 json.dump(training_result, f, indent=2)
             
@@ -566,15 +639,18 @@ def delete_train_task(task_id):
     """
     try:
         # 删除数据库记录
+        from utils.db_utils import delete_train_task
         if delete_train_task(task_id):
+            # 删除成功，返回成功响应
             return jsonify({
-                'status': 'success',
-                'message': '训练任务删除成功'
+                'code': 200,
+                'msg': '训练任务删除成功'
             })
         else:
+            # 未找到任务，返回404错误
             return jsonify({
-                'status': 'error',
-                'message': '未找到该训练任务'
+                'code': 404,
+                'msg': '未找到该训练任务'
             }), 404
     except Exception as e:
         logger.error(f'删除训练任务失败: {str(e)}')
@@ -628,7 +704,9 @@ def retry_training(task_id):
                     'dataset_name': task['dataset_name'],
                     'model_name': task['model_name'],
                     'epochs': task['epochs'],
-                    'batch_size': task['batch_size']
+                    'batch_size': task['batch_size'],
+                    'learning_rate': task['learning_rate'], # 添加 learning_rate
+                    'use_pretrained': task['use_pretrained'] # 添加 use_pretrained
                 }
                 
                 # 开始重新训练

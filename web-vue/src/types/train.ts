@@ -3,19 +3,24 @@
  */
 export enum TrainTaskStatus {
   /**
-   * 进行中
+   * 等待中
    */
-  RUNNING = 0,
+  PENDING = 0,
   
   /**
-   * 已完成
+   * 进行中
    */
-  COMPLETED = 1,
+  RUNNING = 1,
   
   /**
    * 失败
    */
-  FAILED = 2
+  FAILED = 2,
+
+  /**
+   * 已完成
+   */
+  COMPLETED = 3
 }
 
 /**
@@ -106,6 +111,11 @@ export interface TrainTask {
    * 训练参数(JSON字符串)
    */
   parameters?: string
+
+  /**
+   * 后端原始任务状态（字符串）
+   */
+  taskStatus?: string
 }
 
 /**

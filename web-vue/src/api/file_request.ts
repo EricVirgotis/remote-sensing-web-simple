@@ -206,17 +206,18 @@ const fileRequest = {
    * @param objectKey 文件名或包含用户ID的路径
    * @returns 返回文件访问URL
    */
-  getFileUrl(bucket: string, objectKey: string): string {
+  getFileUrl(bucket: string | undefined, objectKey: string | undefined): string {
     // 参数验证
     if (!bucket || typeof bucket !== 'string') {
-      console.error('无效的存储桶名称:', bucket)
-      bucket = 'default' // 使用默认值
+      console.error('getFileUrl 调用失败：无效的存储桶名称:', bucket)
+      // 返回一个占位符或默认图片URL，避免后续代码出错
+      return '/path/to/default/placeholder.svg'; // 或者根据业务返回空字符串或抛出错误
     }
     
     if (!objectKey || typeof objectKey !== 'string') {
-      console.error('无效的文件名:', objectKey)
-      objectKey = 'default_avatar.svg' // 使用默认头像
-      return `${import.meta.env.VITE_FILE_URL}/file/avatars/default_avatar.svg`
+      console.error('getFileUrl 调用失败：无效的文件名:', objectKey)
+      // 返回一个占位符或默认图片URL
+      return '/path/to/default/placeholder.svg'; // 或者根据业务返回空字符串或抛出错误
     }
     
     // 从localStorage获取用户信息

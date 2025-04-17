@@ -231,19 +231,24 @@ onBeforeUnmount(() => {
         >
             <el-table-column prop="name" label="任务名称" min-width="120" />
             
-            <el-table-column label="图片预览" min-width="120">
+            <el-table-column label="预览图" width="120">
                 <template #default="{ row }">
+                    <!-- 添加 v-if 判断 -->
                     <el-image
-                        style="width: 100px; height: 100px"
-                        :src="fileRequest.getFileUrl(row.bucket, row.objectKey)"
-                        fit="cover"
+                      v-if="row.bucket && row.objectKey"
+                      style="width: 100px; height: 100px"
+                      :src="fileRequest.getFileUrl(row.bucket, row.objectKey)"
+                      :preview-src-list="[fileRequest.getFileUrl(row.bucket, row.objectKey)]"
+                      fit="cover"
+                      lazy
                     >
-                        <template #error>
-                            <div class="image-slot">
-                                <el-icon><picture-filled /></el-icon>
-                            </div>
-                        </template>
+                      <template #error>
+                        <div class="image-slot">
+                          <el-icon><icon-picture /></el-icon>
+                        </div>
+                      </template>
                     </el-image>
+                    <span v-else>无效图片数据</span>
                 </template>
             </el-table-column>
             
@@ -393,4 +398,4 @@ onBeforeUnmount(() => {
 .preview {
     margin-top: 10px;
 }
-</style> 
+</style>

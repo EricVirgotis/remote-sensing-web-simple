@@ -46,6 +46,7 @@ public class TrainTask {
     private Integer progress;
     private String modelPath;
     private Double accuracy;
+    private Double loss; // 添加 loss 字段
     private String errorMessage;
     private Date startTime;
     private Date endTime;
