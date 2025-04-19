@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `remote_image` (
 -- 分类模型表
 CREATE TABLE IF NOT EXISTS `classification_model` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '模型ID',
-  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID（系统提供的模型的用户ID是管理员ID——1）',
   `model_name` varchar(100) NOT NULL COMMENT '模型名称',
   `model_path` varchar(255) NOT NULL COMMENT '模型存储路径',
   `model_type` varchar(50) NOT NULL COMMENT '模型类型',
@@ -145,11 +145,16 @@ INSERT IGNORE INTO `user` (`username`, `password`, `real_name`, `email`, `role`,
 ('admin', '$2a$10$ySG2lkvjFHY5O0./CPIE1OI8VJsuKYEzOYzqIa7AJR6sEgSzUFOAm', '系统管理员', 'admin@example.com', 'ADMIN', 1);
 
 -- 插入预训练的默认模型 (关联管理员用户ID=1)
-INSERT IGNORE INTO `classification_model` (`user_id`, `model_name`, `model_path`, `model_type`, `description`, `accuracy`, `is_default`, `status`) VALUES
-(1, 'AlexNet', 'models/AlexNet.h5', 'CNN', '预训练的 AlexNet 模型', 0.80, 1, 1),
-(1, 'GoogLeNet', 'models/GoogLeNet.h5', 'CNN', '预训练的 GoogLeNet 模型', 0.84, 1, 1),
-(1, 'ResNet50', 'models/ResNet50.h5', 'CNN', '预训练的 ResNet50 模型', 0.96, 1, 1),
-(1, 'VGGNet-16', 'models/VGGNet-16.h5', 'CNN', '预训练的 VGGNet-16 模型', 0.76, 1, 1);
+-- 添加唯一性约束，防止重复插入预训练模型
+ALTER TABLE `classification_model` ADD UNIQUE INDEX `uk_model_name_type` (`model_name`, `model_type`) WHERE `deleted` = 0;
+ALTER TABLE `classification_model` ADD UNIQUE INDEX `uk_model_path` (`model_path`) WHERE `deleted` = 0;
+
+-- 使用IGNORE关键字插入预训练模型，避免重复插入
+INSERT IGNORE INTO `classification_model` (`user_id`, `model_name`, `model_path`, `model_type`, `description`, `accuracy`, `is_default`, `status`, `deleted`) VALUES
+(1, 'AlexNet', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple3/remote-sensing-web-simple/web-flask/models/AlexNet.h5', 'CNN', '预训练的 AlexNet 模型', 0.80, 1, 1, 0),
+(1, 'GoogLeNet', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple3/remote-sensing-web-simple/web-flask/models/GoogLeNet.h5', 'CNN', '预训练的 GoogLeNet 模型', 0.84, 1, 1, 0),
+(1, 'ResNet50', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple3/remote-sensing-web-simple/web-flask/models/ResNet50.h5', 'CNN', '预训练的 ResNet50 模型', 0.96, 1, 1, 0),
+(1, 'VGGNet-16', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple3/remote-sensing-web-simple/web-flask/models/VGGNet-16.h5', 'CNN', '预训练的 VGGNet-16 模型', 0.76, 1, 1, 0);
 
 -- 在模型训练完成后插入模型数据到分类模型表
 -- 注意：以下语句需要在应用程序中动态替换变量值后执行

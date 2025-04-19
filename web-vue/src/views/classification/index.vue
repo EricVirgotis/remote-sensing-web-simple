@@ -5,26 +5,27 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import { pageQuery, deleteTask, createTask } from '@/api/classification'
 import type { ClassificationTask } from '@/types/classification'
 import { fileRequest } from '@/api/file_request'
-import { Refresh } from '@element-plus/icons-vue'
-import { pageTrainTasks } from '@/api/train'
-import type { TrainTask } from '@/types/train'
-import { TrainTaskStatus } from '@/types/train'
+import { Refresh, Picture as IconPicture } from '@element-plus/icons-vue'
+import { getAvailableModels } from '@/api/model'
+import type { ClassificationModel } from '@/types/model'
+import { useUserStore } from '@/stores/user'
 
+const userStore = useUserStore()
 const loading = ref(false)
 const total = ref(0)
 const pageSize = ref(10)
 const currentPage = ref(1)
 const taskList = ref<ClassificationTask[]>([])
 
-// 训练任务相关
-const trainTaskOptions = ref<TrainTask[]>([])
+// 可用模型列表
+const modelOptions = ref<ClassificationModel[]>([])
 
 // 上传相关
 const uploadDialogVisible = ref(false)
 const uploadForm = ref({
     name: '',
     image: null as File | null,
-    trainTaskId: undefined as number | undefined
+    modelId: undefined as number | undefined
 })
 const uploadLoading = ref(false)
 
@@ -114,15 +115,15 @@ const handleFileChange = (uploadFile: any) => {
     uploadForm.value.image = uploadFile.raw
 }
 
-// 获取训练成功的模型列表
-const getTrainTaskOptions = async () => {
+// 获取可用的模型列表
+const getModelOptions = async () => {
     try {
-        const res = await pageTrainTasks({
-            current: 1,
-            size: 1000,
-            status: TrainTaskStatus.COMPLETED
-        })
-        trainTaskOptions.value = res.records
+        if (!userStore.userInfo?.id) {
+            ElMessage.error('获取用户信息失败')
+            return
+        }
+        const models = await getAvailableModels(userStore.userInfo.id)
+        modelOptions.value = models
     } catch (error: any) {
         ElMessage.error(error.message || '获取模型列表失败')
     }
@@ -138,8 +139,8 @@ const handleCreate = async () => {
         ElMessage.warning('请选择图片')
         return
     }
-    if (!uploadForm.value.trainTaskId) {
-        ElMessage.warning('请选择训练模型')
+    if (!uploadForm.value.modelId) {
+        ElMessage.warning('请选择模型')
         return
     }
     
@@ -148,7 +149,7 @@ const handleCreate = async () => {
         const formData = new FormData()
         formData.append('name', uploadForm.value.name)
         formData.append('file', uploadForm.value.image)
-        formData.append('trainTaskId', uploadForm.value.trainTaskId.toString())
+        formData.append('modelId', uploadForm.value.modelId.toString())
         
         await createTask(formData)
         ElMessage.success('创建成功')
@@ -156,7 +157,7 @@ const handleCreate = async () => {
         uploadForm.value = {
             name: '',
             image: null,
-            trainTaskId: undefined
+            modelId: undefined
         }
         getTaskList()
     } catch (error: any) {
@@ -197,7 +198,7 @@ const getStatusType = (status: number) => {
 // 打开上传对话框
 const handleOpenUploadDialog = () => {
     uploadDialogVisible.value = true
-    getTrainTaskOptions()
+    getModelOptions()
 }
 
 onMounted(() => {
@@ -311,7 +312,7 @@ onBeforeUnmount(() => {
             title="创建分类任务"
             width="500px"
             :close-on-click-modal="false"
-            @close="uploadForm = { name: '', image: null, trainTaskId: undefined }"
+            @close="uploadForm = { name: '', image: null, modelId: undefined }"
         >
             <el-form :model="uploadForm" label-width="100px">
                 <el-form-item label="任务名称" required>
@@ -319,16 +320,16 @@ onBeforeUnmount(() => {
                 </el-form-item>
                 
                 <el-form-item label="选择模型" required>
-                    <el-select v-model="uploadForm.trainTaskId" placeholder="请选择训练成功的模型" style="width: 100%">
+                    <el-select v-model="uploadForm.modelId" placeholder="请选择分类模型" style="width: 100%">
                         <el-option
-                            v-for="item in trainTaskOptions"
+                            v-for="item in modelOptions"
                             :key="item.id"
-                            :label="item.name"
+                            :label="item.modelName"
                             :value="item.id"
                         >
                             <div style="display: flex; justify-content: space-between; align-items: center">
-                                <span>{{ item.name }}</span>
-                                <span style="color: #8492a6; font-size: 13px">准确率: {{ (item.accuracy * 100).toFixed(2) }}%</span>
+                                <span>{{ item.modelName }}</span>
+                                <span style="color: #8492a6; font-size: 13px">准确率: {{ item.accuracy !== undefined ? (item.accuracy * 100).toFixed(2) : '未知' }}%</span>
                             </div>
                         </el-option>
                     </el-select>

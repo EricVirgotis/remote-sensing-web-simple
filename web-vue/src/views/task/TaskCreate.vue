@@ -3,13 +3,12 @@
 import { ref, onMounted, computed } from 'vue' // 引入 computed
 import { ElMessage } from 'element-plus'
 import type { RemoteSensingImage } from '@/types/image'
-// import type { Algorithm, TaskCreateParams } from '@/types/task' // 移除 Algorithm
-import type { TaskCreateParams } from '@/types/task' // 移除 Algorithm
-import type { ClassificationModel } from '@/types/model' // 引入 ClassificationModel
+import type { TaskCreateParams } from '@/types/task'
+import type { ClassificationModel } from '@/types/model'
 import { getImageList } from '@/api/image'
-// import { getAlgorithms, createTask } from '@/api/task' // 移除 getAlgorithms
 import { createTask } from '@/api/task'
-import { getAvailableModels } from '@/api/model' // 引入获取模型的 API
+import { getAvailableModels } from '@/api/model'
+import { useUserStore } from '@/stores/user'
 
 // 表单数据
 const form = ref<TaskCreateParams>({
@@ -46,10 +45,17 @@ const getImages = async () => {
     }
 }
 
+// 获取用户store
+const userStore = useUserStore()
+
 // 获取可用模型列表
 const getModels = async () => {
     try {
-        modelList.value = await getAvailableModels()
+        if (!userStore.userInfo?.id) {
+            ElMessage.error('用户未登录')
+            return
+        }
+        modelList.value = await getAvailableModels(userStore.userInfo.id)
     } catch (error: any) {
         ElMessage.error(error.message || '获取模型列表失败')
     }

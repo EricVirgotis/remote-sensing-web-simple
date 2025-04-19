@@ -73,12 +73,27 @@ public class TrainingTaskServiceImpl extends ServiceImpl<TrainingTaskMapper, Tra
      */
     private void insertModelFromTrainingTask(TrainingTask task) {
         try {
-            // 方法一：使用JdbcTemplate执行SQL语句
-            String sql = "INSERT INTO classification_model (user_id, model_name, model_path, model_type, description, accuracy, parameters, is_default, status) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, 0, 1)";
+            // 检查是否为预训练模型，如果是则跳过插入
+            if (task.getModelPath() != null && task.getModelPath().contains("web-flask/models/")) {
+                log.info("预训练模型 {} 不需要重复插入", task.getModelName());
+                return;
+            }
+            
+            // 检查是否已存在相同名称、类型或路径的模型
+            String checkSql = "SELECT COUNT(*) FROM classification_model WHERE (model_name = ? AND model_type = ?) OR model_path = ? AND deleted = 0";
+            int count = jdbcTemplate.queryForObject(checkSql, Integer.class, task.getModelName(), task.getModelType(), task.getModelPath());
+            
+            if (count > 0) {
+                log.info("模型 {} 已存在或路径 {} 已被使用，跳过插入", task.getModelName(), task.getModelPath());
+                return;
+            }
+            
+            // 不存在则插入新模型
+            String sql = "INSERT INTO classification_model (user_id, model_name, model_path, model_type, description, accuracy, parameters, is_default, status, deleted) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, 0, 1, 0)";
             
             jdbcTemplate.update(sql,
-                    task.getUserId(), // 新增 userId
+                    task.getUserId(),
                     task.getModelName(),
                     task.getModelPath(),
                     task.getModelType(),

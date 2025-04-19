@@ -80,6 +80,13 @@ public class TokenUtils {
      */
     public Long getCurrentUserId() {
         String token = getTokenFromRequest();
-        return getUserIdFromToken(token);
+        if (token == null || token.trim().isEmpty()) {
+            return null;
+        }
+        Long userId = getUserIdFromToken(token);
+        if (userId == null) {
+            return null;
+        }
+        return userId;
     }
 }

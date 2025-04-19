@@ -1,6 +1,7 @@
 package com.rs.filter;
 
 import com.rs.utils.TokenUtils;
+import com.rs.utils.UserContext;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,6 +38,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     
                     // 设置认证信息到上下文
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    // 设置用户ID到UserContext
+                    UserContext.setUserId(userId);
                 }
             }
         } catch (Exception e) {

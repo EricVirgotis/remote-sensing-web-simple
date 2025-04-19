@@ -1,15 +1,15 @@
-import request from '@/utils/request'
+import { request } from '@/api/request'
 import type { ClassificationModel } from '@/types/model'
 
 /**
  * 获取当前用户可用的所有分类模型（包括默认模型和用户自己的模型）
  * @returns Promise<ClassificationModel[]>
  */
-export function getAvailableModels(): Promise<ClassificationModel[]> {
+export function getAvailableModels(userId: number): Promise<ClassificationModel[]> {
   // request.get 解析为后端的 Result 对象，因为拦截器返回 response.data
   // 我们需要从该对象中提取 'data' 属性。
   // 假设 Result 对象有一个 'data' 属性包含数组。
-  return request.get<any>('/api/classification-model/available').then(res => res.data)
+  return request.get<any>('/models/available', { params: { userId } }).then(res => res.data)
 }
 
 /**

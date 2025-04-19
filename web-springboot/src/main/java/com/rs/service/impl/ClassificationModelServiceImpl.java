@@ -39,52 +39,64 @@ public class ClassificationModelServiceImpl extends ServiceImpl<ClassificationMo
         return model;
     }
 
+    /**
+     * 构建基础的模型查询条件
+     */
+    private LambdaQueryWrapper<ClassificationModel> buildBaseModelQueryWrapper() {
+        LambdaQueryWrapper<ClassificationModel> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(ClassificationModel::getStatus, 1)
+                   .eq(ClassificationModel::getDeleted, 0);
+        return queryWrapper;
+    }
+
+    /**
+     * 检查模型名称是否已存在
+     */
+    private void checkModelNameExists(String modelName, Long excludeModelId) {
+        LambdaQueryWrapper<ClassificationModel> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(ClassificationModel::getModelName, modelName);
+        if (excludeModelId != null) {
+            queryWrapper.ne(ClassificationModel::getId, excludeModelId);
+        }
+        if (this.count(queryWrapper) > 0) {
+            throw new BusinessException("模型名称已存在");
+        }
+    }
+
     @Override
     public Page<ClassificationModel> getModelPage(Page<ClassificationModel> page, String modelName, String modelType) {
         Long userId = UserContext.getUserId();
         if (userId == null) {
-            // 对于未登录用户，可以考虑返回空分页或抛出异常，这里选择返回空分页
             log.warn("用户未登录，无法获取模型分页列表");
             return new Page<>(page.getCurrent(), page.getSize(), 0);
-            // 或者抛出异常: throw new BusinessException("用户未登录，无法获取模型列表");
         }
 
-        LambdaQueryWrapper<ClassificationModel> queryWrapper = new LambdaQueryWrapper<>();
-        // 添加查询条件
-        queryWrapper.like(modelName != null, ClassificationModel::getModelName, modelName);
-        queryWrapper.eq(modelType != null, ClassificationModel::getModelType, modelType);
-        // 只查询当前用户的模型
-        queryWrapper.eq(ClassificationModel::getUserId, userId);
-        // 只查询启用的模型
-        queryWrapper.eq(ClassificationModel::getStatus, 1);
-        // 只查询非默认模型 (用户自己的模型)
-        queryWrapper.eq(ClassificationModel::getIsDefault, 0);
-        // 按创建时间降序排序
-        queryWrapper.orderByDesc(ClassificationModel::getCreateTime);
+        LambdaQueryWrapper<ClassificationModel> queryWrapper = buildBaseModelQueryWrapper();
+        queryWrapper.like(modelName != null, ClassificationModel::getModelName, modelName)
+                   .eq(modelType != null, ClassificationModel::getModelType, modelType)
+                   .eq(ClassificationModel::getUserId, userId)
+                   .eq(ClassificationModel::getIsDefault, 0)
+                   .orderByDesc(ClassificationModel::getCreateTime);
 
         return this.page(page, queryWrapper);
     }
 
-    // 修改后：获取用户可用的所有模型（包括所有默认模型和用户自己的非默认模型）
     @Override
     public List<ClassificationModel> getAvailableModelsForUser() {
         Long userId = UserContext.getUserId();
         if (userId == null) {
-            // 对于未登录用户，可以考虑只返回公共模型或抛出异常，这里选择抛出异常
             throw new BusinessException("用户未登录，无法获取模型列表");
         }
 
-        // 1. 获取所有启用的默认模型 (is_default = 1, status = 1)
-        LambdaQueryWrapper<ClassificationModel> defaultModelWrapper = new LambdaQueryWrapper<>();
-        defaultModelWrapper.eq(ClassificationModel::getIsDefault, 1)
-                           .eq(ClassificationModel::getStatus, 1);
+        // 1. 获取所有启用的默认模型
+        LambdaQueryWrapper<ClassificationModel> defaultModelWrapper = buildBaseModelQueryWrapper();
+        defaultModelWrapper.eq(ClassificationModel::getIsDefault, 1);
         List<ClassificationModel> defaultModels = this.list(defaultModelWrapper);
 
-        // 2. 获取当前用户创建的、启用的非默认模型 (user_id = userId, is_default = 0, status = 1)
-        LambdaQueryWrapper<ClassificationModel> userModelWrapper = new LambdaQueryWrapper<>();
+        // 2. 获取当前用户创建的、启用的非默认模型
+        LambdaQueryWrapper<ClassificationModel> userModelWrapper = buildBaseModelQueryWrapper();
         userModelWrapper.eq(ClassificationModel::getUserId, userId)
-                        .eq(ClassificationModel::getIsDefault, 0)
-                        .eq(ClassificationModel::getStatus, 1);
+                       .eq(ClassificationModel::getIsDefault, 0);
         List<ClassificationModel> userModels = this.list(userModelWrapper);
 
         // 3. 合并列表
@@ -114,48 +126,30 @@ public class ClassificationModelServiceImpl extends ServiceImpl<ClassificationMo
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long addModel(ClassificationModel model) {
-        // 检查模型名称是否已存在
-        LambdaQueryWrapper<ClassificationModel> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(ClassificationModel::getModelName, model.getModelName());
-        if (this.count(queryWrapper) > 0) {
-            throw new BusinessException("模型名称已存在");
-        }
+        checkModelNameExists(model.getModelName(), null);
 
-        // 设置默认值
-        model.setStatus(1); // 默认启用
-        model.setIsDefault(0); // 默认非默认模型
+        model.setStatus(1);
+        model.setIsDefault(0);
         model.setCreateTime(LocalDateTime.now());
         model.setUpdateTime(LocalDateTime.now());
 
-        // 保存模型
         this.save(model);
-
         return model.getId();
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean updateModel(ClassificationModel model) {
-        // 检查模型是否存在
         ClassificationModel existModel = this.getById(model.getId());
         if (existModel == null) {
             throw new BusinessException("模型不存在");
         }
 
-        // 检查模型名称是否已存在（排除自身）
         if (!existModel.getModelName().equals(model.getModelName())) {
-            LambdaQueryWrapper<ClassificationModel> queryWrapper = new LambdaQueryWrapper<>();
-            queryWrapper.eq(ClassificationModel::getModelName, model.getModelName());
-            queryWrapper.ne(ClassificationModel::getId, model.getId());
-            if (this.count(queryWrapper) > 0) {
-                throw new BusinessException("模型名称已存在");
-            }
+            checkModelNameExists(model.getModelName(), model.getId());
         }
 
-        // 更新时间
         model.setUpdateTime(LocalDateTime.now());
-
-        // 保留原有字段
         model.setCreateTime(existModel.getCreateTime());
         model.setIsDefault(existModel.getIsDefault());
 

@@ -19,6 +19,14 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/dataset")
 public class DatasetController {
     
+    private Long checkAndGetUserId() {
+        Long userId = tokenUtils.getCurrentUserId();
+        if (userId == null) {
+            throw new com.rs.exception.BusinessException(401, "用户未认证");
+        }
+        return userId;
+    }
+
     @PostMapping("/upload")
     public Result<Long> createDataset(
         @RequestParam("file") MultipartFile file,
@@ -26,14 +34,11 @@ public class DatasetController {
         @RequestParam(required = false) String description
     ) {
         try {
-            // 从TokenUtils获取当前用户ID
-            Long userId = tokenUtils.getCurrentUserId();
-            if (userId == null) {
-                return Result.error(401, "用户未认证");
-            }
-            // 调用服务层处理数据集创建逻辑
+            Long userId = checkAndGetUserId();
             Long datasetId = datasetService.uploadDataset(userId, file, name, description);
             return Result.success(datasetId);
+        } catch (com.rs.exception.BusinessException e) {
+            return Result.error(e.getCode(), e.getMessage());
         } catch (Exception e) {
             return Result.error(500, "上传数据集失败: " + e.getMessage());
         }
@@ -51,14 +56,12 @@ public class DatasetController {
             @RequestPart(value = "file", required = false) MultipartFile file
     ) {
         try {
-            // 从TokenUtils获取当前用户ID
-            Long userId = tokenUtils.getCurrentUserId();
-            if (userId == null) {
-                return Result.error(401, "用户未认证");
-            }
+            Long userId = checkAndGetUserId();
             dataset.setUserId(userId);
             Dataset createdDataset = datasetService.createDataset(dataset, file);
             return Result.success(createdDataset);
+        } catch (com.rs.exception.BusinessException e) {
+            return Result.error(e.getCode(), e.getMessage());
         } catch (Exception e) {
             return Result.error(500, "创建数据集失败: " + e.getMessage());
         }

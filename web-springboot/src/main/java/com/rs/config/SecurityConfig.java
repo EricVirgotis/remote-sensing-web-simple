@@ -45,7 +45,8 @@ public class SecurityConfig {
                     "/user/register",
                     "/swagger-ui/**",
                     "/v3/api-docs/**",
-                    "/error"
+                    "/error",
+                    "/classification-model/**"
                 ).permitAll()
                 // 其他所有请求需要认证
                 .anyRequest().authenticated()
