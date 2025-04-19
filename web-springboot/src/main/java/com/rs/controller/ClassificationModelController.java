@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List; // 新增导入
+
 /**
  * 分类模型控制器
  */
@@ -37,6 +39,12 @@ public class ClassificationModelController {
             @Parameter(description = "模型类型") @RequestParam(required = false) String modelType) {
         Page<ClassificationModel> page = new Page<>(current, size);
         return Result.success(classificationModelService.getModelPage(page, modelName, modelType));
+    }
+
+    @Operation(summary = "获取用户可用的所有模型列表(公共+用户训练)") // 新增接口
+    @GetMapping("/available")
+    public Result<List<ClassificationModel>> getAvailableModelsForUser() {
+        return Result.success(classificationModelService.getAvailableModelsForUser());
     }
 
     @Operation(summary = "添加模型")

@@ -277,7 +277,7 @@ class ModelTrainer:
                     transform=train_transform
                 )
             
-            train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
+            train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0) # 将num_workers设置为0以在Windows上兼容。
             
             if val_data:
                 if isinstance(val_data, str):
@@ -291,7 +291,7 @@ class ModelTrainer:
                         labels=val_data['labels'],
                         transform=val_transform
                     )
-                val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
+                val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=0) # Set num_workers=0 for Windows compatibility
             else:
                 val_loader = None
             
@@ -309,10 +309,10 @@ class ModelTrainer:
             # 更新训练开始时间
             from datetime import datetime
             from utils.db_utils import update_task_status
-            import redis
+            from app import socketio # 导入 socketio 实例
             
             # 连接Redis
-            redis_client = redis.Redis(host='localhost', port=6379, db=0)
+            # redis_client = redis.Redis(host='localhost', port=6379, db=0)
             
             # 更新任务状态并发布消息
             update_task_status(task_id, 1, start_time=datetime.now())
@@ -322,7 +322,7 @@ class ModelTrainer:
                 'startTime': datetime.now().isoformat(),
                 'message': '训练开始'
             }
-            redis_client.publish(f'training_status:{task_id}', json.dumps(status_message))
+            socketio.emit('training_status_update', status_message) # 使用 socketio 发送消息
             
             for epoch in range(epochs):
                 # 训练阶段
@@ -339,7 +339,16 @@ class ModelTrainer:
                     # 前向传播
                     self.optimizer.zero_grad()
                     outputs = self.model(images)
-                    loss = self.criterion(outputs, labels)
+                    
+                    # 处理GoogleNet特殊输出结构
+                    if self.model_name == 'GoogleNet' and hasattr(outputs, 'logits'):
+                        # GoogleNet返回的是GoogLeNetOutputs对象，需要提取logits
+                        loss = self.criterion(outputs.logits, labels)
+                        _, predicted = torch.max(outputs.logits, 1) # 使用 outputs.logits
+                    else:
+                        # 其他模型返回的是普通张量
+                        loss = self.criterion(outputs, labels)
+                        _, predicted = torch.max(outputs, 1)
                     
                     # 反向传播
                     loss.backward()
@@ -347,7 +356,7 @@ class ModelTrainer:
                     
                     # 统计
                     train_loss += loss.item() * images.size(0)
-                    _, predicted = torch.max(outputs, 1)
+                    # _, predicted = torch.max(outputs, 1) # 这行已被移到上面条件判断中
                     train_total += labels.size(0)
                     train_correct += (predicted == labels).sum().item()
                     
@@ -377,11 +386,20 @@ class ModelTrainer:
                             
                             # 前向传播
                             outputs = self.model(images)
-                            loss = self.criterion(outputs, labels)
+                            
+                            # 处理GoogleNet特殊输出结构
+                            if self.model_name == 'GoogleNet' and hasattr(outputs, 'logits'):
+                                # GoogleNet返回的是GoogLeNetOutputs对象，需要提取logits
+                                loss = self.criterion(outputs.logits, labels)
+                                _, predicted = torch.max(outputs.logits, 1)
+                            else:
+                                # 其他模型返回的是普通张量
+                                loss = self.criterion(outputs, labels)
+                                _, predicted = torch.max(outputs, 1)
                             
                             # 统计
                             val_loss += loss.item() * images.size(0)
-                            _, predicted = torch.max(outputs, 1)
+                            # _, predicted = torch.max(outputs, 1) # 这行需要删除或注释掉，因为上面已经计算了 predicted
                             val_total += labels.size(0)
                             val_correct += (predicted == labels).sum().item()
                     
@@ -412,12 +430,62 @@ class ModelTrainer:
                               f"Train Loss: {epoch_train_loss:.4f}, "
                               f"Train Acc: {epoch_train_acc:.4f}")
                 
+                # 通过WebSocket发送进度更新
+                progress_message = {
+                    'taskId': task_id,
+                    'status': 1, # 训练中
+                    'epoch': epoch + 1,
+                    'totalEpochs': epochs,
+                    'trainLoss': epoch_train_loss,
+                    'trainAcc': epoch_train_acc,
+                    'valLoss': epoch_val_loss if val_loader else None,
+                    'valAcc': epoch_val_acc if val_loader else None,
+                    'message': f'Epoch {epoch+1} 完成'
+                }
+                socketio.emit('training_status_update', progress_message)
+
                 # 定期保存模型
                 if (epoch + 1) % save_interval == 0:
                     self.save_model(f"{self.model_name}_epoch{epoch+1}", user_id=user_id, task_id=task_id)
             
             # 保存最终模型
-            self.save_model(self.model_name, user_id=user_id, task_id=task_id)
+            self.save_model(f"{self.model_name}_final", user_id=user_id, task_id=task_id)
+            
+            # 训练成功，发送最终状态
+            end_time = datetime.now()
+            success_message = {
+                'taskId': task_id,
+                'status': 2, # 成功状态
+                'endTime': end_time.isoformat(),
+                'message': '训练成功完成',
+                'finalTrainLoss': epoch_train_loss,
+                'finalTrainAcc': epoch_train_acc,
+                'finalValLoss': epoch_val_loss if val_loader else None,
+                'finalValAcc': epoch_val_acc if val_loader else None
+            }
+            socketio.emit('training_status_update', success_message)
+            update_task_status(task_id, 2, end_time=end_time) # 更新数据库状态为成功
+            logger.info(f"训练任务 {task_id} 成功完成")
+            
+            return history
+            
+        except Exception as e:
+            logger.error(f"训练失败: {str(e)}")
+            # 更新任务状态为失败
+            update_task_status(task_id, 2, end_time=datetime.now(), error_msg=str(e))
+            
+            # 发送失败消息
+            failure_message = {
+                'taskId': task_id,
+                'status': 2, # 失败
+                'endTime': datetime.now().isoformat(),
+                'message': f'训练失败: {str(e)}'
+            }
+            socketio.emit('training_status_update', failure_message)
+            raise
+        finally:
+            # 清理临时文件等操作可以在这里添加
+            pass
             
             # 计算总训练时间
             total_time = time.time() - start_time
@@ -430,15 +498,15 @@ class ModelTrainer:
             
             # 更新任务状态并发布消息
             update_task_status(task_id, 3, end_time=datetime.now(), accuracy=final_accuracy, loss=final_loss)
-            status_message = {
+            completion_message = {
                 'taskId': task_id,
-                'status': 3,
+                'status': 3, # 完成
                 'endTime': datetime.now().isoformat(),
                 'accuracy': final_accuracy,
                 'loss': final_loss,
-                'message': '训练完成'
+                'message': '训练成功完成'
             }
-            redis_client.publish(f'training_status:{task_id}', json.dumps(status_message))
+            socketio.emit('training_status_update', completion_message)
             
             # 清理临时数据集目录
             if user_id:
@@ -452,10 +520,6 @@ class ModelTrainer:
                         logger.warning(f"清理临时数据集目录失败: {str(e)}")
             
             return history
-            
-        except Exception as e:
-            logger.error(f"训练失败: {str(e)}")
-            raise
     
     def save_model(self, model_name=None, user_id=None, task_id=None):
         """

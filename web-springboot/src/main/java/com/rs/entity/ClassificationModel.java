@@ -21,7 +21,12 @@ public class ClassificationModel {
      */
     @TableId(type = IdType.AUTO)
     private Long id;
-    
+
+    /**
+     * 用户ID
+     */
+    private Long userId;
+
     /**
      * 模型名称
      */

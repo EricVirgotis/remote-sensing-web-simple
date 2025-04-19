@@ -26,7 +26,8 @@ const upload = ref<UploadInstance | null>(null)
 const getUploadFiles = () => {
     const uploadRef = upload.value
     if (!uploadRef) return []
-    return uploadRef.getFiles()
+    // Access the fileList property instead of calling getFiles()
+    return uploadRef.fileList
 }
 
 // 获取图片尺寸

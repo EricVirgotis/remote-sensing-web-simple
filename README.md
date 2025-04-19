@@ -187,9 +187,9 @@ npm run build
 
 ## 访问地址
 - 前端页面：http://localhost:3000
-- 后端服务：http://localhost:8080
-- 算法服务：http://localhost:5000
-- 文件服务：http://localhost:5001
+- 后端服务 API：http://localhost:8080
+- 算法服务 API：http://localhost:5000
+- 文件服务 API：http://localhost:5001
 
 ## 开发规范
 1. 代码注释使用中文，保持清晰易懂
@@ -222,11 +222,12 @@ npm run build
 - 分类模型管理模块：实现模型添加、查询、设置默认模型等功能
 - 分析任务管理模块：实现任务提交、查询、取消等功能
 
-### 微服务架构
-系统采用微服务架构，主要包括以下几个服务：
-- 后端服务（web-springboot）：提供核心业务功能和API接口
-- 算法服务（web-flask）：提供深度学习模型推理和训练功能
-- 文件服务（web-file）：提供文件存储和管理功能
+### 系统架构概览
+系统采用前后端分离和微服务的设计思想，主要包括以下几个核心组件：
+- **前端 (web-vue)**：基于 Vue 3 和 Element Plus 构建的用户界面，负责与用户交互和展示数据。
+- **后端服务 (web-springboot)**：基于 Spring Boot 构建的核心业务服务，提供 RESTful API 接口，处理业务逻辑和数据持久化。
+- **算法服务 (web-flask)**：基于 Flask 和 PyTorch/TensorFlow 构建的独立服务，负责执行计算密集型的遥感影像分析和模型训练任务。
+- **文件服务 (web-file)**：基于 Flask 构建的简单文件存储服务，用于管理用户上传的影像和数据集文件。
 
 ## 技术支持
 如有问题请提交Issue或联系技术支持团队。

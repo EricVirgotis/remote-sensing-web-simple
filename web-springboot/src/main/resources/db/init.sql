@@ -43,19 +43,20 @@ CREATE TABLE IF NOT EXISTS `remote_image` (
 -- 分类模型表
 CREATE TABLE IF NOT EXISTS `classification_model` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '模型ID',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
   `model_name` varchar(100) NOT NULL COMMENT '模型名称',
   `model_path` varchar(255) NOT NULL COMMENT '模型存储路径',
   `model_type` varchar(50) NOT NULL COMMENT '模型类型',
   `description` varchar(500) DEFAULT NULL COMMENT '模型描述',
   `accuracy` decimal(5,2) DEFAULT NULL COMMENT '模型精度',
   `parameters` text DEFAULT NULL COMMENT '模型参数JSON',
-  `is_default` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否默认模型：0-否，1-是',
+  `is_default` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否默认模型（系统提供的已训练好的模型，可以直接拿来用，不需要自己去训练才能用）：0-否，1-是',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除：0-未删除，1-已删除',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_model_name` (`model_name`)
+  KEY `idx_user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='分类模型表';
 
 -- 分析任务表
@@ -143,7 +144,25 @@ CREATE TABLE IF NOT EXISTS `operation_log` (
 INSERT IGNORE INTO `user` (`username`, `password`, `real_name`, `email`, `role`, `status`) VALUES
 ('admin', '$2a$10$ySG2lkvjFHY5O0./CPIE1OI8VJsuKYEzOYzqIa7AJR6sEgSzUFOAm', '系统管理员', 'admin@example.com', 'ADMIN', 1);
 
--- 插入默认分类模型
-INSERT IGNORE INTO `classification_model` (`model_name`, `model_path`, `model_type`, `description`, `accuracy`, `is_default`, `status`) VALUES
-('ResNet50', '/models/ResNet50.h5', 'CNN', 'ResNet50预训练模型', 92.50, 1, 1),
-('VGG16', '/models/VGGNet-16.h5', 'CNN', 'VGG16预训练模型', 90.80, 0, 1);
+-- 插入预训练的默认模型 (关联管理员用户ID=1)
+INSERT IGNORE INTO `classification_model` (`user_id`, `model_name`, `model_path`, `model_type`, `description`, `accuracy`, `is_default`, `status`) VALUES
+(1, 'AlexNet', 'models/AlexNet.h5', 'CNN', '预训练的 AlexNet 模型', 0.80, 1, 1),
+(1, 'GoogLeNet', 'models/GoogLeNet.h5', 'CNN', '预训练的 GoogLeNet 模型', 0.84, 1, 1),
+(1, 'ResNet50', 'models/ResNet50.h5', 'CNN', '预训练的 ResNet50 模型', 0.96, 1, 1),
+(1, 'VGGNet-16', 'models/VGGNet-16.h5', 'CNN', '预训练的 VGGNet-16 模型', 0.76, 1, 1);
+
+-- 在模型训练完成后插入模型数据到分类模型表
+-- 注意：以下语句需要在应用程序中动态替换变量值后执行
+INSERT INTO `classification_model` (`user_id`, `model_name`, `model_path`, `model_type`, `description`, `accuracy`, `parameters`, `is_default`, `status`) 
+SELECT 
+  `user_id`,
+  `model_name`, 
+  `model_path`, 
+  `model_type`, 
+  CONCAT('由训练任务 "', `task_name`, '" 生成的模型'), 
+  `accuracy`, 
+  `parameters`, 
+  0, -- 非默认模型
+  1  -- 启用状态
+FROM `training_task` 
+WHERE `task_status` = 'COMPLETED' AND `id` = ?; -- 需要替换为实际的训练任务ID

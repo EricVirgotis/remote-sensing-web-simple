@@ -7,13 +7,16 @@
 
 import os
 import logging
-from flask import Flask, request, jsonify
+from datetime import datetime # Add this import
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
+from flask_socketio import SocketIO # 添加 SocketIO 导入
 
 # 导入路由模块
 from routes.classify import classify_bp
-from routes.train import train_bp
 from routes.model import model_bp
+from routes.train import train_bp
+from utils.db_utils import init_db
 
 # 配置日志
 logging.basicConfig(
@@ -24,10 +27,19 @@ logger = logging.getLogger(__name__)
 
 # 创建Flask应用
 app = Flask(__name__)
-CORS(app)  # 启用CORS支持跨域请求
+CORS(app) # 允许所有来源的跨域请求
+
+# 初始化 SocketIO
+socketio = SocketIO(app, cors_allowed_origins="*") # 允许所有来源连接
+
+# 配置日志
+log_dir = 'logs'
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
 
 # 注册蓝图
 app.register_blueprint(classify_bp, url_prefix='/api/classify')
+app.register_blueprint(model_bp, url_prefix='/api/model')
 app.register_blueprint(train_bp, url_prefix='/api/train')
 
 def legacy_train_health_check():
@@ -36,16 +48,12 @@ def legacy_train_health_check():
         'service': 'algorithm-service',
         'version': '1.0.0'
     })
-app.register_blueprint(model_bp, url_prefix='/api/model')
 
 # 健康检查路由
 @app.route('/api/health/health_check', methods=['GET'])
 def health_check():
-    return jsonify({
-        'status': 'ok',
-        'service': 'algorithm-service',
-        'version': '1.0.0'
-    })
+    # 这里可以添加更复杂的健康检查逻辑，例如检查数据库连接、依赖服务等
+    return jsonify({"status": "ok", "timestamp": datetime.now().isoformat()})
 
 # 错误处理
 @app.errorhandler(404)
@@ -65,12 +73,8 @@ def server_error(error):
 
 # 启动服务
 if __name__ == '__main__':
-    # 预热模型
-    from algo.model_loader import load_default_models
-    logger.info("正在预热模型...")
-    load_default_models()
-    logger.info("模型预热完成")
-    
-    # 启动Flask应用
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='localhost', port=port, debug=False, threaded=True, use_reloader=False)
+    # 初始化数据库
+    init_db()
+    # 使用 socketio.run() 启动应用，以便支持 WebSocket
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True, use_reloader=False)
+    # app.run(host='0.0.0.0', port=5000, debug=True)

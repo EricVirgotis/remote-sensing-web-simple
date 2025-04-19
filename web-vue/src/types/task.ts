@@ -19,10 +19,11 @@ export interface AnalysisTask {
 // 任务创建参数
 export interface TaskCreateParams {
     imageId: number | undefined
+    modelId: number | undefined // 添加模型ID
     name: string
     description: string
-    algorithm: string
-    parameters: string
+    // algorithm: string // 移除算法相关字段，如果不再需要
+    // parameters: string // 移除算法相关字段，如果不再需要
 }
 
 // 任务查询参数
@@ -48,4 +49,4 @@ export interface Algorithm {
             max: number
         }
     }
-} 
+}
