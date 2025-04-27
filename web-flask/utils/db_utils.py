@@ -7,6 +7,7 @@
 
 import os
 import json
+import logging
 import pymysql
 from pymysql.cursors import DictCursor
 
@@ -94,6 +95,19 @@ def update_task_status(task_id, status, error_message=None, start_time=None, end
             }
             task_status = status_map.get(status, 'PENDING')
             
+            # 如果状态为COMPLETED，确保保留parameters中的classes信息
+            if status == 3:  # COMPLETED
+                # 先获取当前的parameters
+                cursor.execute('SELECT parameters FROM training_task WHERE id = %s', (task_id,))
+                row = cursor.fetchone()
+                current_params = None
+                if row and row.get('parameters'):
+                    try:
+                        current_params = json.loads(row['parameters'])
+                        logging.info(f"获取到当前parameters: {current_params}")
+                    except json.JSONDecodeError:
+                        logging.error(f"解析parameters失败: {row['parameters']}")
+            
             # 构建更新字段和参数
             update_fields = ['task_status = %s']
             params = [task_status]
@@ -125,6 +139,30 @@ def update_task_status(task_id, status, error_message=None, start_time=None, end
             sql = f"UPDATE training_task SET {', '.join(update_fields)} WHERE id = %s"
             cursor.execute(sql, tuple(params))
             conn.commit()
+            
+            # 验证更新后的parameters是否保留了classes信息
+            if status == 3:  # COMPLETED
+                cursor.execute('SELECT parameters FROM training_task WHERE id = %s', (task_id,))
+                row = cursor.fetchone()
+                if row and row.get('parameters'):
+                    try:
+                        updated_params = json.loads(row['parameters'])
+                        if current_params and 'classes' in current_params and 'classes' not in updated_params:
+                            # 如果更新后的parameters丢失了classes信息，重新添加
+                            updated_params['classes'] = current_params['classes']
+                            if 'num_classes' in current_params:
+                                updated_params['num_classes'] = current_params['num_classes']
+                            
+                            # 更新parameters字段
+                            cursor.execute(
+                                'UPDATE training_task SET parameters = %s WHERE id = %s',
+                                (json.dumps(updated_params), task_id)
+                            )
+                            conn.commit()
+                            logging.info(f"已恢复classes信息到parameters: {updated_params['classes']}")
+                    except json.JSONDecodeError:
+                        logging.error(f"验证时解析parameters失败")
+
     finally:
         conn.close()
 

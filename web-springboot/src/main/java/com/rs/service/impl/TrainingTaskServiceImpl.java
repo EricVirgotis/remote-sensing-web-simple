@@ -88,9 +88,41 @@ public class TrainingTaskServiceImpl extends ServiceImpl<TrainingTaskMapper, Tra
                 return;
             }
             
-            // 不存在则插入新模型
-            String sql = "INSERT INTO classification_model (user_id, model_name, model_path, model_type, description, accuracy, parameters, is_default, status, deleted) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, 0, 1, 0)";
+            // 从训练任务参数中提取classes信息
+            String classes = null;
+            if (task.getParameters() != null && !task.getParameters().isEmpty()) {
+                try {
+                    com.alibaba.fastjson.JSONObject paramsJson = com.alibaba.fastjson.JSON.parseObject(task.getParameters());
+                    if (paramsJson.containsKey("classes")) {
+                        Object classesObj = paramsJson.get("classes");
+                        if (classesObj != null) {
+                            // 将classes对象转换为字符串
+                            if (classesObj instanceof com.alibaba.fastjson.JSONArray) {
+                                // 直接使用JSONArray的toString方法会包含额外的方括号和引号
+                                // 我们需要将其格式化为逗号分隔的字符串
+                                com.alibaba.fastjson.JSONArray classesArray = (com.alibaba.fastjson.JSONArray) classesObj;
+                                StringBuilder sb = new StringBuilder();
+                                for (int i = 0; i < classesArray.size(); i++) {
+                                    if (i > 0) {
+                                        sb.append(", ");
+                                    }
+                                    sb.append(classesArray.getString(i));
+                                }
+                                classes = sb.toString();
+                            } else {
+                                classes = String.valueOf(classesObj);
+                            }
+                            log.info("从训练任务 {} 参数中提取到classes信息: {}", task.getId(), classes);
+                        }
+                    }
+                } catch (Exception ex) {
+                    log.error("解析训练任务参数失败: {}", ex.getMessage());
+                }
+            }
+            
+            // 不存在则插入新模型，添加classes字段
+            String sql = "INSERT INTO classification_model (user_id, model_name, model_path, model_type, description, accuracy, parameters, classes, is_default, status, deleted) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, 1, 0)";
             
             jdbcTemplate.update(sql,
                     task.getUserId(),
@@ -99,9 +131,10 @@ public class TrainingTaskServiceImpl extends ServiceImpl<TrainingTaskMapper, Tra
                     task.getModelType(),
                     "由训练任务 \"" + task.getTaskName() + "\" 生成的模型",
                     task.getAccuracy(),
-                    task.getParameters());
+                    task.getParameters(),
+                    classes);
             
-            log.info("成功将训练任务 {} 生成的模型插入到分类模型表", task.getId());
+            log.info("成功将训练任务 {} 生成的模型插入到分类模型表，classes: {}", task.getId(), classes);
             
             // 方法二：使用MyBatis-Plus插入
             /*

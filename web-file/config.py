@@ -2,7 +2,7 @@ import os
 
 # 文件存储配置
 FILE_STORE_CONFIG = {
-    'base_path': 'D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple2\\remote-sensing-web-simple\\file_store',
+    'base_path': 'D:\\Code\\System\\remote-sensing-web-simple\\remote-sensing-web-simple1\\remote-sensing-web-simple\\file_store',
     'access_url': 'http://localhost:5001/api/file',  # 文件访问URL前缀
     'allowed_types': [  # 支持的文件类型
         # 图片类型

@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `classification_model` (
   `model_type` varchar(50) NOT NULL COMMENT '模型类型',
   `description` varchar(500) DEFAULT NULL COMMENT '模型描述',
   `accuracy` decimal(5,2) DEFAULT NULL COMMENT '模型精度',
+  `classes` varchar(500) DEFAULT NULL COMMENT '分类类别',
   `parameters` text DEFAULT NULL COMMENT '模型参数JSON',
   `is_default` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否默认模型（系统提供的已训练好的模型，可以直接拿来用，不需要自己去训练才能用）：0-否，1-是',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态：0-禁用，1-启用',
@@ -145,20 +146,24 @@ INSERT IGNORE INTO `user` (`username`, `password`, `real_name`, `email`, `role`,
 ('admin', '$2a$10$ySG2lkvjFHY5O0./CPIE1OI8VJsuKYEzOYzqIa7AJR6sEgSzUFOAm', '系统管理员', 'admin@example.com', 'ADMIN', 1);
 
 -- 插入预训练的默认模型 (关联管理员用户ID=1)
--- 添加唯一性约束，防止重复插入预训练模型
-ALTER TABLE `classification_model` ADD UNIQUE INDEX `uk_model_name_type` (`model_name`, `model_type`) WHERE `deleted` = 0;
-ALTER TABLE `classification_model` ADD UNIQUE INDEX `uk_model_path` (`model_path`) WHERE `deleted` = 0;
+-- 添加唯一性约束，防止重复插入相同名称和精度的预训练模型
+-- 注意：如果表已存在且有重复数据，此约束可能添加失败。建议在首次初始化时执行。
+ALTER TABLE `classification_model` ADD UNIQUE INDEX `uk_model_name_accuracy` (`model_name`, `accuracy`);
 
--- 使用IGNORE关键字插入预训练模型，避免重复插入
+-- 使用INSERT IGNORE插入预训练模型，避免重复插入
+-- ID将由数据库自动递增分配
+-- 只有当(model_name, accuracy)组合不存在时才会插入
 INSERT IGNORE INTO `classification_model` (`user_id`, `model_name`, `model_path`, `model_type`, `description`, `accuracy`, `is_default`, `status`, `deleted`) VALUES
-(1, 'AlexNet', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple3/remote-sensing-web-simple/web-flask/models/AlexNet.h5', 'CNN', '预训练的 AlexNet 模型', 0.80, 1, 1, 0),
-(1, 'GoogLeNet', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple3/remote-sensing-web-simple/web-flask/models/GoogLeNet.h5', 'CNN', '预训练的 GoogLeNet 模型', 0.84, 1, 1, 0),
-(1, 'ResNet50', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple3/remote-sensing-web-simple/web-flask/models/ResNet50.h5', 'CNN', '预训练的 ResNet50 模型', 0.96, 1, 1, 0),
-(1, 'VGGNet-16', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple3/remote-sensing-web-simple/web-flask/models/VGGNet-16.h5', 'CNN', '预训练的 VGGNet-16 模型', 0.76, 1, 1, 0);
+(1, 'AlexNet', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple1/remote-sensing-web-simple/web-flask/models/AlexNet.h5', 'CNN', '预训练的 AlexNet 模型', 0.80, 1, 1, 0),
+(1, 'GoogLeNet', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple1/remote-sensing-web-simple/web-flask/models/GoogLeNet.h5', 'CNN', '预训练的 GoogLeNet 模型', 0.84, 1, 1, 0),
+(1, 'ResNet50', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple1/remote-sensing-web-simple/web-flask/models/ResNet50.h5', 'CNN', '预训练的 ResNet50 模型', 0.96, 1, 1, 0),
+(1, 'VGGNet-16', 'D:/Code/System/remote-sensing-web-simple/remote-sensing-web-simple1/remote-sensing-web-simple/web-flask/models/VGGNet-16.h5', 'CNN', '预训练的 VGGNet-16 模型', 0.76, 1, 1, 0);
 
 -- 在模型训练完成后插入模型数据到分类模型表
 -- 注意：以下语句需要在应用程序中动态替换变量值后执行
-INSERT INTO `classification_model` (`user_id`, `model_name`, `model_path`, `model_type`, `description`, `accuracy`, `parameters`, `is_default`, `status`) 
+-- ID将由数据库自动递增分配
+-- 从parameters JSON中提取classes信息并插入到classes字段
+INSERT INTO `classification_model` (`user_id`, `model_name`, `model_path`, `model_type`, `description`, `accuracy`, `classes`, `parameters`, `is_default`, `status`) 
 SELECT 
   `user_id`,
   `model_name`, 
@@ -166,6 +171,7 @@ SELECT
   `model_type`, 
   CONCAT('由训练任务 "', `task_name`, '" 生成的模型'), 
   `accuracy`, 
+  JSON_UNQUOTE(JSON_EXTRACT(`parameters`, '$.classes')), -- 从parameters JSON中提取classes数组并转换为字符串
   `parameters`, 
   0, -- 非默认模型
   1  -- 启用状态

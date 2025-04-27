@@ -509,6 +509,7 @@ def start_training():
 
         # 准备训练数据和参数
         from algo.trainer import ModelTrainer
+        import json
         
         try:
             # 更新任务状态为训练中
@@ -526,8 +527,72 @@ def start_training():
                 'labels': [f.parent.name for f in val_dir.rglob('*') if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.png']]
             }
             
-            # 获取类别数量
-            num_classes = len(set(train_data['labels']))
+            # 获取类别列表和数量
+            classes = sorted(list(set(train_data['labels'])))
+            num_classes = len(classes)
+            
+            # 如果有任务ID，将classes信息添加到training_task.parameters中
+            if task_id:
+                # 获取当前parameters值
+                conn = get_db()
+                try:
+                    with conn.cursor() as cursor:
+                        cursor.execute('SELECT parameters FROM training_task WHERE id = %s', (task_id,))
+                        row = cursor.fetchone()
+                        
+                        # 解析parameters字段
+                        params = {}
+                        if row and row.get('parameters'):
+                            try:
+                                params = json.loads(row['parameters'])
+                                logger.info(f"获取到现有参数: {params}")
+                            except json.JSONDecodeError:
+                                logger.warning(f"参数格式无效，将使用空字典")
+                                params = {}
+                            except Exception as e:
+                                logger.error(f"解析parameters字段失败: {e}")
+                                params = {}
+                        
+                        # 更新parameters字段
+                        try:
+                            # 记录更新前后的参数变化
+                            logger.info(f"更新前的参数: {params}")
+                            
+                            # 将classes和num_classes信息添加到参数中
+                            # 确保不覆盖现有参数，只添加classes信息
+                            params['classes'] = [str(cls) for cls in classes]
+                            params['num_classes'] = num_classes
+                            logger.info(f"添加classes信息: {classes}")
+                            logger.info(f"添加num_classes信息: {num_classes}")
+                            
+                            # 更新数据库
+                            params_json = json.dumps(params)
+                            cursor.execute(
+                                'UPDATE training_task SET parameters = %s WHERE id = %s',
+                                (params_json, task_id)
+                            )
+                            conn.commit()
+                            affected_rows = cursor.rowcount
+                            logger.info(f"已更新training_task.parameters: 影响行数={affected_rows}")
+                            
+                            # 验证更新是否成功
+                            cursor.execute('SELECT parameters FROM training_task WHERE id = %s', (task_id,))
+                            verify_row = cursor.fetchone()
+                            if verify_row and verify_row.get('parameters'):
+                                try:
+                                    verify_params = json.loads(verify_row['parameters'])
+                                    if 'classes' in verify_params:
+                                        logger.info(f"验证成功: classes信息已正确保存到数据库: {verify_params['classes']}")
+                                    else:
+                                        logger.warning(f"验证失败: 数据库中未找到classes信息")
+                                except json.JSONDecodeError:
+                                    logger.error(f"验证失败: 无法解析数据库中的parameters字段")
+                            else:
+                                logger.error(f"验证失败: 无法从数据库获取更新后的parameters字段")
+                        except Exception as e:
+                            logger.error(f"更新parameters字段失败: {e}")
+                finally:
+                    conn.close()
             
             # 创建训练器实例
             trainer = ModelTrainer(

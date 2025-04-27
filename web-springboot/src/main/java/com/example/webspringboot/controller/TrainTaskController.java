@@ -87,9 +87,25 @@ public class TrainTaskController {
                 paramsJson.put("batchSize", trainTask.getBatchSize());
                 paramsJson.put("learningRate", trainTask.getLearningRate());
                 paramsJson.put("usePretrained", trainTask.getUsePretrained());
+                
+                // 获取数据集信息，提取classes参数
+                TrainingDataset dataset = trainingDatasetMapper.selectById(trainTask.getDatasetId());
+                if (dataset != null && dataset.getMetadata() != null && !dataset.getMetadata().isEmpty()) {
+                    try {
+                        com.alibaba.fastjson.JSONObject metadataJson = com.alibaba.fastjson.JSON.parseObject(dataset.getMetadata());
+                        if (metadataJson.containsKey("classes")) {
+                            // 将数据集的classes参数添加到训练任务参数中
+                            paramsJson.put("classes", metadataJson.get("classes"));
+                            log.info("已将数据集 {} 的classes参数添加到训练任务 {} 的参数中", dataset.getId(), trainTask.getId());
+                        }
+                    } catch (Exception ex) {
+                        log.error("解析数据集元数据失败: {}", ex.getMessage());
+                    }
+                }
+                
                 trainTask.setParameters(paramsJson.toJSONString());
             } catch (Exception e) {
-                System.err.println("参数转换失败: " + e.getMessage());
+                log.error("参数转换失败: {}", e.getMessage());
             }
             
             trainTaskService.save(trainTask);

@@ -263,21 +263,21 @@ class ModelTrainer:
             # 支持两种数据加载方式
             if isinstance(train_data, str):
                 # 从目录加载数据集
-                train_dataset = RemoteSensingDataset(
+                self.train_dataset = RemoteSensingDataset(
                     data_dir=train_data,
                     transform=train_transform
                 )
                 # 更新类别数量
-                self.num_classes = len(train_dataset.class_names)
+                self.num_classes = len(self.train_dataset.class_names)
             else:
                 # 使用传统方式加载数据集
-                train_dataset = RemoteSensingDataset(
+                self.train_dataset = RemoteSensingDataset(
                     image_paths=train_data['images'],
                     labels=train_data['labels'],
                     transform=train_transform
                 )
             
-            train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0) # 将num_workers设置为0以在Windows上兼容。
+            train_loader = DataLoader(self.train_dataset, batch_size=batch_size, shuffle=True, num_workers=0) # 将num_workers设置为0以在Windows上兼容。
             
             if val_data:
                 if isinstance(val_data, str):
@@ -546,12 +546,17 @@ class ModelTrainer:
         
         # 保存模型
         try:
+            # 使用CPU版本的状态字典以避免序列化问题
+            model_state = {k: v.cpu() for k, v in self.model.state_dict().items()}
+            optimizer_state = {k: v.cpu() if torch.is_tensor(v) else v for k, v in self.optimizer.state_dict().items()}
+            
+            # 使用pickle协议版本2，提高兼容性
             torch.save({
-                'model_state_dict': self.model.state_dict(),
-                'optimizer_state_dict': self.optimizer.state_dict(),
+                'model_state_dict': model_state,
+                'optimizer_state_dict': optimizer_state,
                 'scheduler_state_dict': self.scheduler.state_dict(),
                 'num_classes': self.num_classes
-            }, save_path)
+            }, save_path, _use_new_zipfile_serialization=False)
             logger.info(f"模型已保存到: {save_path}")
             
             # 如果有任务ID，更新数据库中的model_path
@@ -560,6 +565,46 @@ class ModelTrainer:
                 conn = get_db()
                 try:
                     with conn.cursor() as cursor:
+                        # 先获取当前的parameters，确保不丢失classes信息
+                        cursor.execute('SELECT parameters FROM training_task WHERE id = %s', (task_id,))
+                        row = cursor.fetchone()
+                        if row and row.get('parameters'):
+                            try:
+                                # 记录当前parameters，确保后续操作不会丢失classes信息
+                                logger.info(f"保存模型前的parameters: {row['parameters']}")
+                                
+                                # 解析parameters字段
+                                params = {}
+                                try:
+                                    params = json.loads(row['parameters'])
+                                except json.JSONDecodeError:
+                                    logger.warning(f"参数格式无效，将使用空字典")
+                                    params = {}
+                                except Exception as e:
+                                    logger.error(f"解析parameters字段失败: {e}")
+                                    params = {}
+                                
+                                # 如果训练数据集中有类别信息，添加到parameters中
+                                if hasattr(self, 'train_dataset') and hasattr(self.train_dataset, 'class_names'):
+                                    # 将classes和num_classes信息添加到参数中
+                                    # 确保不覆盖现有参数，只添加classes信息
+                                    params['classes'] = [str(cls) for cls in self.train_dataset.class_names]
+                                    params['num_classes'] = len(self.train_dataset.class_names)
+                                    logger.info(f"添加classes信息: {params['classes']}")
+                                    logger.info(f"添加num_classes信息: {params['num_classes']}")
+                                    
+                                    # 更新数据库
+                                    params_json = json.dumps(params)
+                                    cursor.execute(
+                                        'UPDATE training_task SET parameters = %s WHERE id = %s',
+                                        (params_json, task_id)
+                                    )
+                                    conn.commit()
+                                    affected_rows = cursor.rowcount
+                                    logger.info(f"已更新training_task.parameters: 影响行数={affected_rows}")
+                            except Exception as e:
+                                logger.error(f"更新parameters失败: {str(e)}")
+                        
                         # 更新training_task表中的model_path字段、progress字段
                         cursor.execute(
                             'UPDATE training_task SET model_path = %s, progress = 100 WHERE id = %s',
@@ -567,6 +612,75 @@ class ModelTrainer:
                         )
                         conn.commit()
                         logger.info(f"已更新任务 {task_id} 的模型路径")
+                        
+                        # 将模型信息插入到classification_model表中
+                        try:
+                            # 获取训练任务信息
+                            cursor.execute('SELECT user_id, model_name, parameters FROM training_task WHERE id = %s', (task_id,))
+                            task_info = cursor.fetchone()
+                            
+                            if task_info:
+                                user_id = task_info['user_id']
+                                model_name = task_info['model_name']
+                                parameters = task_info['parameters']
+                                
+                                # 解析parameters
+                                params_dict = {}
+                                try:
+                                    params_dict = json.loads(parameters)
+                                except Exception as e:
+                                    logger.error(f"解析parameters失败: {str(e)}")
+                                
+                                # 获取classes信息
+                                classes = None
+                                if 'classes' in params_dict:
+                                    classes = json.dumps(params_dict['classes'])
+                                
+                                # 计算模型精度（如果有验证数据）
+                                accuracy = None
+                                if 'valAcc' in params_dict:
+                                    accuracy = params_dict['valAcc']
+                                elif hasattr(self, 'best_val_acc'):
+                                    accuracy = self.best_val_acc
+                                
+                                # 检查是否已经为当前训练任务插入过模型记录
+                                # 由于一个训练任务会保存多个模型文件（best、final等），但我们只需要在数据库中保存一条记录
+                                # 所以我们检查是否已经存在相同训练任务ID的其他模型记录
+                                cursor.execute('SELECT id FROM classification_model WHERE model_path LIKE %s', (f'%{task_id}%',))
+                                existing_model = cursor.fetchone()
+                                
+                                if existing_model:
+                                    # 更新现有模型，包括模型路径
+                                    cursor.execute(
+                                        'UPDATE classification_model SET model_name = %s, model_path = %s, model_type = %s, description = %s, '
+                                        'accuracy = %s, classes = %s, parameters = %s, update_time = NOW() '
+                                        'WHERE id = %s',
+                                        (model_name, str(save_path), 'CNN', f'训练的{model_name}模型', accuracy, classes, parameters, existing_model['id'])
+                                    )
+                                    logger.info(f"已更新classification_model表中的模型信息，ID={existing_model['id']}，新路径={save_path}")
+                                    # 记录日志，帮助调试
+                                    logger.info(f"模型更新成功，任务ID={task_id}, 模型名称={model_name}")
+
+                                else:
+                                    # 只有在没有现有记录时才插入新模型
+                                    # 这样可以确保每个训练任务只插入一条记录到classification_model表中
+                                    # 即使训练过程中保存了多个模型文件（best、final等）
+                                    cursor.execute(
+                                        'INSERT INTO classification_model (user_id, model_name, model_path, model_type, description, '
+                                        'accuracy, classes, parameters, is_default, status, create_time, update_time) '
+                                        'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW())',
+                                        (user_id, model_name, str(save_path), 'CNN', f'训练的{model_name}模型', 
+                                         accuracy, classes, parameters, 0, 1)
+                                    )
+                                    logger.info(f"已将模型信息插入到classification_model表中，路径={save_path}")
+                                    # 记录日志，帮助调试
+                                    logger.info(f"模型插入成功，任务ID={task_id}, 模型名称={model_name}")
+
+                                
+                                conn.commit()
+                        except Exception as e:
+                            logger.error(f"保存模型信息到classification_model表失败: {str(e)}")
+                            # 不抛出异常，确保主流程不受影响
                 finally:
                     conn.close()
             
